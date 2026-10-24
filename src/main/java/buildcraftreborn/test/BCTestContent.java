@@ -37,8 +37,10 @@ public final class BCTestContent {
         if (!ENABLED) {
             return;
         }
+        // No loot table and no tags: datagen runs in development, so anything generated for this block would ship in the
+        // released jar, where the block doesn't exist (a missing entry makes Minecraft drop the whole tag).
         TEST_MACHINE_BLOCK = BCRegistries.BLOCKS.register("test_machine",
-            () -> new BlockTestMachine(BlockBCBase_Neptune.defaultProperties()));
+            () -> new BlockTestMachine(BlockBCBase_Neptune.defaultProperties().noLootTable()));
         TEST_MACHINE_ITEM = BCRegistries.ITEMS.registerSimpleBlockItem(TEST_MACHINE_BLOCK);
         TEST_MACHINE_TILE = BCRegistries.registerTile("test_machine", TileTestMachine::new, TEST_MACHINE_BLOCK);
         TEST_MACHINE_MENU = BCRegistries.MENU_TYPES.register("test_machine",

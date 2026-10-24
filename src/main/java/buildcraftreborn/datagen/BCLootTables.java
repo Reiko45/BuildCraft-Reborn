@@ -41,7 +41,6 @@ import buildcraftreborn.factory.BCFactoryItems;
 import buildcraftreborn.factory.block.BlockWaterGel;
 import buildcraftreborn.factory.block.BlockWaterGel.GelStage;
 import buildcraftreborn.lib.BCRegistries;
-import buildcraftreborn.test.BCTestContent;
 
 /** Block loot tables. 1.12 BuildCraft coded its drops in Java; in 1.21 every block needs a loot table. */
 public final class BCLootTables {
@@ -93,9 +92,6 @@ public final class BCLootTables {
             dropSelf(BCRoboticsBlocks.CHARGING_TABLE.get());
             dropSelf(BCRoboticsBlocks.PROGRAMMING_TABLE.get());
             waterGel();
-            if (BCTestContent.ENABLED) {
-                dropSelf(BCTestContent.TEST_MACHINE_BLOCK.get());
-            }
         }
 
         /** Water gel drops gelled water: one or two while it's still spreading, else one (as in 1.12). */

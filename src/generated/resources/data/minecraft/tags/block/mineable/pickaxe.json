@@ -35,7 +35,6 @@
     "buildcraftreborn:zone_planner",
     "buildcraftreborn:requester",
     "buildcraftreborn:charging_table",
-    "buildcraftreborn:programming_table",
-    "buildcraftreborn:test_machine"
+    "buildcraftreborn:programming_table"
   ]
 }

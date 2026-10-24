@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.1.1
+
+Fixes found in the first play test.
+
+- Pickaxes work again with BuildCraft Reborn installed. The released jar's `minecraft:mineable/pickaxe` tag listed a development-only test block that only exists in development builds, so Minecraft threw the whole tag away: stone and ores mined slowly and dropped nothing. Development-only content no longer gets tags or a loot table, and a unit test checks the generated data never mentions it. This affected 1.0.0-rc.1 and 1.1.0.
+
 ## 1.1.0
 
 BuildCraft 7.1's robots, which 8.0 never ported.

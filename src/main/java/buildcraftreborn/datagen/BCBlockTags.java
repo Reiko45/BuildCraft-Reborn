@@ -25,7 +25,6 @@ import buildcraftreborn.factory.BCFactoryBlocks;
 import buildcraftreborn.robotics.BCRoboticsBlocks;
 import buildcraftreborn.silicon.BCSiliconBlocks;
 import buildcraftreborn.transport.BCTransportBlocks;
-import buildcraftreborn.test.BCTestContent;
 
 /** Block tags (mineable/pickaxe, needs_iron_tool, ...). */
 public final class BCBlockTags extends BlockTagsProvider {
@@ -61,8 +60,5 @@ public final class BCBlockTags extends BlockTagsProvider {
         tag(BlockTags.DRAGON_IMMUNE).add(BCCoreBlocks.WATER_SPRING.get(), BCEnergyBlocks.OIL_SPRING.get());
         tag(BlockTags.WITHER_IMMUNE).add(BCCoreBlocks.WATER_SPRING.get(), BCEnergyBlocks.OIL_SPRING.get());
         tag(BlockTags.FEATURES_CANNOT_REPLACE).add(BCCoreBlocks.WATER_SPRING.get(), BCEnergyBlocks.OIL_SPRING.get());
-        if (BCTestContent.ENABLED) {
-            tag(BlockTags.MINEABLE_WITH_PICKAXE).add(BCTestContent.TEST_MACHINE_BLOCK.get());
-        }
     }
 }
