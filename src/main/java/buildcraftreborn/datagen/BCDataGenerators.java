@@ -41,6 +41,7 @@ public final class BCDataGenerators {
         generator.addProvider(event.includeServer(),
             new BCItemTags(output, lookup, blockTags.contentsGetter(), files));
         generator.addProvider(event.includeServer(), new BCBiomeTags(output, lookup, files));
+        generator.addProvider(event.includeServer(), new BCFluidTags(output, lookup, files));
         generator.addProvider(event.includeServer(), new BCRecipes(output, lookup));
         generator.addProvider(event.includeServer(), BCLootTables.create(output, lookup));
         generator.addProvider(event.includeServer(), new BCDataMapsProvider(output, lookup));

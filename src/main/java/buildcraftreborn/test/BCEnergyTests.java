@@ -7,15 +7,20 @@
  */
 package buildcraftreborn.test;
 
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 import com.mojang.authlib.GameProfile;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.gametest.framework.GameTest;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.ItemStack;
@@ -23,11 +28,13 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.FurnaceBlock;
+import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 
 import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.util.FakePlayer;
 import net.neoforged.neoforge.common.util.FakePlayerFactory;
 import net.neoforged.neoforge.energy.IEnergyStorage;
@@ -42,6 +49,8 @@ import buildcraftreborn.api.fuels.IFuel;
 import buildcraftreborn.api.fuels.IFuelManager.IDirtyFuel;
 import buildcraftreborn.api.mj.IMjReceiver;
 import buildcraftreborn.api.mj.MjAPI;
+import buildcraftreborn.api.recipes.IRefineryRecipeManager.IDistillationRecipe;
+import buildcraftreborn.api.recipes.IRefineryRecipeManager.IHeatableRecipe;
 import buildcraftreborn.core.BCCoreBlocks;
 import buildcraftreborn.core.BCCoreItems;
 import buildcraftreborn.core.tile.TileEngineCreative;
@@ -49,11 +58,14 @@ import buildcraftreborn.core.tile.TileEngineRedstone_BC8;
 import buildcraftreborn.energy.BCEnergyBlocks;
 import buildcraftreborn.energy.BCEnergyConfig;
 import buildcraftreborn.energy.BCEnergyFluids;
+import buildcraftreborn.energy.BCEnergyTags;
 import buildcraftreborn.energy.tile.TileDynamoMJ;
 import buildcraftreborn.energy.tile.TileEngineIron_BC8;
 import buildcraftreborn.energy.tile.TileEngineRF;
 import buildcraftreborn.energy.tile.TileEngineStone_BC8;
 import buildcraftreborn.lib.engine.TileEngineBase_BC8;
+import buildcraftreborn.lib.fluid.BCFluid;
+import buildcraftreborn.lib.recipe.RefineryRecipeRegistry;
 
 /** Phase 2 tests for engines, fuels, fluids and the wrench. Engines sit on top of the test machine (which takes MJ
  * into its battery) with a redstone block above them. */
@@ -177,6 +189,78 @@ public final class BCEnergyTests {
         helper.assertTrue(BuildcraftFuelRegistry.coolant.getDegreesPerMb(new FluidStack(Fluids.WATER, 1), 100) == 0.0023f,
             "Water cooling is wrong");
         helper.succeed();
+    }
+
+    @GameTest(template = "empty")
+    public static void oilAndFuelAreInCommonTags(GameTestHelper helper) {
+        Fluid oil = BCEnergyFluids.crudeOil[0].getSource();
+        Fluid fuel = BCEnergyFluids.fuelLight[0].getSource();
+        for (TagKey<Fluid> tag : List.of(BCEnergyTags.OIL, BCEnergyTags.CRUDE_OIL)) {
+            helper.assertTrue(isIn(oil, tag), "Oil isn't in " + tag.location());
+            helper.assertFalse(isIn(BCEnergyFluids.crudeOil[1].getSource(), tag), "Hot oil is in " + tag.location());
+            helper.assertFalse(isIn(BCEnergyFluids.crudeOil[0].flowing.get(), tag),
+                "Flowing oil is in " + tag.location());
+        }
+        for (TagKey<Fluid> tag : List.of(BCEnergyTags.FUEL, BCEnergyTags.LIGHT_FUEL)) {
+            helper.assertTrue(isIn(fuel, tag), "Light fuel isn't in " + tag.location());
+            helper.assertFalse(isIn(BCEnergyFluids.fuelDense[0].getSource(), tag), "Dense fuel is in " + tag.location());
+        }
+        for (BCFluid gas : BCEnergyFluids.fuelGaseous) {
+            helper.assertTrue(isIn(gas.getSource(), Tags.Fluids.GASEOUS), gas.getSource() + " isn't gaseous");
+        }
+        helper.assertFalse(isIn(oil, Tags.Fluids.GASEOUS), "Oil is gaseous");
+        helper.succeed();
+    }
+
+    /** Whatever is in the common oil and fuel tags (other mods' fluids too) gets BuildCraft's oil and light fuel
+     * values. In a development run with {@code -Pinterop_runtime=true} the tags hold PneumaticCraft's oil as well. */
+    @GameTest(template = "empty")
+    public static void taggedOilAndFuelWorkInBuildCraftMachines(GameTestHelper helper) {
+        FluidStack bcOil = new FluidStack(BCEnergyFluids.crudeOil[0].getSource(), 1);
+        IFuel oilFuel = BuildcraftFuelRegistry.fuel.getFuel(bcOil);
+        IDistillationRecipe oilDistilling = RefineryRecipeRegistry.INSTANCE.distillationRegistry.getRecipeForInput(bcOil);
+        IHeatableRecipe oilHeating = RefineryRecipeRegistry.INSTANCE.heatableRegistry.getRecipeForInput(bcOil);
+        helper.assertTrue(oilFuel != null && oilDistilling != null && oilHeating != null, "Oil isn't fully set up");
+        for (Fluid fluid : tagged(List.of(BCEnergyTags.OIL, BCEnergyTags.CRUDE_OIL))) {
+            FluidStack stack = new FluidStack(fluid, 1);
+            String name = BuiltInRegistries.FLUID.getKey(fluid).toString();
+            helper.assertTrue(sameFuel(BuildcraftFuelRegistry.fuel.getFuel(stack), oilFuel),
+                name + " doesn't burn like oil");
+            IDistillationRecipe distil = RefineryRecipeRegistry.INSTANCE.distillationRegistry.getRecipeForInput(stack);
+            helper.assertTrue(distil != null && distil.powerRequired() == oilDistilling.powerRequired()
+                && FluidStack.matches(distil.outGas(), oilDistilling.outGas())
+                && FluidStack.matches(distil.outLiquid(), oilDistilling.outLiquid()), name + " doesn't distil like oil");
+            IHeatableRecipe heat = RefineryRecipeRegistry.INSTANCE.heatableRegistry.getRecipeForInput(stack);
+            helper.assertTrue(heat != null && FluidStack.matches(heat.out(), oilHeating.out()),
+                name + " doesn't heat like oil");
+        }
+        IFuel lightFuel = BuildcraftFuelRegistry.fuel.getFuel(new FluidStack(BCEnergyFluids.fuelLight[0].getSource(), 1));
+        for (Fluid fluid : tagged(List.of(BCEnergyTags.FUEL, BCEnergyTags.LIGHT_FUEL))) {
+            helper.assertTrue(sameFuel(BuildcraftFuelRegistry.fuel.getFuel(new FluidStack(fluid, 1)), lightFuel),
+                BuiltInRegistries.FLUID.getKey(fluid) + " doesn't burn like light fuel");
+        }
+        helper.succeed();
+    }
+
+    private static boolean isIn(Fluid fluid, TagKey<Fluid> tag) {
+        return fluid.builtInRegistryHolder().is(tag);
+    }
+
+    private static Set<Fluid> tagged(List<TagKey<Fluid>> tags) {
+        Set<Fluid> fluids = new LinkedHashSet<>();
+        tags.forEach(tag -> BuiltInRegistries.FLUID.getTagOrEmpty(tag).forEach(h -> fluids.add(h.value())));
+        return fluids;
+    }
+
+    private static boolean sameFuel(IFuel a, IFuel b) {
+        if (a == null || b == null || a.getPowerPerCycle() != b.getPowerPerCycle()
+            || a.getTotalBurningTime() != b.getTotalBurningTime()) {
+            return false;
+        }
+        if (a instanceof IDirtyFuel dirtyA) {
+            return b instanceof IDirtyFuel dirtyB && FluidStack.matches(dirtyA.getResidue(), dirtyB.getResidue());
+        }
+        return !(b instanceof IDirtyFuel);
     }
 
     @GameTest(template = "empty")

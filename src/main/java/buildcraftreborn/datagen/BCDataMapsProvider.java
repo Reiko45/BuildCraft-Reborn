@@ -7,12 +7,15 @@
  */
 package buildcraftreborn.datagen;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
 
 import net.neoforged.neoforge.common.data.DataMapProvider;
@@ -20,6 +23,7 @@ import net.neoforged.neoforge.fluids.FluidStack;
 
 import buildcraftreborn.api.mj.MjAPI;
 import buildcraftreborn.energy.BCEnergyFluids;
+import buildcraftreborn.energy.BCEnergyTags;
 import buildcraftreborn.lib.fluid.BCFluid;
 import buildcraftreborn.lib.fluid.BCFluidDataMaps;
 import buildcraftreborn.lib.fluid.BCFluidDataMaps.CoolantData;
@@ -30,7 +34,13 @@ import buildcraftreborn.lib.fluid.BCFluidDataMaps.SolidCoolantData;
 import buildcraftreborn.lib.misc.MathUtil;
 
 /** Combustion engine fuels and coolants, and the distiller and heat exchanger recipes, with 1.12's values
- * ({@code BCEnergyRecipes}). Only the cool version of each fluid is a fuel, as in 1.12. */
+ * ({@code BCEnergyRecipes}). Only the cool version of each fluid is a fuel, as in 1.12.
+ * <p>
+ * Other mods' oil and fuel get BuildCraft's values through the common tags in {@link BCEnergyTags}: anything in
+ * {@code c:oil} or {@code c:crude_oil} burns, heats and distills like BuildCraft's oil, and anything in {@code c:fuel}
+ * or {@code c:light_fuel} burns like light fuel. BuildCraft's own fluids are in those tags too, and their tag entries
+ * hold exactly the same values as their own entries, so it doesn't matter which of the two a data pack load sees
+ * last. */
 public final class BCDataMapsProvider extends DataMapProvider {
     // Relative amounts of the fluid -- the amount of oil used in refining will return X amount of fluid
     // single
@@ -49,10 +59,13 @@ public final class BCDataMapsProvider extends DataMapProvider {
 
     private static final int TIME_BASE = 240_000; // 240_000 - multiple of 3, 5, 16, 1000
 
-    private Builder<FuelData, net.minecraft.world.level.material.Fluid> fuels;
-    private Builder<DistillationData, net.minecraft.world.level.material.Fluid> distillation;
-    private Builder<HeatExchangeData, net.minecraft.world.level.material.Fluid> heatable;
-    private Builder<HeatExchangeData, net.minecraft.world.level.material.Fluid> coolable;
+    private static final List<TagKey<Fluid>> OIL_TAGS = List.of(BCEnergyTags.OIL, BCEnergyTags.CRUDE_OIL);
+    private static final List<TagKey<Fluid>> FUEL_TAGS = List.of(BCEnergyTags.FUEL, BCEnergyTags.LIGHT_FUEL);
+
+    private Builder<FuelData, Fluid> fuels;
+    private Builder<DistillationData, Fluid> distillation;
+    private Builder<HeatExchangeData, Fluid> heatable;
+    private Builder<HeatExchangeData, Fluid> coolable;
 
     public BCDataMapsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookup) {
         super(output, lookup);
@@ -62,14 +75,16 @@ public final class BCDataMapsProvider extends DataMapProvider {
     protected void gather() {
         fuels = builder(BCFluidDataMaps.FUELS);
         addFuel(BCEnergyFluids.fuelGaseous, _gas, 8, 4);
-        addFuel(BCEnergyFluids.fuelLight, _light, 6, 6);
+        FuelData light = addFuel(BCEnergyFluids.fuelLight, _light, 6, 6);
+        FUEL_TAGS.forEach(tag -> fuels.add(tag, light, false));
         addFuel(BCEnergyFluids.fuelDense, _dense, 4, 12);
         addFuel(BCEnergyFluids.fuelMixedLight, _gas_light, 3, 5);
         addFuel(BCEnergyFluids.fuelMixedHeavy, _light_dense, 5, 8);
         addDirtyFuel(BCEnergyFluids.oilDense, _dense_residue, 4, 4);
         addFuel(BCEnergyFluids.oilDistilled, _gas_light_dense, 1, 5);
         addDirtyFuel(BCEnergyFluids.oilHeavy, _light_dense_residue, 2, 4);
-        addDirtyFuel(BCEnergyFluids.crudeOil, _oil, 3, 4);
+        FuelData oil = addDirtyFuel(BCEnergyFluids.crudeOil, _oil, 3, 4);
+        OIL_TAGS.forEach(tag -> fuels.add(tag, oil, false));
 
         builder(BCFluidDataMaps.COOLANTS)
             .add(Fluids.WATER.builtInRegistryHolder(), new CoolantData(0.0023f), false);
@@ -99,7 +114,8 @@ public final class BCDataMapsProvider extends DataMapProvider {
         FluidStack[] dense = createFluidStack(BCEnergyFluids.fuelDense, _dense);
         FluidStack[] residue = createFluidStack(BCEnergyFluids.oilResidue, _residue);
 
-        addDistillation(gas_light_dense_residue, gas, light_dense_residue, 0, 32);
+        DistillationData oil = addDistillation(gas_light_dense_residue, gas, light_dense_residue, 0, 32);
+        OIL_TAGS.forEach(tag -> distillation.add(tag, oil, false));
         addDistillation(gas_light_dense_residue, gas_light, dense_residue, 1, 16);
         addDistillation(gas_light_dense_residue, gas_light_dense, residue, 2, 12);
 
@@ -115,7 +131,8 @@ public final class BCDataMapsProvider extends DataMapProvider {
 
         addDistillation(dense_residue, dense, residue, 2, 12);
 
-        addHeatExchange(BCEnergyFluids.crudeOil);
+        HeatExchangeData heatOil = addHeatExchange(BCEnergyFluids.crudeOil);
+        OIL_TAGS.forEach(tag -> heatable.add(tag, heatOil, false));
         addHeatExchange(BCEnergyFluids.oilDistilled);
         addHeatExchange(BCEnergyFluids.oilHeavy);
         addHeatExchange(BCEnergyFluids.fuelMixedLight);
@@ -138,7 +155,7 @@ public final class BCDataMapsProvider extends DataMapProvider {
         return arr;
     }
 
-    private void addDistillation(FluidStack[] in, FluidStack[] outGas, FluidStack[] outLiquid, int heat,
+    private DistillationData addDistillation(FluidStack[] in, FluidStack[] outGas, FluidStack[] outLiquid, int heat,
         long mjCost) {
         FluidStack _in = in[heat];
         FluidStack _outGas = outGas[heat];
@@ -154,31 +171,43 @@ public final class BCDataMapsProvider extends DataMapProvider {
         } else {
             mjCost = mjCost * MjAPI.MJ;
         }
-        distillation.add(_in.getFluidHolder(),
-            new DistillationData(_in.getAmount(), _outGas, _outLiquid, mjCost / (double) MjAPI.MJ), false);
+        DistillationData data = new DistillationData(_in.getAmount(), _outGas, _outLiquid, mjCost / (double) MjAPI.MJ);
+        distillation.add(_in.getFluidHolder(), data, false);
+        return data;
     }
 
-    private void addHeatExchange(BCFluid[] fluid) {
+    /** Adds heating each temperature of the fluid to the next, and cooling it back, and returns the heating of the
+     * cool fluid. */
+    private HeatExchangeData addHeatExchange(BCFluid[] fluid) {
+        HeatExchangeData heatCool = null;
         for (int i = 0; i < fluid.length - 1; i++) {
             BCFluid cool = fluid[i];
             BCFluid hot = fluid[i + 1];
             FluidStack hot_f = new FluidStack(hot.getSource(), 10);
             FluidStack cool_f = new FluidStack(cool.getSource(), 10);
-            heatable.add(cool.source.getKey(), new HeatExchangeData(10, Optional.of(hot_f), cool.heat, hot.heat),
-                false);
+            HeatExchangeData heat = new HeatExchangeData(10, Optional.of(hot_f), cool.heat, hot.heat);
+            heatable.add(cool.source.getKey(), heat, false);
             coolable.add(hot.source.getKey(), new HeatExchangeData(10, Optional.of(cool_f), hot.heat, cool.heat),
                 false);
+            if (i == 0) {
+                heatCool = heat;
+            }
         }
+        return heatCool;
     }
 
-    private void addFuel(BCFluid[] in, int amountDiff, int multiplier, int boostOver4) {
+    private FuelData addFuel(BCFluid[] in, int amountDiff, int multiplier, int boostOver4) {
         int totalTime = TIME_BASE * boostOver4 / 4 / multiplier / amountDiff;
-        fuels.add(in[0].source.getKey(), new FuelData(multiplier, totalTime, Optional.empty()), false);
+        FuelData data = new FuelData(multiplier, totalTime, Optional.empty());
+        fuels.add(in[0].source.getKey(), data, false);
+        return data;
     }
 
-    private void addDirtyFuel(BCFluid[] in, int amountDiff, int multiplier, int boostOver4) {
+    private FuelData addDirtyFuel(BCFluid[] in, int amountDiff, int multiplier, int boostOver4) {
         int totalTime = TIME_BASE * boostOver4 / 4 / multiplier / amountDiff;
         FluidStack residue = new FluidStack(BCEnergyFluids.oilResidue[0].getSource(), 1000 / amountDiff);
-        fuels.add(in[0].source.getKey(), new FuelData(multiplier, totalTime, Optional.of(residue)), false);
+        FuelData data = new FuelData(multiplier, totalTime, Optional.of(residue));
+        fuels.add(in[0].source.getKey(), data, false);
+        return data;
     }
 }

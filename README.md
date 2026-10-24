@@ -24,6 +24,7 @@ An unofficial port of BuildCraft 8.0 from Minecraft 1.12.2 to **Minecraft 1.21.1
   - **Heat exchanger:** three to five in a row heat one fluid with another (oil with lava, for example), with the fluids flowing through it. The wrench turns a lone one and swaps the ends of a full one.
   - **Water gel:** the water gelifier turns water into gel, which spreads and sets; gelled water crafts back into a water bucket.
 - **Refinery recipes** (distillation, heating and cooling) are data maps too: `data/buildcraftreborn/data_maps/fluid/{distillation,heatable,coolable}.json`.
+- **Oil and fuel are shared with other mods** through common fluid tags: oil is in `c:oil` and `c:crude_oil`, light fuel in `c:fuel` and `c:light_fuel`, and gaseous fuel in `c:gaseous`. Other mods' fluids in those tags work in BuildCraft's machines too: oil burns, heats and distils like BuildCraft's oil, and fuel burns like light fuel. So, for example, PneumaticCraft refines BuildCraft's oil, BuildCraft's engines burn PneumaticCraft's oil, and Ad Astra's rockets fly on BuildCraft's fuel.
 - **Pipes:** all 47 of 8.0's pipe types.
   - **Transport pipes** for items: wooden (extracts with engine power), cobblestone, stone, sandstone, quartz, golden, iron (routes), diamond (sorts, with its filter GUI), wooden diamond (round-robin extraction), clay (prefers machines), void, obsidian (sucks up items), lazuli (paints items), daizuli (routes painted items), emzuli (gate-controlled extraction presets) and stripes (places, breaks, plants, shears, uses and dispenses, and extends itself with pipes).
   - **Fluid pipes** (wooden, cobblestone, stone, sandstone, quartz, golden, iron, diamond, wooden diamond, clay and void), made waterproof with pipe sealant. The obsidian fluid pipe is registered but, as in 1.12, has no item.
@@ -128,13 +129,17 @@ On Windows use `gradlew.bat` instead of `./gradlew`.
 | `./gradlew runClient` | Start Minecraft with the mod |
 | `./gradlew runServer` | Start a dedicated server (set `eula=true` in `run/eula.txt` first) |
 | `./gradlew runData` | Regenerate models, lang, tags and recipes into `src/generated/resources` |
-| `./gradlew runGameTestServer` | Run every GameTest (110) on a headless server, then exit |
-| `./gradlew test` | Run the unit tests (expression language, packet buffer, boxes, snapshot NBT and indexes) |
+| `./gradlew runGameTestServer` | Run every GameTest (129) on a headless server, then exit |
+| `./gradlew test` | Run the unit tests (expression language, packet buffer, boxes, snapshot NBT and indexes, and a check that the shipped data never mentions development-only content) |
 | `./gradlew build` | Build the mod jar into `build/libs` |
 
 Commit `src/generated/resources` after running `runData`; the build reads it from there.
 
 JEI, Jade, The One Probe and CraftTweaker are compiled against but never required. With `compat_runtime=true` in `gradle.properties` (the default) the dev runs load all four; set it to `false` (or pass `-Pcompat_runtime=false`) to run without them.
+
+`-Pinterop_runtime=true` also loads PneumaticCraft in the dev runs, for the GameTests in `BCInteropTests` that check oil works both ways between the two mods (132 GameTests in all).
+
+The dev runs can't catch everything: they register development-only content and run in development mode. Before a release, also boot the built jar on a real NeoForge server (from the NeoForge installer, `--installServer`) and check its log for errors.
 
 ## CraftTweaker
 

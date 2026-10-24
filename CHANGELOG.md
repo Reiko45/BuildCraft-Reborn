@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.1.2
+
+Oil and fuel work with other mods.
+
+- BuildCraft's oil is in the common fluid tags `c:oil` and `c:crude_oil`, light fuel is in `c:fuel` and `c:light_fuel`, and gaseous fuel is in `c:gaseous`. These are the names other 1.21.1 mods use: PneumaticCraft's refinery and Ad Astra's fuel refinery take BuildCraft's oil, and Ad Astra's rockets fly on BuildCraft's fuel.
+- Other mods' fluids in those tags work in BuildCraft's machines: oil burns in the combustion engine, heats in the heat exchanger and distils in the distiller like BuildCraft's oil, and fuel burns like light fuel. Data packs can change these values in the fuel, distillation and heatable data maps.
+- New GameTests, including tests with PneumaticCraft's oil (`gradlew runGameTestServer -Pinterop_runtime=true`).
+
 ## 1.1.1
 
 Fixes found in the first play test.

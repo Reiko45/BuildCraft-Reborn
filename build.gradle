@@ -141,6 +141,10 @@ dependencies {
     compileOnly "maven.modrinth:jade:${jade_version}"
     compileOnly "mcjty.theoneprobe:theoneprobe:${top_version}"
     compileOnly "com.blamejared.crafttweaker:CraftTweaker-neoforge-${minecraft_version}:${crafttweaker_version}"
+    // Another mod's oil, for the cross-mod tests in BCInteropTests: -Pinterop_runtime=true (off by default)
+    if (project.findProperty("interop_runtime") == "true") {
+        localRuntime "maven.modrinth:pneumaticcraft-repressurized:${pnc_version}"
+    }
     if (project.findProperty("compat_runtime") == "true") {
         localRuntime "mezz.jei:jei-${minecraft_version}-neoforge:${jei_version}"
         localRuntime "maven.modrinth:jade:${jade_version}"

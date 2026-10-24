@@ -1,5 +1,23 @@
 {
   "values": {
+    "#c:crude_oil": {
+      "amount": 10,
+      "heat_from": 0,
+      "heat_to": 1,
+      "result": {
+        "amount": 10,
+        "id": "buildcraftreborn:oil_heat_1"
+      }
+    },
+    "#c:oil": {
+      "amount": 10,
+      "heat_from": 0,
+      "heat_to": 1,
+      "result": {
+        "amount": 10,
+        "id": "buildcraftreborn:oil_heat_1"
+      }
+    },
     "buildcraftreborn:fuel_dense": {
       "amount": 10,
       "heat_from": 0,

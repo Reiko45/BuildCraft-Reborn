@@ -1,5 +1,29 @@
 {
   "values": {
+    "#c:crude_oil": {
+      "amount": 8,
+      "gas": {
+        "amount": 16,
+        "id": "buildcraftreborn:fuel_gaseous"
+      },
+      "liquid": {
+        "amount": 3,
+        "id": "buildcraftreborn:oil_heavy"
+      },
+      "power": 32.0
+    },
+    "#c:oil": {
+      "amount": 8,
+      "gas": {
+        "amount": 16,
+        "id": "buildcraftreborn:fuel_gaseous"
+      },
+      "liquid": {
+        "amount": 3,
+        "id": "buildcraftreborn:oil_heavy"
+      },
+      "power": 32.0
+    },
     "buildcraftreborn:fuel_mixed_heavy_heat_1": {
       "amount": 5,
       "gas": {

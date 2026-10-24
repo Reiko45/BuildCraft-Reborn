@@ -1,5 +1,29 @@
 {
   "values": {
+    "#c:crude_oil": {
+      "burn_time": 10000,
+      "power_per_tick": 3.0,
+      "residue": {
+        "amount": 125,
+        "id": "buildcraftreborn:oil_residue"
+      }
+    },
+    "#c:fuel": {
+      "burn_time": 15000,
+      "power_per_tick": 6.0
+    },
+    "#c:light_fuel": {
+      "burn_time": 15000,
+      "power_per_tick": 6.0
+    },
+    "#c:oil": {
+      "burn_time": 10000,
+      "power_per_tick": 3.0,
+      "residue": {
+        "amount": 125,
+        "id": "buildcraftreborn:oil_residue"
+      }
+    },
     "buildcraftreborn:fuel_dense": {
       "burn_time": 90000,
       "power_per_tick": 4.0
