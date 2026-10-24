@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "g": {
+      "tag": "c:glass_blocks/colorless"
+    },
+    "l": {
+      "tag": "c:obsidians/normal"
+    },
+    "r": {
+      "tag": "c:obsidians/normal"
+    }
+  },
+  "pattern": [
+    "lgr"
+  ],
+  "result": {
+    "count": 8,
+    "id": "buildcraftreborn:pipe_obsidian_item"
+  }
+}

@@ -1,0 +1,800 @@
+{
+  "action/extraction_preset": {
+    "type": "statement",
+    "book": "buildcraftreborn:main",
+    "tag_type": "action",
+    "tag_subtype": "pipe_item",
+    "statement": "buildcraft:extraction.preset.red"
+  },
+  "action/machine_control_loop": {
+    "type": "statement",
+    "book": "buildcraftreborn:main",
+    "tag_type": "action",
+    "tag_subtype": "automation",
+    "statement": "buildcraft:machine.loop"
+  },
+  "action/machine_control_off": {
+    "type": "statement",
+    "book": "buildcraftreborn:main",
+    "tag_type": "action",
+    "tag_subtype": "automation",
+    "statement": "buildcraft:machine.off"
+  },
+  "action/machine_control_on": {
+    "type": "statement",
+    "book": "buildcraftreborn:main",
+    "tag_type": "action",
+    "tag_subtype": "automation",
+    "statement": "buildcraft:machine.on"
+  },
+  "action/pipe_colour": {
+    "type": "statement",
+    "book": "buildcraftreborn:main",
+    "tag_type": "action",
+    "tag_subtype": "pipe_item",
+    "statement": "buildcraft:pipe.color.black"
+  },
+  "action/pipe_direction_above": {
+    "type": "statement",
+    "book": "buildcraftreborn:main",
+    "tag_type": "action",
+    "tag_subtype": "pipe_item",
+    "statement": "buildcraft:pipe.dir.up"
+  },
+  "action/pipe_direction_below": {
+    "type": "statement",
+    "book": "buildcraftreborn:main",
+    "tag_type": "action",
+    "tag_subtype": "pipe_item",
+    "statement": "buildcraft:pipe.dir.down"
+  },
+  "action/pipe_direction_east": {
+    "type": "statement",
+    "book": "buildcraftreborn:main",
+    "tag_type": "action",
+    "tag_subtype": "pipe_item",
+    "statement": "buildcraft:pipe.dir.east"
+  },
+  "action/pipe_direction_north": {
+    "type": "statement",
+    "book": "buildcraftreborn:main",
+    "tag_type": "action",
+    "tag_subtype": "pipe_item",
+    "statement": "buildcraft:pipe.dir.north"
+  },
+  "action/pipe_direction_south": {
+    "type": "statement",
+    "book": "buildcraftreborn:main",
+    "tag_type": "action",
+    "tag_subtype": "pipe_item",
+    "statement": "buildcraft:pipe.dir.south"
+  },
+  "action/pipe_direction_west": {
+    "type": "statement",
+    "book": "buildcraftreborn:main",
+    "tag_type": "action",
+    "tag_subtype": "pipe_item",
+    "statement": "buildcraft:pipe.dir.west"
+  },
+  "action/pipe_signal_active": {
+    "type": "statement",
+    "book": "buildcraftreborn:main",
+    "tag_type": "action",
+    "tag_subtype": "pipe_plug",
+    "statement": "buildcraft:pipe.wire.output.black"
+  },
+  "action/pulsar_constant": {
+    "type": "statement",
+    "book": "buildcraftreborn:main",
+    "tag_type": "action",
+    "tag_subtype": "pipe_plug",
+    "statement": "buildcraft:pulsar.constant"
+  },
+  "action/pulsar_single": {
+    "type": "statement",
+    "book": "buildcraftreborn:main",
+    "tag_type": "action",
+    "tag_subtype": "pipe_plug",
+    "statement": "buildcraft:pulsar.single"
+  },
+  "action/redstone": {
+    "type": "statement",
+    "book": "buildcraftreborn:main",
+    "tag_type": "action",
+    "tag_subtype": "basic",
+    "statement": "buildcraft:redstone.output"
+  },
+  "block/autoworkbench_item": {
+    "type": "item_stack",
+    "book": "buildcraftreborn:main",
+    "tag_type": "block",
+    "tag_subtype": "automation",
+    "stack": "buildcraftreborn:autoworkbench_item"
+  },
+  "block/chute": {
+    "type": "item_stack",
+    "book": "buildcraftreborn:main",
+    "tag_type": "block",
+    "tag_subtype": "automation",
+    "stack": "buildcraftreborn:chute"
+  },
+  "block/distiller": {
+    "type": "item_stack",
+    "book": "buildcraftreborn:main",
+    "tag_type": "block",
+    "tag_subtype": "refining",
+    "stack": "buildcraftreborn:distiller"
+  },
+  "block/engine_iron": {
+    "type": "item_stack",
+    "book": "buildcraftreborn:main",
+    "tag_type": "block",
+    "tag_subtype": "engine",
+    "stack": "buildcraftreborn:engine_iron"
+  },
+  "block/engine_stone": {
+    "type": "item_stack",
+    "book": "buildcraftreborn:main",
+    "tag_type": "block",
+    "tag_subtype": "engine",
+    "stack": "buildcraftreborn:engine_stone"
+  },
+  "block/engine_wood": {
+    "type": "item_stack",
+    "book": "buildcraftreborn:main",
+    "tag_type": "block",
+    "tag_subtype": "engine",
+    "stack": "buildcraftreborn:engine_wood"
+  },
+  "block/flood_gate": {
+    "type": "item_stack",
+    "book": "buildcraftreborn:main",
+    "tag_type": "block",
+    "tag_subtype": "fluid",
+    "stack": "buildcraftreborn:flood_gate"
+  },
+  "block/heat_exchange": {
+    "type": "item_stack",
+    "book": "buildcraftreborn:main",
+    "tag_type": "block",
+    "tag_subtype": "refining",
+    "stack": "buildcraftreborn:heat_exchange"
+  },
+  "block/mining_well": {
+    "type": "item_stack",
+    "book": "buildcraftreborn:main",
+    "tag_type": "block",
+    "tag_subtype": "mining",
+    "stack": "buildcraftreborn:mining_well"
+  },
+  "block/pump": {
+    "type": "item_stack",
+    "book": "buildcraftreborn:main",
+    "tag_type": "block",
+    "tag_subtype": "fluid",
+    "stack": "buildcraftreborn:pump"
+  },
+  "block/tank": {
+    "type": "item_stack",
+    "book": "buildcraftreborn:main",
+    "tag_type": "block",
+    "tag_subtype": "fluid",
+    "stack": "buildcraftreborn:tank"
+  },
+  "config/guide_entry_format": {
+    "type": "external",
+    "book": "buildcraftreborn:meta",
+    "tag_type": "config",
+    "tag_subtype": "resourcepack",
+    "title": "guide_entry_format"
+  },
+  "config/guide_page_format": {
+    "type": "external",
+    "book": "buildcraftreborn:meta",
+    "tag_type": "config",
+    "tag_subtype": "resourcepack",
+    "title": "guide_page_format"
+  },
+  "item/gear_diamond": {
+    "type": "item_stack",
+    "book": "buildcraftreborn:main",
+    "tag_type": "item",
+    "tag_subtype": "gear",
+    "stack": "buildcraftreborn:gear_diamond"
+  },
+  "item/gear_gold": {
+    "type": "item_stack",
+    "book": "buildcraftreborn:main",
+    "tag_type": "item",
+    "tag_subtype": "gear",
+    "stack": "buildcraftreborn:gear_gold"
+  },
+  "item/gear_iron": {
+    "type": "item_stack",
+    "book": "buildcraftreborn:main",
+    "tag_type": "item",
+    "tag_subtype": "gear",
+    "stack": "buildcraftreborn:gear_iron"
+  },
+  "item/gear_stone": {
+    "type": "item_stack",
+    "book": "buildcraftreborn:main",
+    "tag_type": "item",
+    "tag_subtype": "gear",
+    "stack": "buildcraftreborn:gear_stone"
+  },
+  "item/gear_wood": {
+    "type": "item_stack",
+    "book": "buildcraftreborn:main",
+    "tag_type": "item",
+    "tag_subtype": "gear",
+    "stack": "buildcraftreborn:gear_wood"
+  },
+  "item/guide": {
+    "type": "item_stack",
+    "book": "buildcraftreborn:main",
+    "tag_type": "item",
+    "tag_subtype": "tool",
+    "stack": "buildcraftreborn:guide"
+  },
+  "item/list": {
+    "type": "item_stack",
+    "book": "buildcraftreborn:main",
+    "tag_type": "item",
+    "tag_subtype": "tool",
+    "stack": "buildcraftreborn:list"
+  },
+  "item/marker_connector": {
+    "type": "item_stack",
+    "book": "buildcraftreborn:main",
+    "tag_type": "item",
+    "tag_subtype": "tool",
+    "stack": "buildcraftreborn:marker_connector"
+  },
+  "item/marker_path": {
+    "type": "item_stack",
+    "book": "buildcraftreborn:main",
+    "tag_type": "item",
+    "tag_subtype": "tool",
+    "stack": "buildcraftreborn:marker_path"
+  },
+  "item/marker_volume": {
+    "type": "item_stack",
+    "book": "buildcraftreborn:main",
+    "tag_type": "item",
+    "tag_subtype": "tool",
+    "stack": "buildcraftreborn:marker_volume"
+  },
+  "item/paintbrush": {
+    "type": "item_stack",
+    "book": "buildcraftreborn:main",
+    "tag_type": "item",
+    "tag_subtype": "tool",
+    "stack": "buildcraftreborn:paintbrush"
+  },
+  "item/plug_blocker": {
+    "type": "item_stack",
+    "book": "buildcraftreborn:main",
+    "tag_type": "item",
+    "tag_subtype": "pipe_plug",
+    "stack": "buildcraftreborn:plug_blocker"
+  },
+  "item/plug_facade": {
+    "type": "item_stack",
+    "book": "buildcraftreborn:main",
+    "tag_type": "item",
+    "tag_subtype": "pipe_plug",
+    "stack": "buildcraftreborn:plug_facade"
+  },
+  "item/plug_gate": {
+    "type": "item_stack",
+    "book": "buildcraftreborn:main",
+    "tag_type": "item",
+    "tag_subtype": "pipe_plug",
+    "stack": "buildcraftreborn:plug_gate"
+  },
+  "item/plug_lens": {
+    "type": "item_stack",
+    "book": "buildcraftreborn:main",
+    "tag_type": "item",
+    "tag_subtype": "pipe_plug",
+    "stack": "buildcraftreborn:plug_lens"
+  },
+  "item/plug_light_sensor": {
+    "type": "item_stack",
+    "book": "buildcraftreborn:main",
+    "tag_type": "item",
+    "tag_subtype": "pipe_plug",
+    "stack": "buildcraftreborn:plug_light_sensor"
+  },
+  "item/plug_power_adaptor": {
+    "type": "item_stack",
+    "book": "buildcraftreborn:main",
+    "tag_type": "item",
+    "tag_subtype": "pipe_plug",
+    "stack": "buildcraftreborn:plug_power_adaptor"
+  },
+  "item/plug_pulsar": {
+    "type": "item_stack",
+    "book": "buildcraftreborn:main",
+    "tag_type": "item",
+    "tag_subtype": "pipe_plug",
+    "stack": "buildcraftreborn:plug_pulsar"
+  },
+  "item/volume_box": {
+    "type": "item_stack",
+    "book": "buildcraftreborn:main",
+    "tag_type": "item",
+    "tag_subtype": "tool",
+    "stack": "buildcraftreborn:volume_box"
+  },
+  "item/wire": {
+    "type": "item_stack",
+    "book": "buildcraftreborn:main",
+    "tag_type": "item",
+    "tag_subtype": "pipe_plug",
+    "stack": "buildcraftreborn:wire_white"
+  },
+  "item/wrench": {
+    "type": "item_stack",
+    "book": "buildcraftreborn:main",
+    "tag_type": "item",
+    "tag_subtype": "tool",
+    "stack": "buildcraftreborn:wrench"
+  },
+  "pipe/clay_fluid": {
+    "type": "item_stack",
+    "book": "buildcraftreborn:main",
+    "tag_type": "pipe",
+    "tag_subtype": "pipe_fluid",
+    "stack": "buildcraftreborn:pipe_clay_fluid"
+  },
+  "pipe/clay_item": {
+    "type": "item_stack",
+    "book": "buildcraftreborn:main",
+    "tag_type": "pipe",
+    "tag_subtype": "pipe_item",
+    "stack": "buildcraftreborn:pipe_clay_item"
+  },
+  "pipe/cobble_fluid": {
+    "type": "item_stack",
+    "book": "buildcraftreborn:main",
+    "tag_type": "pipe",
+    "tag_subtype": "pipe_fluid",
+    "stack": "buildcraftreborn:pipe_cobble_fluid"
+  },
+  "pipe/cobble_item": {
+    "type": "item_stack",
+    "book": "buildcraftreborn:main",
+    "tag_type": "pipe",
+    "tag_subtype": "pipe_item",
+    "stack": "buildcraftreborn:pipe_cobble_item"
+  },
+  "pipe/daizuli_item": {
+    "type": "item_stack",
+    "book": "buildcraftreborn:main",
+    "tag_type": "pipe",
+    "tag_subtype": "pipe_item",
+    "stack": "buildcraftreborn:pipe_daizuli_item"
+  },
+  "pipe/diamond_fluid": {
+    "type": "item_stack",
+    "book": "buildcraftreborn:main",
+    "tag_type": "pipe",
+    "tag_subtype": "pipe_fluid",
+    "stack": "buildcraftreborn:pipe_diamond_fluid"
+  },
+  "pipe/diamond_item": {
+    "type": "item_stack",
+    "book": "buildcraftreborn:main",
+    "tag_type": "pipe",
+    "tag_subtype": "pipe_item",
+    "stack": "buildcraftreborn:pipe_diamond_item"
+  },
+  "pipe/diamond_wood_fluid": {
+    "type": "item_stack",
+    "book": "buildcraftreborn:main",
+    "tag_type": "pipe",
+    "tag_subtype": "pipe_fluid",
+    "stack": "buildcraftreborn:pipe_diamond_wood_fluid"
+  },
+  "pipe/diamond_wood_item": {
+    "type": "item_stack",
+    "book": "buildcraftreborn:main",
+    "tag_type": "pipe",
+    "tag_subtype": "pipe_item",
+    "stack": "buildcraftreborn:pipe_diamond_wood_item"
+  },
+  "pipe/emzuli_item": {
+    "type": "item_stack",
+    "book": "buildcraftreborn:main",
+    "tag_type": "pipe",
+    "tag_subtype": "pipe_item",
+    "stack": "buildcraftreborn:pipe_emzuli_item"
+  },
+  "pipe/gold_fluid": {
+    "type": "item_stack",
+    "book": "buildcraftreborn:main",
+    "tag_type": "pipe",
+    "tag_subtype": "pipe_fluid",
+    "stack": "buildcraftreborn:pipe_gold_fluid"
+  },
+  "pipe/gold_item": {
+    "type": "item_stack",
+    "book": "buildcraftreborn:main",
+    "tag_type": "pipe",
+    "tag_subtype": "pipe_item",
+    "stack": "buildcraftreborn:pipe_gold_item"
+  },
+  "pipe/iron_fluid": {
+    "type": "item_stack",
+    "book": "buildcraftreborn:main",
+    "tag_type": "pipe",
+    "tag_subtype": "pipe_fluid",
+    "stack": "buildcraftreborn:pipe_iron_fluid"
+  },
+  "pipe/iron_item": {
+    "type": "item_stack",
+    "book": "buildcraftreborn:main",
+    "tag_type": "pipe",
+    "tag_subtype": "pipe_item",
+    "stack": "buildcraftreborn:pipe_iron_item"
+  },
+  "pipe/lapis_item": {
+    "type": "item_stack",
+    "book": "buildcraftreborn:main",
+    "tag_type": "pipe",
+    "tag_subtype": "pipe_item",
+    "stack": "buildcraftreborn:pipe_lapis_item"
+  },
+  "pipe/obsidian_item": {
+    "type": "item_stack",
+    "book": "buildcraftreborn:main",
+    "tag_type": "pipe",
+    "tag_subtype": "pipe_item",
+    "stack": "buildcraftreborn:pipe_obsidian_item"
+  },
+  "pipe/quartz_fluid": {
+    "type": "item_stack",
+    "book": "buildcraftreborn:main",
+    "tag_type": "pipe",
+    "tag_subtype": "pipe_fluid",
+    "stack": "buildcraftreborn:pipe_quartz_fluid"
+  },
+  "pipe/quartz_item": {
+    "type": "item_stack",
+    "book": "buildcraftreborn:main",
+    "tag_type": "pipe",
+    "tag_subtype": "pipe_item",
+    "stack": "buildcraftreborn:pipe_quartz_item"
+  },
+  "pipe/sandstone_fluid": {
+    "type": "item_stack",
+    "book": "buildcraftreborn:main",
+    "tag_type": "pipe",
+    "tag_subtype": "pipe_fluid",
+    "stack": "buildcraftreborn:pipe_sandstone_fluid"
+  },
+  "pipe/sandstone_item": {
+    "type": "item_stack",
+    "book": "buildcraftreborn:main",
+    "tag_type": "pipe",
+    "tag_subtype": "pipe_item",
+    "stack": "buildcraftreborn:pipe_sandstone_item"
+  },
+  "pipe/stone_fluid": {
+    "type": "item_stack",
+    "book": "buildcraftreborn:main",
+    "tag_type": "pipe",
+    "tag_subtype": "pipe_fluid",
+    "stack": "buildcraftreborn:pipe_stone_fluid"
+  },
+  "pipe/stone_item": {
+    "type": "item_stack",
+    "book": "buildcraftreborn:main",
+    "tag_type": "pipe",
+    "tag_subtype": "pipe_item",
+    "stack": "buildcraftreborn:pipe_stone_item"
+  },
+  "pipe/stripes_item": {
+    "type": "item_stack",
+    "book": "buildcraftreborn:main",
+    "tag_type": "pipe",
+    "tag_subtype": "pipe_item",
+    "stack": "buildcraftreborn:pipe_stripes_item"
+  },
+  "pipe/structure": {
+    "type": "item_stack",
+    "book": "buildcraftreborn:main",
+    "tag_type": "pipe",
+    "tag_subtype": "pipe_item",
+    "stack": "buildcraftreborn:pipe_structure"
+  },
+  "pipe/void_fluid": {
+    "type": "item_stack",
+    "book": "buildcraftreborn:main",
+    "tag_type": "pipe",
+    "tag_subtype": "pipe_fluid",
+    "stack": "buildcraftreborn:pipe_void_fluid"
+  },
+  "pipe/void_item": {
+    "type": "item_stack",
+    "book": "buildcraftreborn:main",
+    "tag_type": "pipe",
+    "tag_subtype": "pipe_item",
+    "stack": "buildcraftreborn:pipe_void_item"
+  },
+  "pipe/wood_fluid": {
+    "type": "item_stack",
+    "book": "buildcraftreborn:main",
+    "tag_type": "pipe",
+    "tag_subtype": "pipe_fluid",
+    "stack": "buildcraftreborn:pipe_wood_fluid"
+  },
+  "pipe/wood_item": {
+    "type": "item_stack",
+    "book": "buildcraftreborn:main",
+    "tag_type": "pipe",
+    "tag_subtype": "pipe_item",
+    "stack": "buildcraftreborn:pipe_wood_item"
+  },
+  "trigger/always_on": {
+    "type": "statement",
+    "book": "buildcraftreborn:main",
+    "tag_type": "trigger",
+    "tag_subtype": "basic",
+    "statement": "buildcraftcore:trigger.true"
+  },
+  "trigger/engine_blue": {
+    "type": "statement",
+    "book": "buildcraftreborn:main",
+    "tag_type": "trigger",
+    "tag_subtype": "engine",
+    "statement": "buildcraft:engine.stage.blue"
+  },
+  "trigger/engine_green": {
+    "type": "statement",
+    "book": "buildcraftreborn:main",
+    "tag_type": "trigger",
+    "tag_subtype": "engine",
+    "statement": "buildcraft:engine.stage.green"
+  },
+  "trigger/engine_overheat": {
+    "type": "statement",
+    "book": "buildcraftreborn:main",
+    "tag_type": "trigger",
+    "tag_subtype": "engine",
+    "statement": "buildcraft:engine.stage.overheat"
+  },
+  "trigger/engine_red": {
+    "type": "statement",
+    "book": "buildcraftreborn:main",
+    "tag_type": "trigger",
+    "tag_subtype": "engine",
+    "statement": "buildcraft:engine.stage.red"
+  },
+  "trigger/engine_yellow": {
+    "type": "statement",
+    "book": "buildcraftreborn:main",
+    "tag_type": "trigger",
+    "tag_subtype": "engine",
+    "statement": "buildcraft:engine.stage.yellow"
+  },
+  "trigger/fluid_below_25": {
+    "type": "statement",
+    "book": "buildcraftreborn:main",
+    "tag_type": "trigger",
+    "tag_subtype": "fluid",
+    "statement": "buildcraft:fluid.below25"
+  },
+  "trigger/fluid_below_50": {
+    "type": "statement",
+    "book": "buildcraftreborn:main",
+    "tag_type": "trigger",
+    "tag_subtype": "fluid",
+    "statement": "buildcraft:fluid.below50"
+  },
+  "trigger/fluid_below_75": {
+    "type": "statement",
+    "book": "buildcraftreborn:main",
+    "tag_type": "trigger",
+    "tag_subtype": "fluid",
+    "statement": "buildcraft:fluid.below75"
+  },
+  "trigger/fluid_contains": {
+    "type": "statement",
+    "book": "buildcraftreborn:main",
+    "tag_type": "trigger",
+    "tag_subtype": "fluid",
+    "statement": "buildcraft:fluid.contains"
+  },
+  "trigger/fluid_empty": {
+    "type": "statement",
+    "book": "buildcraftreborn:main",
+    "tag_type": "trigger",
+    "tag_subtype": "fluid",
+    "statement": "buildcraft:fluid.empty"
+  },
+  "trigger/fluid_full": {
+    "type": "statement",
+    "book": "buildcraftreborn:main",
+    "tag_type": "trigger",
+    "tag_subtype": "fluid",
+    "statement": "buildcraft:fluid.full"
+  },
+  "trigger/fluid_space": {
+    "type": "statement",
+    "book": "buildcraftreborn:main",
+    "tag_type": "trigger",
+    "tag_subtype": "fluid",
+    "statement": "buildcraft:fluid.space"
+  },
+  "trigger/fluids_traversing": {
+    "type": "statement",
+    "book": "buildcraftreborn:main",
+    "tag_type": "trigger",
+    "tag_subtype": "pipe_fluid",
+    "statement": "buildcraft:pipe_contains_fluids"
+  },
+  "trigger/inventory_below_25": {
+    "type": "statement",
+    "book": "buildcraftreborn:main",
+    "tag_type": "trigger",
+    "tag_subtype": "item",
+    "statement": "buildcraft:inventorylevel.below25"
+  },
+  "trigger/inventory_below_50": {
+    "type": "statement",
+    "book": "buildcraftreborn:main",
+    "tag_type": "trigger",
+    "tag_subtype": "item",
+    "statement": "buildcraft:inventorylevel.below50"
+  },
+  "trigger/inventory_below_75": {
+    "type": "statement",
+    "book": "buildcraftreborn:main",
+    "tag_type": "trigger",
+    "tag_subtype": "item",
+    "statement": "buildcraft:inventorylevel.below75"
+  },
+  "trigger/inventory_contains": {
+    "type": "statement",
+    "book": "buildcraftreborn:main",
+    "tag_type": "trigger",
+    "tag_subtype": "item",
+    "statement": "buildcraft:inventory.contains"
+  },
+  "trigger/inventory_empty": {
+    "type": "statement",
+    "book": "buildcraftreborn:main",
+    "tag_type": "trigger",
+    "tag_subtype": "item",
+    "statement": "buildcraft:inventory.empty"
+  },
+  "trigger/inventory_full": {
+    "type": "statement",
+    "book": "buildcraftreborn:main",
+    "tag_type": "trigger",
+    "tag_subtype": "item",
+    "statement": "buildcraft:inventory.full"
+  },
+  "trigger/inventory_space": {
+    "type": "statement",
+    "book": "buildcraftreborn:main",
+    "tag_type": "trigger",
+    "tag_subtype": "item",
+    "statement": "buildcraft:inventory.space"
+  },
+  "trigger/items_traversing": {
+    "type": "statement",
+    "book": "buildcraftreborn:main",
+    "tag_type": "trigger",
+    "tag_subtype": "pipe_item",
+    "statement": "buildcraft:pipe_contains_items"
+  },
+  "trigger/light_high": {
+    "type": "statement",
+    "book": "buildcraftreborn:main",
+    "tag_type": "trigger",
+    "tag_subtype": "pipe_plug",
+    "statement": "buildcraft:light_bright"
+  },
+  "trigger/light_low": {
+    "type": "statement",
+    "book": "buildcraftreborn:main",
+    "tag_type": "trigger",
+    "tag_subtype": "pipe_plug",
+    "statement": "buildcraft:light_dark"
+  },
+  "trigger/machine_active": {
+    "type": "statement",
+    "book": "buildcraftreborn:main",
+    "tag_type": "trigger",
+    "tag_subtype": "automation",
+    "statement": "buildcraft:work.scheduled"
+  },
+  "trigger/machine_inactive": {
+    "type": "statement",
+    "book": "buildcraftreborn:main",
+    "tag_type": "trigger",
+    "tag_subtype": "automation",
+    "statement": "buildcraft:work.done"
+  },
+  "trigger/pipe_signal_active": {
+    "type": "statement",
+    "book": "buildcraftreborn:main",
+    "tag_type": "trigger",
+    "tag_subtype": "pipe_plug",
+    "statement": "buildcraft.pipe.wire.input.black.active"
+  },
+  "trigger/pipe_signal_inactive": {
+    "type": "statement",
+    "book": "buildcraftreborn:main",
+    "tag_type": "trigger",
+    "tag_subtype": "pipe_plug",
+    "statement": "buildcraft.pipe.wire.input.black.inactive"
+  },
+  "trigger/redstone_active": {
+    "type": "statement",
+    "book": "buildcraftreborn:main",
+    "tag_type": "trigger",
+    "tag_subtype": "basic",
+    "statement": "buildcraft:redstone.input.active"
+  },
+  "trigger/redstone_inactive": {
+    "type": "statement",
+    "book": "buildcraftreborn:main",
+    "tag_type": "trigger",
+    "tag_subtype": "basic",
+    "statement": "buildcraft:redstone.input.inactive"
+  },
+  "item/robot": {
+    "type": "item_stack",
+    "book": "buildcraftreborn:main",
+    "tag_type": "item",
+    "tag_subtype": "robotics",
+    "stack": "buildcraftreborn:robot"
+  },
+  "item/redstone_board": {
+    "type": "item_stack",
+    "book": "buildcraftreborn:main",
+    "tag_type": "item",
+    "tag_subtype": "robotics",
+    "stack": "buildcraftreborn:redstone_board"
+  },
+  "item/robot_station": {
+    "type": "item_stack",
+    "book": "buildcraftreborn:main",
+    "tag_type": "item",
+    "tag_subtype": "robotics",
+    "stack": "buildcraftreborn:robot_station"
+  },
+  "block/programming_table": {
+    "type": "item_stack",
+    "book": "buildcraftreborn:main",
+    "tag_type": "block",
+    "tag_subtype": "robotics",
+    "stack": "buildcraftreborn:programming_table"
+  },
+  "block/charging_table": {
+    "type": "item_stack",
+    "book": "buildcraftreborn:main",
+    "tag_type": "block",
+    "tag_subtype": "robotics",
+    "stack": "buildcraftreborn:charging_table"
+  },
+  "block/requester": {
+    "type": "item_stack",
+    "book": "buildcraftreborn:main",
+    "tag_type": "block",
+    "tag_subtype": "robotics",
+    "stack": "buildcraftreborn:requester"
+  },
+  "block/construction_marker": {
+    "type": "item_stack",
+    "book": "buildcraftreborn:main",
+    "tag_type": "block",
+    "tag_subtype": "robotics",
+    "stack": "buildcraftreborn:construction_marker"
+  }
+}

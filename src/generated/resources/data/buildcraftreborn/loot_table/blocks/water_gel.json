@@ -1,0 +1,95 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "conditions": [
+                {
+                  "block": "buildcraftreborn:water_gel",
+                  "condition": "minecraft:block_state_property",
+                  "properties": {
+                    "stage": "spread_0"
+                  }
+                }
+              ],
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 2.0,
+                "min": 1.0
+              },
+              "function": "minecraft:set_count"
+            },
+            {
+              "add": false,
+              "conditions": [
+                {
+                  "block": "buildcraftreborn:water_gel",
+                  "condition": "minecraft:block_state_property",
+                  "properties": {
+                    "stage": "spread_1"
+                  }
+                }
+              ],
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 2.0,
+                "min": 1.0
+              },
+              "function": "minecraft:set_count"
+            },
+            {
+              "add": false,
+              "conditions": [
+                {
+                  "block": "buildcraftreborn:water_gel",
+                  "condition": "minecraft:block_state_property",
+                  "properties": {
+                    "stage": "spread_2"
+                  }
+                }
+              ],
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 2.0,
+                "min": 1.0
+              },
+              "function": "minecraft:set_count"
+            },
+            {
+              "add": false,
+              "conditions": [
+                {
+                  "block": "buildcraftreborn:water_gel",
+                  "condition": "minecraft:block_state_property",
+                  "properties": {
+                    "stage": "spread_3"
+                  }
+                }
+              ],
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 2.0,
+                "min": 1.0
+              },
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "buildcraftreborn:gel"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "buildcraftreborn:blocks/water_gel"
+}

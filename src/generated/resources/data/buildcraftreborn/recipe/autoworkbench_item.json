@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "g": {
+      "tag": "c:gears/stone"
+    },
+    "w": {
+      "tag": "c:player_workstations/crafting_tables"
+    }
+  },
+  "pattern": [
+    "gwg"
+  ],
+  "result": {
+    "count": 1,
+    "id": "buildcraftreborn:autoworkbench_item"
+  }
+}

@@ -1,0 +1,13 @@
+/*
+ * Copyright (c) 2011-2017 SpaceToad and the BuildCraft Team http://www.mod-buildcraft.com
+ * Ported to Minecraft 1.21.1 by BuildCraft Reborn.
+ *
+ * The BuildCraft API is distributed under the terms of the MIT License. Please check the contents of the license,
+ * which is located as "LICENSE-API" in the BuildCraft Reborn source code distribution.
+ */
+package buildcraftreborn.api.statements;
+
+/** Marker interface that designates a class as being an action. Note that you *must* implement ONE of the following
+ * interfaces to be recognised as an action: {@link IActionInternal}, {@link IActionInternalSided}, or
+ * {@link IActionExternal} */
+public interface IAction extends IStatement {}

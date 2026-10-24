@@ -1,0 +1,25 @@
+{
+  "type": "buildcraftreborn:assembly",
+  "ingredients": [
+    {
+      "ingredient": {
+        "tag": "c:glass_blocks/colorless"
+      }
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:iron_bars"
+      }
+    }
+  ],
+  "mj": 500,
+  "result": {
+    "components": {
+      "buildcraftreborn:lens": {
+        "filter": true
+      }
+    },
+    "count": 1,
+    "id": "buildcraftreborn:plug_lens"
+  }
+}

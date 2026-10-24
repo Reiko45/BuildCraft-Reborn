@@ -1,0 +1,10 @@
+[
+    {
+        "selectors": [
+            "minecraft:daylight_detector"
+        ],
+        "ignoredProperties": [
+            "power"
+        ]
+    }
+]

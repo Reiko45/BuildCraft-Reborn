@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "d": {
+      "tag": "c:gems/diamond"
+    },
+    "o": {
+      "tag": "c:obsidians/normal"
+    },
+    "r": {
+      "tag": "c:dusts/redstone"
+    }
+  },
+  "pattern": [
+    "rro",
+    "rdd",
+    "rro"
+  ],
+  "result": {
+    "count": 1,
+    "id": "buildcraftreborn:laser"
+  }
+}

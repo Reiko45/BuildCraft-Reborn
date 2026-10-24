@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "buildcraftreborn:block/engine_stone"
+    }
+  }
+}

@@ -1,0 +1,32 @@
+/*
+ * Copyright (c) 2011-2017 SpaceToad and the BuildCraft Team http://www.mod-buildcraft.com
+ * Ported to Minecraft 1.21.1 by BuildCraft Reborn.
+ *
+ * The BuildCraft API is distributed under the terms of the MIT License. Please check the contents of the license,
+ * which is located as "LICENSE-API" in the BuildCraft Reborn source code distribution.
+ */
+package buildcraftreborn.api.robots;
+
+import net.minecraft.world.item.ItemStack;
+
+/** Provide requests of items that need to be fulfilled.
+ *
+ * Requests are organized as an linear array, where empty entries mark slots without a requests. A request in a slot,
+ * or the amount of slots, is allowed to change before a call to {@link #offerItem(int, ItemStack)}, but it is not
+ * recommended that this is frequent, since the request delivery won't fail until it is offered the previous request.
+ * <p>
+ * 1.21: {@link ItemStack#EMPTY} instead of null. */
+public interface IRequestProvider {
+    /** Return the total number of request slots available from this provider. */
+    int getRequestsCount();
+
+    /** Return a stack with the request in the slot.
+     *
+     * @return the request in the slot, or {@link ItemStack#EMPTY} if there's no request. */
+    ItemStack getRequest(int slot);
+
+    /** Fulfill the request in slot with the stack given and return any excess.
+     *
+     * @return any excess that was not used to fulfill the request. */
+    ItemStack offerItem(int slot, ItemStack stack);
+}

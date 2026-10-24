@@ -1,0 +1,117 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "buildcraftreborn:block/builder"
+      },
+      "when": {
+        "facing": "north"
+      }
+    },
+    {
+      "apply": {
+        "model": "buildcraftreborn:block/builder/slot_blueprint"
+      },
+      "when": {
+        "facing": "north",
+        "snapshot_type": "blueprint"
+      }
+    },
+    {
+      "apply": {
+        "model": "buildcraftreborn:block/builder/slot_template"
+      },
+      "when": {
+        "facing": "north",
+        "snapshot_type": "template"
+      }
+    },
+    {
+      "apply": {
+        "model": "buildcraftreborn:block/builder",
+        "y": 90
+      },
+      "when": {
+        "facing": "east"
+      }
+    },
+    {
+      "apply": {
+        "model": "buildcraftreborn:block/builder/slot_blueprint",
+        "y": 90
+      },
+      "when": {
+        "facing": "east",
+        "snapshot_type": "blueprint"
+      }
+    },
+    {
+      "apply": {
+        "model": "buildcraftreborn:block/builder/slot_template",
+        "y": 90
+      },
+      "when": {
+        "facing": "east",
+        "snapshot_type": "template"
+      }
+    },
+    {
+      "apply": {
+        "model": "buildcraftreborn:block/builder",
+        "y": 180
+      },
+      "when": {
+        "facing": "south"
+      }
+    },
+    {
+      "apply": {
+        "model": "buildcraftreborn:block/builder/slot_blueprint",
+        "y": 180
+      },
+      "when": {
+        "facing": "south",
+        "snapshot_type": "blueprint"
+      }
+    },
+    {
+      "apply": {
+        "model": "buildcraftreborn:block/builder/slot_template",
+        "y": 180
+      },
+      "when": {
+        "facing": "south",
+        "snapshot_type": "template"
+      }
+    },
+    {
+      "apply": {
+        "model": "buildcraftreborn:block/builder",
+        "y": 270
+      },
+      "when": {
+        "facing": "west"
+      }
+    },
+    {
+      "apply": {
+        "model": "buildcraftreborn:block/builder/slot_blueprint",
+        "y": 270
+      },
+      "when": {
+        "facing": "west",
+        "snapshot_type": "blueprint"
+      }
+    },
+    {
+      "apply": {
+        "model": "buildcraftreborn:block/builder/slot_template",
+        "y": 270
+      },
+      "when": {
+        "facing": "west",
+        "snapshot_type": "template"
+      }
+    }
+  ]
+}

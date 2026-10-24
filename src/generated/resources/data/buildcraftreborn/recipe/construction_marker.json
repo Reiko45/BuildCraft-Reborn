@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "g": {
+      "tag": "c:gears/gold"
+    },
+    "t": {
+      "item": "minecraft:redstone_torch"
+    }
+  },
+  "pattern": [
+    "g",
+    "t"
+  ],
+  "result": {
+    "count": 1,
+    "id": "buildcraftreborn:construction_marker"
+  }
+}

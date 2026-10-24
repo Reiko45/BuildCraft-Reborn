@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "O": {
+      "tag": "c:obsidians/normal"
+    },
+    "d": {
+      "tag": "c:gems/diamond"
+    },
+    "g": {
+      "tag": "c:gears/diamond"
+    },
+    "r": {
+      "tag": "c:dusts/redstone"
+    }
+  },
+  "pattern": [
+    "OdO",
+    "OrO",
+    "OgO"
+  ],
+  "result": {
+    "count": 1,
+    "id": "buildcraftreborn:assembly_table"
+  }
+}

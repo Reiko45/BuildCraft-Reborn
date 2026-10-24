@@ -1,0 +1,26 @@
+{
+  "parent": "buildcraftreborn:laser_power",
+  "criteria": {
+    "code_trigger": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.buildcraftreborn.precision_crafting.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "buildcraftreborn:assembly_table"
+    },
+    "title": {
+      "translate": "advancements.buildcraftreborn.precision_crafting.title"
+    }
+  },
+  "requirements": [
+    [
+      "code_trigger"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

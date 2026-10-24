@@ -1,0 +1,26 @@
+{
+  "parent": "buildcraftreborn:oil_platform",
+  "criteria": {
+    "code_trigger": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.buildcraftreborn.heating_and_distilling.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "buildcraftreborn:distiller"
+    },
+    "title": {
+      "translate": "advancements.buildcraftreborn.heating_and_distilling.title"
+    }
+  },
+  "requirements": [
+    [
+      "code_trigger"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

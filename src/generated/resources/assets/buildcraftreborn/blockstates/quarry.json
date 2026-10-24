@@ -1,0 +1,472 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "buildcraftreborn:block/quarry/down_normal"
+      },
+      "when": {
+        "connected_down": "false",
+        "facing": "north"
+      }
+    },
+    {
+      "apply": {
+        "model": "buildcraftreborn:block/quarry/down_normal",
+        "y": 90
+      },
+      "when": {
+        "connected_down": "false",
+        "facing": "east"
+      }
+    },
+    {
+      "apply": {
+        "model": "buildcraftreborn:block/quarry/down_normal",
+        "y": 180
+      },
+      "when": {
+        "connected_down": "false",
+        "facing": "south"
+      }
+    },
+    {
+      "apply": {
+        "model": "buildcraftreborn:block/quarry/down_normal",
+        "y": 270
+      },
+      "when": {
+        "connected_down": "false",
+        "facing": "west"
+      }
+    },
+    {
+      "apply": {
+        "model": "buildcraftreborn:block/quarry/down_connected"
+      },
+      "when": {
+        "connected_down": "true",
+        "facing": "north"
+      }
+    },
+    {
+      "apply": {
+        "model": "buildcraftreborn:block/quarry/down_connected",
+        "y": 90
+      },
+      "when": {
+        "connected_down": "true",
+        "facing": "east"
+      }
+    },
+    {
+      "apply": {
+        "model": "buildcraftreborn:block/quarry/down_connected",
+        "y": 180
+      },
+      "when": {
+        "connected_down": "true",
+        "facing": "south"
+      }
+    },
+    {
+      "apply": {
+        "model": "buildcraftreborn:block/quarry/down_connected",
+        "y": 270
+      },
+      "when": {
+        "connected_down": "true",
+        "facing": "west"
+      }
+    },
+    {
+      "apply": {
+        "model": "buildcraftreborn:block/quarry/up_normal"
+      },
+      "when": {
+        "connected_up": "false",
+        "facing": "north"
+      }
+    },
+    {
+      "apply": {
+        "model": "buildcraftreborn:block/quarry/up_normal",
+        "y": 90
+      },
+      "when": {
+        "connected_up": "false",
+        "facing": "east"
+      }
+    },
+    {
+      "apply": {
+        "model": "buildcraftreborn:block/quarry/up_normal",
+        "y": 180
+      },
+      "when": {
+        "connected_up": "false",
+        "facing": "south"
+      }
+    },
+    {
+      "apply": {
+        "model": "buildcraftreborn:block/quarry/up_normal",
+        "y": 270
+      },
+      "when": {
+        "connected_up": "false",
+        "facing": "west"
+      }
+    },
+    {
+      "apply": {
+        "model": "buildcraftreborn:block/quarry/up_connected"
+      },
+      "when": {
+        "connected_up": "true",
+        "facing": "north"
+      }
+    },
+    {
+      "apply": {
+        "model": "buildcraftreborn:block/quarry/up_connected",
+        "y": 90
+      },
+      "when": {
+        "connected_up": "true",
+        "facing": "east"
+      }
+    },
+    {
+      "apply": {
+        "model": "buildcraftreborn:block/quarry/up_connected",
+        "y": 180
+      },
+      "when": {
+        "connected_up": "true",
+        "facing": "south"
+      }
+    },
+    {
+      "apply": {
+        "model": "buildcraftreborn:block/quarry/up_connected",
+        "y": 270
+      },
+      "when": {
+        "connected_up": "true",
+        "facing": "west"
+      }
+    },
+    {
+      "apply": {
+        "model": "buildcraftreborn:block/quarry/north_normal"
+      },
+      "when": {
+        "connected_north": "false",
+        "facing": "north"
+      }
+    },
+    {
+      "apply": {
+        "model": "buildcraftreborn:block/quarry/north_normal",
+        "y": 90
+      },
+      "when": {
+        "connected_north": "false",
+        "facing": "east"
+      }
+    },
+    {
+      "apply": {
+        "model": "buildcraftreborn:block/quarry/north_normal",
+        "y": 180
+      },
+      "when": {
+        "connected_north": "false",
+        "facing": "south"
+      }
+    },
+    {
+      "apply": {
+        "model": "buildcraftreborn:block/quarry/north_normal",
+        "y": 270
+      },
+      "when": {
+        "connected_north": "false",
+        "facing": "west"
+      }
+    },
+    {
+      "apply": {
+        "model": "buildcraftreborn:block/quarry/north_connected"
+      },
+      "when": {
+        "connected_north": "true",
+        "facing": "north"
+      }
+    },
+    {
+      "apply": {
+        "model": "buildcraftreborn:block/quarry/north_connected",
+        "y": 90
+      },
+      "when": {
+        "connected_north": "true",
+        "facing": "east"
+      }
+    },
+    {
+      "apply": {
+        "model": "buildcraftreborn:block/quarry/north_connected",
+        "y": 180
+      },
+      "when": {
+        "connected_north": "true",
+        "facing": "south"
+      }
+    },
+    {
+      "apply": {
+        "model": "buildcraftreborn:block/quarry/north_connected",
+        "y": 270
+      },
+      "when": {
+        "connected_north": "true",
+        "facing": "west"
+      }
+    },
+    {
+      "apply": {
+        "model": "buildcraftreborn:block/quarry/south_normal"
+      },
+      "when": {
+        "connected_south": "false",
+        "facing": "north"
+      }
+    },
+    {
+      "apply": {
+        "model": "buildcraftreborn:block/quarry/south_normal",
+        "y": 90
+      },
+      "when": {
+        "connected_south": "false",
+        "facing": "east"
+      }
+    },
+    {
+      "apply": {
+        "model": "buildcraftreborn:block/quarry/south_normal",
+        "y": 180
+      },
+      "when": {
+        "connected_south": "false",
+        "facing": "south"
+      }
+    },
+    {
+      "apply": {
+        "model": "buildcraftreborn:block/quarry/south_normal",
+        "y": 270
+      },
+      "when": {
+        "connected_south": "false",
+        "facing": "west"
+      }
+    },
+    {
+      "apply": {
+        "model": "buildcraftreborn:block/quarry/south_connected"
+      },
+      "when": {
+        "connected_south": "true",
+        "facing": "north"
+      }
+    },
+    {
+      "apply": {
+        "model": "buildcraftreborn:block/quarry/south_connected",
+        "y": 90
+      },
+      "when": {
+        "connected_south": "true",
+        "facing": "east"
+      }
+    },
+    {
+      "apply": {
+        "model": "buildcraftreborn:block/quarry/south_connected",
+        "y": 180
+      },
+      "when": {
+        "connected_south": "true",
+        "facing": "south"
+      }
+    },
+    {
+      "apply": {
+        "model": "buildcraftreborn:block/quarry/south_connected",
+        "y": 270
+      },
+      "when": {
+        "connected_south": "true",
+        "facing": "west"
+      }
+    },
+    {
+      "apply": {
+        "model": "buildcraftreborn:block/quarry/west_normal"
+      },
+      "when": {
+        "connected_west": "false",
+        "facing": "north"
+      }
+    },
+    {
+      "apply": {
+        "model": "buildcraftreborn:block/quarry/west_normal",
+        "y": 90
+      },
+      "when": {
+        "connected_west": "false",
+        "facing": "east"
+      }
+    },
+    {
+      "apply": {
+        "model": "buildcraftreborn:block/quarry/west_normal",
+        "y": 180
+      },
+      "when": {
+        "connected_west": "false",
+        "facing": "south"
+      }
+    },
+    {
+      "apply": {
+        "model": "buildcraftreborn:block/quarry/west_normal",
+        "y": 270
+      },
+      "when": {
+        "connected_west": "false",
+        "facing": "west"
+      }
+    },
+    {
+      "apply": {
+        "model": "buildcraftreborn:block/quarry/west_connected"
+      },
+      "when": {
+        "connected_west": "true",
+        "facing": "north"
+      }
+    },
+    {
+      "apply": {
+        "model": "buildcraftreborn:block/quarry/west_connected",
+        "y": 90
+      },
+      "when": {
+        "connected_west": "true",
+        "facing": "east"
+      }
+    },
+    {
+      "apply": {
+        "model": "buildcraftreborn:block/quarry/west_connected",
+        "y": 180
+      },
+      "when": {
+        "connected_west": "true",
+        "facing": "south"
+      }
+    },
+    {
+      "apply": {
+        "model": "buildcraftreborn:block/quarry/west_connected",
+        "y": 270
+      },
+      "when": {
+        "connected_west": "true",
+        "facing": "west"
+      }
+    },
+    {
+      "apply": {
+        "model": "buildcraftreborn:block/quarry/east_normal"
+      },
+      "when": {
+        "connected_east": "false",
+        "facing": "north"
+      }
+    },
+    {
+      "apply": {
+        "model": "buildcraftreborn:block/quarry/east_normal",
+        "y": 90
+      },
+      "when": {
+        "connected_east": "false",
+        "facing": "east"
+      }
+    },
+    {
+      "apply": {
+        "model": "buildcraftreborn:block/quarry/east_normal",
+        "y": 180
+      },
+      "when": {
+        "connected_east": "false",
+        "facing": "south"
+      }
+    },
+    {
+      "apply": {
+        "model": "buildcraftreborn:block/quarry/east_normal",
+        "y": 270
+      },
+      "when": {
+        "connected_east": "false",
+        "facing": "west"
+      }
+    },
+    {
+      "apply": {
+        "model": "buildcraftreborn:block/quarry/east_connected"
+      },
+      "when": {
+        "connected_east": "true",
+        "facing": "north"
+      }
+    },
+    {
+      "apply": {
+        "model": "buildcraftreborn:block/quarry/east_connected",
+        "y": 90
+      },
+      "when": {
+        "connected_east": "true",
+        "facing": "east"
+      }
+    },
+    {
+      "apply": {
+        "model": "buildcraftreborn:block/quarry/east_connected",
+        "y": 180
+      },
+      "when": {
+        "connected_east": "true",
+        "facing": "south"
+      }
+    },
+    {
+      "apply": {
+        "model": "buildcraftreborn:block/quarry/east_connected",
+        "y": 270
+      },
+      "when": {
+        "connected_east": "true",
+        "facing": "west"
+      }
+    }
+  ]
+}

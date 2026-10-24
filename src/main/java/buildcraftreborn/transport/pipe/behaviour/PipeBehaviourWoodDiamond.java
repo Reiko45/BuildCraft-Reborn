@@ -1,0 +1,241 @@
+/*
+ * Copyright (c) 2017 SpaceToad and the BuildCraft team
+ * Ported to Minecraft 1.21.1 by BuildCraft Reborn.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public License, v. 2.0. If a copy of the MPL was not
+ * distributed with this file, You can obtain one at https://mozilla.org/MPL/2.0/
+ */
+package buildcraftreborn.transport.pipe.behaviour;
+
+import buildcraftreborn.lib.net.PacketBufferBC;
+import org.jetbrains.annotations.Nullable;
+import net.minecraft.world.phys.BlockHitResult;
+import net.neoforged.neoforge.network.handling.IPayloadContext;
+import net.neoforged.fml.LogicalSide;
+import net.minecraft.core.HolderLookup;
+import java.io.IOException;
+
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.core.Direction;
+
+import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.FluidUtil; // TODO port
+import net.neoforged.neoforge.items.IItemHandlerModifiable;
+
+import buildcraftreborn.api.core.EnumPipePart;
+import buildcraftreborn.api.core.IStackFilter;
+import buildcraftreborn.api.transport.IItemPluggable;
+import buildcraftreborn.api.transport.pipe.IFlowFluid;
+import buildcraftreborn.api.transport.pipe.IFlowItems;
+import buildcraftreborn.api.transport.pipe.IPipe;
+import buildcraftreborn.api.transport.pipe.IPipeHolder.PipeMessageReceiver;
+
+import buildcraftreborn.lib.inventory.filter.ArrayFluidFilter;
+import buildcraftreborn.lib.inventory.filter.DelegatingItemHandlerFilter;
+import buildcraftreborn.lib.inventory.filter.InvertedFluidFilter;
+import buildcraftreborn.lib.inventory.filter.InvertedStackFilter;
+import buildcraftreborn.lib.inventory.filter.StackFilter;
+import buildcraftreborn.lib.misc.EntityUtil;
+import buildcraftreborn.lib.misc.StackUtil;
+import buildcraftreborn.lib.tile.item.ItemHandlerSimple;
+
+import buildcraftreborn.transport.BCTransportGuis;
+
+public class PipeBehaviourWoodDiamond extends PipeBehaviourWood {
+
+    public enum FilterMode {
+        WHITE_LIST,
+        BLACK_LIST,
+        ROUND_ROBIN;
+
+        public static FilterMode get(int index) {
+            switch (index) {
+                default:
+                case 0:
+                    return WHITE_LIST;
+                case 1:
+                    return BLACK_LIST;
+                case 2:
+                    return ROUND_ROBIN;
+            }
+        }
+    }
+
+    public final ItemHandlerSimple filters = new ItemHandlerSimple(9, this::onSlotChanged);
+    public FilterMode filterMode = FilterMode.WHITE_LIST;
+    public int currentFilter = 0;
+    public boolean filterValid = false;
+
+    public PipeBehaviourWoodDiamond(IPipe pipe) {
+        super(pipe);
+    }
+
+    public PipeBehaviourWoodDiamond(IPipe pipe, CompoundTag nbt, HolderLookup.Provider registries) {
+        super(pipe, nbt, registries);
+        filters.deserializeNBT(registries, nbt.getCompound("filters"));
+        filterMode = FilterMode.get(nbt.getByte("mode"));
+        currentFilter = nbt.getByte("currentFilter") % filters.getSlots();
+        filterValid = !filters.extract(StackFilter.ALL, 1, 1, true).isEmpty();
+    }
+
+    @Override
+    public CompoundTag writeToNbt(HolderLookup.Provider registries) {
+        CompoundTag nbt = super.writeToNbt(registries);
+        nbt.put("filters", filters.serializeNBT(registries));
+        nbt.putByte("mode", (byte) filterMode.ordinal());
+        nbt.putByte("currentFilter", (byte) currentFilter);
+        return nbt;
+    }
+
+    @Override
+    public void readPayload(PacketBufferBC buffer, LogicalSide side, @Nullable IPayloadContext ctx) throws IOException {
+        super.readPayload(buffer, side, ctx);
+        if (side == LogicalSide.CLIENT) {
+            filterMode = FilterMode.get(buffer.readUnsignedByte());
+            currentFilter = buffer.readUnsignedByte() % filters.getSlots();
+            filterValid = buffer.readBoolean();
+        }
+    }
+
+    @Override
+    public void writePayload(PacketBufferBC buffer, LogicalSide side) {
+        super.writePayload(buffer, side);
+        if (side == LogicalSide.SERVER) {
+            buffer.writeByte(filterMode.ordinal());
+            buffer.writeByte(currentFilter);
+            buffer.writeBoolean(filterValid);
+        }
+    }
+
+    @Override
+    public boolean onPipeActivate(Player player, BlockHitResult trace, float hitX, float hitY, float hitZ,
+        EnumPipePart part) {
+        if (EntityUtil.getWrenchHand(player) != null) {
+            return super.onPipeActivate(player, trace, hitX, hitY, hitZ, part);
+        }
+        ItemStack held = player.getMainHandItem();
+        if (!held.isEmpty()) {
+            if (held.getItem() instanceof IItemPluggable) {
+                return false;
+            }
+        }
+        if (!player.level().isClientSide) {
+            BCTransportGuis.PIPE_DIAMOND_WOOD.openGui(player, pipe.getHolder().getPipePos());
+        }
+        return true;
+    }
+
+    private void onSlotChanged(IItemHandlerModifiable itemHandler, int slot, ItemStack before, ItemStack after) {
+        if (!after.isEmpty()) {
+            if (!filterValid) {
+                currentFilter = slot;
+                filterValid = true;
+            }
+        } else if (slot == currentFilter) {
+            advanceFilter();
+        }
+    }
+
+    private IStackFilter getStackFilter() {
+        switch (filterMode) {
+            default:
+            case WHITE_LIST:
+                if (filters.extract(s -> true, 1, 1, true).isEmpty()) {
+                    return s -> true;
+                }
+                return new DelegatingItemHandlerFilter(StackUtil::isMatchingItemOrList, filters);
+            case BLACK_LIST:
+                return new InvertedStackFilter(
+                    new DelegatingItemHandlerFilter(StackUtil::isMatchingItemOrList, filters));
+            case ROUND_ROBIN:
+                return (comparison) -> {
+                    ItemStack filter = filters.getStackInSlot(currentFilter);
+                    return StackUtil.isMatchingItemOrList(filter, comparison);
+                };
+        }
+    }
+
+    @Override
+    protected int extractItems(IFlowItems flow, Direction dir, int count, boolean simulate) {
+        if (filters.getStackInSlot(currentFilter).isEmpty()) {
+            advanceFilter();
+        }
+        int extracted = flow.tryExtractItems(1, getCurrentDir(), null, getStackFilter(), simulate);
+        if (extracted > 0 & filterMode == FilterMode.ROUND_ROBIN && !simulate) {
+            advanceFilter();
+        }
+        return extracted;
+    }
+
+    @Override
+    protected FluidStack extractFluid(IFlowFluid flow, Direction dir, int millibuckets, boolean simulate) {
+        if (filters.getStackInSlot(currentFilter).isEmpty()) {
+            advanceFilter();
+        }
+
+        switch (filterMode) {
+            default:
+            case WHITE_LIST:
+                if (filters.extract(s -> true, 1, 1, true).isEmpty()) {
+                    return flow.tryExtractFluid(millibuckets, dir, null, simulate);
+                }
+                // Firstly try the advanced version - if that fails we will need to try the basic version
+                InteractionResultHolder<FluidStack> result =
+                    flow.tryExtractFluidAdv(millibuckets, dir, new ArrayFluidFilter(filters.stacks), simulate);
+                FluidStack extracted = result.getObject();
+                if (result.getResult() != InteractionResult.PASS) {
+                    return extracted;
+                }
+
+                if (extracted == null || extracted.isEmpty()) {
+                    for (int i = 0; i < filters.getSlots(); i++) {
+                        ItemStack stack = filters.getStackInSlot(i);
+                        if (stack.isEmpty()) {
+                            continue;
+                        }
+                        FluidStack contained = FluidUtil.getFluidContained(stack).orElse(FluidStack.EMPTY);
+                        if (contained.isEmpty()) {
+                            continue;
+                        }
+                        extracted = flow.tryExtractFluid(millibuckets, dir, contained, simulate);
+                        if (extracted != null && !extracted.isEmpty()) {
+                            return extracted;
+                        }
+                    }
+                }
+                return null;
+            case BLACK_LIST:
+                // We cannot fallback to the basic version - only use the advanced version
+                InvertedFluidFilter filter = new InvertedFluidFilter(new ArrayFluidFilter(filters.stacks));
+                return flow.tryExtractFluidAdv(millibuckets, dir, filter, simulate).getObject();
+            case ROUND_ROBIN:
+                // We can't do this -- amounts might differ and its just ugly
+                return null;
+        }
+    }
+
+    private void advanceFilter() {
+        int lastFilter = currentFilter;
+        filterValid = false;
+        while (true) {
+            currentFilter++;
+            if (currentFilter >= filters.getSlots()) {
+                currentFilter = 0;
+            }
+            if (!filters.getStackInSlot(currentFilter).isEmpty()) {
+                filterValid = true;
+                break;
+            }
+            if (currentFilter == lastFilter) {
+                break;
+            }
+        }
+        if (lastFilter != currentFilter) {
+            pipe.getHolder().scheduleNetworkGuiUpdate(PipeMessageReceiver.BEHAVIOUR);
+        }
+    }
+}

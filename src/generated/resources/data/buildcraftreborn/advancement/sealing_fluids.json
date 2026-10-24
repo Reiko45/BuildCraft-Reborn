@@ -1,0 +1,33 @@
+{
+  "parent": "buildcraftreborn:pipe_dream",
+  "criteria": {
+    "has_sealant": {
+      "conditions": {
+        "items": [
+          {
+            "items": "buildcraftreborn:waterproof"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.buildcraftreborn.sealing_fluids.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "buildcraftreborn:waterproof"
+    },
+    "title": {
+      "translate": "advancements.buildcraftreborn.sealing_fluids.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_sealant"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

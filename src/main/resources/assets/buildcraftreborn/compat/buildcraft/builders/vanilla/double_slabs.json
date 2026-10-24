@@ -1,0 +1,13 @@
+[
+    {
+        "selectors": [
+            "#minecraft:slabs[type=double]"
+        ],
+        "requiredExtractors": [
+            {
+                "type": "item_from_block",
+                "amount": 2
+            }
+        ]
+    }
+]

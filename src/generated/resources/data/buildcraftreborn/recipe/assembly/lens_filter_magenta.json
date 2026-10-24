@@ -1,0 +1,26 @@
+{
+  "type": "buildcraftreborn:assembly",
+  "ingredients": [
+    {
+      "ingredient": {
+        "item": "minecraft:magenta_stained_glass"
+      }
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:iron_bars"
+      }
+    }
+  ],
+  "mj": 500,
+  "result": {
+    "components": {
+      "buildcraftreborn:lens": {
+        "colour": "magenta",
+        "filter": true
+      }
+    },
+    "count": 1,
+    "id": "buildcraftreborn:plug_lens"
+  }
+}

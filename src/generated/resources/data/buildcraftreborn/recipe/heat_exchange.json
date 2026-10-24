@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "key": {
+    "#": {
+      "tag": "c:glass_blocks/colorless"
+    },
+    "g": {
+      "tag": "c:gears/iron"
+    },
+    "i": {
+      "tag": "c:ingots/iron"
+    }
+  },
+  "pattern": [
+    "igi",
+    "###",
+    "igi"
+  ],
+  "result": {
+    "count": 1,
+    "id": "buildcraftreborn:heat_exchange"
+  }
+}

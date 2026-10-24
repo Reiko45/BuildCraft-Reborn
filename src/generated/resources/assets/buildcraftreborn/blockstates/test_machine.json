@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "buildcraftreborn:block/test_machine",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "buildcraftreborn:block/test_machine"
+    },
+    "facing=south": {
+      "model": "buildcraftreborn:block/test_machine",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "buildcraftreborn:block/test_machine",
+      "y": 270
+    }
+  }
+}

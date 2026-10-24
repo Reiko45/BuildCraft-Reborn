@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "buildcraftreborn:block/zone_planner/default",
+    "east": "buildcraftreborn:block/zone_planner/right",
+    "north": "buildcraftreborn:block/zone_planner/front",
+    "particle": "buildcraftreborn:block/zone_planner/default",
+    "south": "buildcraftreborn:block/zone_planner/back",
+    "up": "buildcraftreborn:block/zone_planner/top",
+    "west": "buildcraftreborn:block/zone_planner/left"
+  }
+}

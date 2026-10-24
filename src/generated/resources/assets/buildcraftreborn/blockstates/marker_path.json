@@ -1,0 +1,30 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "buildcraftreborn:block/marker_path",
+      "x": 180
+    },
+    "facing=east": {
+      "model": "buildcraftreborn:block/marker_path",
+      "x": 90,
+      "y": 90
+    },
+    "facing=north": {
+      "model": "buildcraftreborn:block/marker_path",
+      "x": 90
+    },
+    "facing=south": {
+      "model": "buildcraftreborn:block/marker_path",
+      "x": 90,
+      "y": 180
+    },
+    "facing=up": {
+      "model": "buildcraftreborn:block/marker_path"
+    },
+    "facing=west": {
+      "model": "buildcraftreborn:block/marker_path",
+      "x": 90,
+      "y": 270
+    }
+  }
+}

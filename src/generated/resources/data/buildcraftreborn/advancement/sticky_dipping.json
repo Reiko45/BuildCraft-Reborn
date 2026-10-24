@@ -1,0 +1,29 @@
+{
+  "parent": "buildcraftreborn:root",
+  "criteria": {
+    "oil": {
+      "conditions": {
+        "block": "buildcraftreborn:oil"
+      },
+      "trigger": "minecraft:enter_block"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.buildcraftreborn.sticky_dipping.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "buildcraftreborn:oil_bucket"
+    },
+    "title": {
+      "translate": "advancements.buildcraftreborn.sticky_dipping.title"
+    }
+  },
+  "requirements": [
+    [
+      "oil"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

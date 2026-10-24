@@ -1,0 +1,26 @@
+{
+  "elements": [
+    {
+      "faces": {
+        "east": {
+          "cullface": "east",
+          "texture": "#face"
+        }
+      },
+      "from": [
+        0,
+        0,
+        0
+      ],
+      "to": [
+        16,
+        16,
+        16
+      ]
+    }
+  ],
+  "textures": {
+    "face": "buildcraftreborn:block/quarry/normal/side",
+    "particle": "buildcraftreborn:block/quarry/normal/side"
+  }
+}

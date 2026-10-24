@@ -1,0 +1,162 @@
+/*
+ * Copyright (c) 2017 SpaceToad and the BuildCraft team
+ * Ported to Minecraft 1.21.1 by BuildCraft Reborn.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public License, v. 2.0. If a copy of the MPL was not
+ * distributed with this file, You can obtain one at https://mozilla.org/MPL/2.0/
+ */
+package buildcraftreborn.transport.statements;
+
+import java.util.ArrayList;
+import java.util.EnumMap;
+import java.util.List;
+import java.util.Map;
+
+import org.jetbrains.annotations.Nullable;
+
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.nbt.CompoundTag;
+
+
+import buildcraftreborn.api.core.render.ISprite;
+import buildcraftreborn.api.gates.IGate;
+import buildcraftreborn.api.statements.IStatement;
+import buildcraftreborn.api.statements.IStatementContainer;
+import buildcraftreborn.api.statements.IStatementParameter;
+import buildcraftreborn.api.statements.StatementMouseClick;
+
+import buildcraftreborn.lib.misc.ColourUtil;
+import buildcraftreborn.lib.misc.LocaleUtil;
+import buildcraftreborn.lib.misc.MessageUtil;
+import buildcraftreborn.lib.misc.StackUtil;
+import buildcraftreborn.lib.misc.StringUtilBC;
+import buildcraftreborn.lib.net.PacketBufferBC;
+
+import buildcraftreborn.transport.BCTransportSprites;
+
+public class TriggerParameterSignal implements IStatementParameter {
+
+    public static final TriggerParameterSignal EMPTY;
+    private static final Map<DyeColor, TriggerParameterSignal> SIGNALS_OFF, SIGNALS_ON;
+
+    static {
+        EMPTY = new TriggerParameterSignal(false, null);
+        SIGNALS_OFF = new EnumMap<>(DyeColor.class);
+        SIGNALS_ON = new EnumMap<>(DyeColor.class);
+        for (DyeColor colour : ColourUtil.COLOURS) {
+            SIGNALS_OFF.put(colour, new TriggerParameterSignal(false, colour));
+            SIGNALS_ON.put(colour, new TriggerParameterSignal(true, colour));
+        }
+    }
+
+    public static TriggerParameterSignal get(boolean active, DyeColor colour) {
+        if (colour == null) {
+            return EMPTY;
+        }
+        return new TriggerParameterSignal(active, colour);
+    }
+
+    public static TriggerParameterSignal readFromNbt(CompoundTag nbt, HolderLookup.Provider registries) {
+        if (nbt.contains("color", net.minecraft.nbt.Tag.TAG_ANY_NUMERIC)) {
+            DyeColor colour = DyeColor.byId(nbt.getByte("color"));
+            boolean active = nbt.getBoolean("active");
+            return get(active, colour);
+        } else {
+            return EMPTY;
+        }
+    }
+
+    @Override
+    public void writeToNbt(CompoundTag nbt, HolderLookup.Provider registries) {
+        if (colour != null) {
+            nbt.putByte("color", (byte) colour.getId());
+            nbt.putBoolean("active", active);
+        }
+    }
+
+    public static TriggerParameterSignal readFromBuf(RegistryFriendlyByteBuf buffer) {
+        PacketBufferBC buf = PacketBufferBC.asPacketBufferBc(buffer, buffer.registryAccess());
+        DyeColor colour = MessageUtil.readEnumOrNull(buf, DyeColor.class);
+        if (colour == null) {
+            return EMPTY;
+        } else {
+            return get(buf.readBoolean(), colour);
+        }
+    }
+
+    @Override
+    public void writeToBuf(RegistryFriendlyByteBuf buffer) {
+        MessageUtil.writeEnumOrNull(PacketBufferBC.asPacketBufferBc(buffer, buffer.registryAccess()), colour);
+        if (colour != null) {
+            buffer.writeBoolean(active);
+        }
+    }
+
+    public final boolean active;
+
+    @Nullable
+    public final DyeColor colour;
+
+    private TriggerParameterSignal(boolean active, DyeColor colour) {
+        this.active = active;
+        this.colour = colour;
+    }
+
+    
+    @Override
+    public ItemStack getItemStack() {
+        return ItemStack.EMPTY;
+    }
+
+    @Override
+    public ISprite getSprite() {
+        if (colour == null) {
+            return null;
+        }
+        return BCTransportSprites.getPipeSignal(active, colour);
+    }
+
+    @Override
+    public TriggerParameterSignal onClick(IStatementContainer source, IStatement stmt, ItemStack stack,
+        StatementMouseClick mouse) {
+        return null;
+    }
+
+    @Override
+    public String getDescription() {
+        if (colour == null) {
+            return null;
+        }
+        return StringUtilBC.formatSafe(LocaleUtil.localize("gate.trigger.pipe.wire." + (active ? "active" : "inactive")), ColourUtil.getTextFullTooltip(colour));
+    }
+
+    @Override
+    public String getUniqueTag() {
+        return "buildcraft:pipeWireTrigger";
+    }
+
+    @Override
+    public IStatementParameter rotateLeft() {
+        return this;
+    }
+
+    @Override
+    public TriggerParameterSignal[] getPossible(IStatementContainer source) {
+        if (!(source instanceof IGate)) {
+            return null;
+        }
+        IGate gate = (IGate) source;
+        List<TriggerParameterSignal> poss = new ArrayList<>(ColourUtil.COLOURS.length * 2 + 1);
+        poss.add(EMPTY);
+        for (DyeColor c : ColourUtil.COLOURS) {
+            if (TriggerPipeSignal.doesGateHaveColour(gate, c)) {
+                poss.add(get(true, c));
+                poss.add(get(false, c));
+            }
+        }
+        return poss.toArray(new TriggerParameterSignal[poss.size()]);
+    }
+}

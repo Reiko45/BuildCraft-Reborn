@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "g": {
+      "tag": "c:glass_blocks/colorless"
+    },
+    "l": {
+      "tag": "c:gears/gold"
+    },
+    "r": {
+      "tag": "c:gears/gold"
+    }
+  },
+  "pattern": [
+    "lgr"
+  ],
+  "result": {
+    "count": 8,
+    "id": "buildcraftreborn:pipe_stripes_item"
+  }
+}

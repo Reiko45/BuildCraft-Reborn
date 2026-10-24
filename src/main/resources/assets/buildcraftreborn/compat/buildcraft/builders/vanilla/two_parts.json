@@ -1,0 +1,28 @@
+[
+    {
+        "selectors": [
+            "#minecraft:beds[part=head]",
+            "#minecraft:doors[half=upper]",
+            "#minecraft:tall_flowers[half=upper]",
+            "minecraft:tall_grass[half=upper]",
+            "minecraft:large_fern[half=upper]",
+            "minecraft:tall_seagrass[half=upper]",
+            "minecraft:pitcher_plant[half=upper]",
+            "minecraft:small_dripleaf[half=upper]"
+        ],
+        "requiredExtractors": []
+    },
+    {
+        "selectors": [
+            "#minecraft:beds[part=foot]",
+            "#minecraft:doors[half=lower]",
+            "#minecraft:tall_flowers[half=lower]",
+            "minecraft:tall_grass[half=lower]",
+            "minecraft:large_fern[half=lower]",
+            "minecraft:tall_seagrass[half=lower]",
+            "minecraft:pitcher_plant[half=lower]",
+            "minecraft:small_dripleaf[half=lower]"
+        ],
+        "updateBlockOffsets": []
+    }
+]

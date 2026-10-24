@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "g": {
+      "tag": "c:glass_blocks/colorless"
+    },
+    "l": {
+      "tag": "c:gems/diamond"
+    },
+    "r": {
+      "tag": "c:gems/diamond"
+    }
+  },
+  "pattern": [
+    "lgr"
+  ],
+  "result": {
+    "count": 8,
+    "id": "buildcraftreborn:pipe_diamond_item"
+  }
+}

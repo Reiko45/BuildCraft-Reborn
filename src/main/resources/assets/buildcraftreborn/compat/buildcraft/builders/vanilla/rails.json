@@ -1,0 +1,11 @@
+[
+    {
+        "selectors": [
+            "#minecraft:rails"
+        ],
+        "ignoredProperties": [
+            "shape",
+            "powered"
+        ]
+    }
+]

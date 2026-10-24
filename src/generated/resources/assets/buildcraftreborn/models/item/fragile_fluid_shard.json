@@ -1,0 +1,10 @@
+{
+  "parent": "neoforge:item/default",
+  "flip_gas": true,
+  "fluid": "minecraft:empty",
+  "loader": "neoforge:fluid_container",
+  "textures": {
+    "base": "buildcraftreborn:item/fragile_fluid_shard_base",
+    "fluid": "buildcraftreborn:item/fragile_fluid_shard_fluid"
+  }
+}

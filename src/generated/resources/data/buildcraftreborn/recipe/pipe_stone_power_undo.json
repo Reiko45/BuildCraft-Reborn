@@ -1,0 +1,5 @@
+{
+  "type": "buildcraftreborn:pipe_upgrade",
+  "from": "buildcraftreborn:pipe_stone_power",
+  "result": "buildcraftreborn:pipe_stone_item"
+}

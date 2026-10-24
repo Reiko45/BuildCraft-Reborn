@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "g": {
+      "item": "minecraft:magenta_stained_glass"
+    },
+    "l": {
+      "tag": "c:gears/gold"
+    },
+    "r": {
+      "tag": "c:gears/gold"
+    }
+  },
+  "pattern": [
+    "lgr"
+  ],
+  "result": {
+    "components": {
+      "buildcraftreborn:colour": "magenta"
+    },
+    "count": 8,
+    "id": "buildcraftreborn:pipe_stripes_item"
+  }
+}

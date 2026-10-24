@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "l": {
+      "tag": "c:gems/lapis"
+    },
+    "t": {
+      "item": "minecraft:redstone_torch"
+    }
+  },
+  "pattern": [
+    "l",
+    "t"
+  ],
+  "result": {
+    "count": 1,
+    "id": "buildcraftreborn:marker_volume"
+  }
+}

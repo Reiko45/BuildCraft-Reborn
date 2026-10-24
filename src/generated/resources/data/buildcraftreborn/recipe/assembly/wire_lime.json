@@ -1,0 +1,20 @@
+{
+  "type": "buildcraftreborn:assembly",
+  "ingredients": [
+    {
+      "ingredient": {
+        "tag": "c:dusts/redstone"
+      }
+    },
+    {
+      "ingredient": {
+        "tag": "c:dyes/lime"
+      }
+    }
+  ],
+  "mj": 10000,
+  "result": {
+    "count": 8,
+    "id": "buildcraftreborn:wire_lime"
+  }
+}

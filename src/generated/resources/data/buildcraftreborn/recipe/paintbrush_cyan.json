@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "group": "buildcraftreborn:paintbrush_colouring",
+  "ingredients": [
+    {
+      "item": "buildcraftreborn:paintbrush"
+    },
+    {
+      "tag": "c:dyes/cyan"
+    }
+  ],
+  "result": {
+    "components": {
+      "buildcraftreborn:colour": "cyan"
+    },
+    "count": 1,
+    "id": "buildcraftreborn:paintbrush"
+  }
+}

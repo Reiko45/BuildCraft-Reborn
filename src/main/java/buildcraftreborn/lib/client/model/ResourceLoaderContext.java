@@ -1,0 +1,41 @@
+/*
+ * Copyright (c) 2017 SpaceToad and the BuildCraft team
+ * Ported to Minecraft 1.21.1 by BuildCraft Reborn.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public License, v. 2.0. If a copy of the MPL was not
+ * distributed with this file, You can obtain one at https://mozilla.org/MPL/2.0/
+ */
+package buildcraftreborn.lib.client.model;
+
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayDeque;
+import java.util.Deque;
+import java.util.HashSet;
+import java.util.Set;
+
+import com.google.gson.JsonSyntaxException;
+
+import net.minecraft.client.Minecraft;
+import net.minecraft.resources.ResourceLocation;
+
+/** Loads model JSON files from the client's resources, catching files that include themselves. */
+public class ResourceLoaderContext {
+    private final Set<ResourceLocation> loaded = new HashSet<>();
+    private final Deque<ResourceLocation> loadingStack = new ArrayDeque<>();
+
+    public InputStreamReader startLoading(ResourceLocation location) throws IOException {
+        if (!loaded.add(location)) {
+            throw new JsonSyntaxException("Already loaded " + location + " from " + loadingStack.peek());
+        }
+        loadingStack.push(location);
+        var res = Minecraft.getInstance().getResourceManager().getResource(location)
+            .orElseThrow(() -> new java.io.FileNotFoundException(location.toString()));
+        return new InputStreamReader(res.open(), StandardCharsets.UTF_8);
+    }
+
+    public void finishLoading() {
+        loadingStack.pop();
+    }
+}

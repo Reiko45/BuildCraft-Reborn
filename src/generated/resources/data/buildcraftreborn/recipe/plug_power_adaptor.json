@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "g": {
+      "tag": "c:gears/stone"
+    },
+    "i": {
+      "tag": "c:ingots/gold"
+    },
+    "r": {
+      "tag": "c:dusts/redstone"
+    },
+    "s": {
+      "item": "buildcraftreborn:pipe_structure"
+    }
+  },
+  "pattern": [
+    "sis",
+    "sgs",
+    "srs"
+  ],
+  "result": {
+    "count": 4,
+    "id": "buildcraftreborn:plug_power_adaptor"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "G": {
+      "tag": "c:dyes/green"
+    },
+    "R": {
+      "tag": "c:dusts/redstone"
+    },
+    "p": {
+      "item": "minecraft:paper"
+    }
+  },
+  "pattern": [
+    "pRp",
+    "pGp",
+    "ppp"
+  ],
+  "result": {
+    "count": 1,
+    "id": "buildcraftreborn:list"
+  }
+}

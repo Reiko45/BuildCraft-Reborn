@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "d": {
+      "tag": "c:gears/diamond"
+    },
+    "g": {
+      "tag": "c:gears/gold"
+    },
+    "i": {
+      "tag": "c:gears/iron"
+    },
+    "p": {
+      "item": "minecraft:diamond_pickaxe"
+    },
+    "r": {
+      "tag": "c:dusts/redstone"
+    }
+  },
+  "pattern": [
+    "iri",
+    "gig",
+    "dpd"
+  ],
+  "result": {
+    "count": 1,
+    "id": "buildcraftreborn:quarry"
+  }
+}

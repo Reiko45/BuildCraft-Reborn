@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "buildcraftreborn:block/zone_planner",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "buildcraftreborn:block/zone_planner"
+    },
+    "facing=south": {
+      "model": "buildcraftreborn:block/zone_planner",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "buildcraftreborn:block/zone_planner",
+      "y": 270
+    }
+  }
+}

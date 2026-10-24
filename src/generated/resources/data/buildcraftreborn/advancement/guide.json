@@ -1,0 +1,26 @@
+{
+  "parent": "buildcraftreborn:root",
+  "criteria": {
+    "code_trigger": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.buildcraftreborn.guide.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "buildcraftreborn:guide"
+    },
+    "title": {
+      "translate": "advancements.buildcraftreborn.guide.title"
+    }
+  },
+  "requirements": [
+    [
+      "code_trigger"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

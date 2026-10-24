@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "O": {
+      "tag": "c:obsidians/normal"
+    },
+    "g": {
+      "tag": "c:gears/diamond"
+    },
+    "i": {
+      "tag": "c:ingots/gold"
+    },
+    "r": {
+      "item": "buildcraftreborn:redstone_iron_chipset"
+    }
+  },
+  "pattern": [
+    "OiO",
+    "OrO",
+    "OgO"
+  ],
+  "result": {
+    "count": 1,
+    "id": "buildcraftreborn:integration_table"
+  }
+}

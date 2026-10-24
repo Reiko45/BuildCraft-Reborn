@@ -1,0 +1,26 @@
+{
+  "parent": "buildcraftreborn:root",
+  "criteria": {
+    "code_trigger": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.buildcraftreborn.pipe_dream.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "buildcraftreborn:pipe_structure"
+    },
+    "title": {
+      "translate": "advancements.buildcraftreborn.pipe_dream.title"
+    }
+  },
+  "requirements": [
+    [
+      "code_trigger"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

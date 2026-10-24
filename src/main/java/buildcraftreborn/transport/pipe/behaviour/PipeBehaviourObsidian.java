@@ -1,0 +1,234 @@
+/*
+ * Copyright (c) 2017 SpaceToad and the BuildCraft team
+ * Ported to Minecraft 1.21.1 by BuildCraft Reborn.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public License, v. 2.0. If a copy of the MPL was not
+ * distributed with this file, You can obtain one at https://mozilla.org/MPL/2.0/
+ */
+package buildcraftreborn.transport.pipe.behaviour;
+
+import org.jetbrains.annotations.Nullable;
+import net.neoforged.neoforge.capabilities.BlockCapability;
+import net.minecraft.core.HolderLookup;
+import java.util.List;
+import java.util.WeakHashMap;
+
+
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.core.Direction;
+import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
+
+
+import buildcraftreborn.api.inventory.IItemTransactor;
+import buildcraftreborn.api.mj.IMjConnector;
+import buildcraftreborn.api.mj.IMjRedstoneReceiver;
+import buildcraftreborn.api.mj.MjAPI;
+import buildcraftreborn.api.mj.MjCapabilityHelper;
+import buildcraftreborn.api.transport.pipe.IFlowFluid;
+import buildcraftreborn.api.transport.pipe.IFlowItems;
+import buildcraftreborn.api.transport.pipe.IPipe;
+import buildcraftreborn.api.transport.pipe.PipeBehaviour;
+import buildcraftreborn.api.transport.pipe.PipeEventHandler;
+import buildcraftreborn.api.transport.pipe.PipeEventItem;
+import buildcraftreborn.api.transport.pipe.PipeFlow;
+
+import buildcraftreborn.lib.inventory.ItemTransactorHelper;
+import buildcraftreborn.lib.inventory.filter.StackFilter;
+import buildcraftreborn.lib.misc.BoundingBoxUtil;
+import buildcraftreborn.lib.misc.VecUtil;
+
+public class PipeBehaviourObsidian extends PipeBehaviour implements IMjRedstoneReceiver {
+    private static final long POWER_PER_ITEM = MjAPI.MJ / 2;
+    private static final long POWER_PER_METRE = MjAPI.MJ / 4;
+
+    private static final double INSERT_SPEED = 0.04;
+    private static final int DROP_GAP = 20;
+
+    private final MjCapabilityHelper mjCaps = new MjCapabilityHelper(this);
+    /** Map of recently dropped item to the tick when it can be picked up */
+    private final WeakHashMap<ItemEntity, Long> entityDropTime = new WeakHashMap<>();
+    private int toWaitTicks = 0;
+
+    public PipeBehaviourObsidian(IPipe pipe) {
+        super(pipe);
+    }
+
+    public PipeBehaviourObsidian(IPipe pipe, CompoundTag nbt, HolderLookup.Provider registries) {
+        super(pipe, nbt, registries);
+        // Saves us from writing out the entity item's ID
+        toWaitTicks = DROP_GAP;
+    }
+
+    @Override
+    public CompoundTag writeToNbt(HolderLookup.Provider registries) {
+        CompoundTag nbt = super.writeToNbt(registries);
+        return nbt;
+    }
+
+    @Override
+    public void onTick() {
+        if (pipe.getHolder().getPipeWorld().isClientSide) {
+            return;
+        }
+        toWaitTicks--;
+        if (toWaitTicks > 0) {
+            return;
+        } else {
+            toWaitTicks = 0;
+        }
+    }
+
+    @Override
+    public boolean canConnect(Direction face, PipeBehaviour other) {
+        return !(other instanceof PipeBehaviourObsidian);
+    }
+
+    @Override
+    public void onEntityCollide(Entity entity) {
+        if (pipe.getHolder().getPipeWorld().isClientSide) {
+            return;
+        }
+        Direction openFace = getOpenFace();
+        if (openFace != null) {
+            trySuckEntity(entity, openFace, Long.MAX_VALUE, false);
+        }
+    }
+
+    private Direction getOpenFace() {
+        Direction openFace = null;
+        for (Direction face : Direction.values()) {
+            if (pipe.isConnected(face)) {
+                if (openFace == null) {
+                    openFace = face.getOpposite();
+                } else {
+                    return null;
+                }
+            }
+        }
+        return openFace;
+    }
+
+    protected AABB getSuckingBox(Direction openFace, int distance) {
+        AABB bb = BoundingBoxUtil.makeAround(VecUtil.convertCenter(pipe.getHolder().getPipePos()), 0.4);
+        switch (openFace) {
+            default:
+            case WEST:
+                return bb.move(-distance, 0, 0).inflate(0.5, distance, distance);
+            case EAST:
+                return bb.move(distance, 0, 0).inflate(0.5, distance, distance);
+            case DOWN:
+                return bb.move(0, -distance, 0).inflate(distance, 0.5, distance);
+            case UP:
+                return bb.move(0, distance, 0).inflate(distance, 0.5, distance);
+            case NORTH:
+                return bb.move(0, 0, -distance).inflate(distance, distance, 0.5);
+            case SOUTH:
+                return bb.move(0, 0, distance).inflate(distance, distance, 0.5);
+        }
+    }
+
+    /** @return The left over power */
+    protected long trySuckEntity(Entity entity, Direction faceFrom, long power, boolean simulate) {
+        if (!entity.isAlive() || entity instanceof LivingEntity) {
+            return power;
+        }
+
+        Long tickPickupObj = entityDropTime.get(entity);
+        if (tickPickupObj != null) {
+            long tickPickup = tickPickupObj;
+            long tickNow = pipe.getHolder().getPipeWorld().getGameTime();
+            if (tickNow < tickPickup) {
+                return power;
+            } else {
+                entityDropTime.remove(entity);
+            }
+        }
+
+        PipeFlow flow = pipe.getFlow();
+
+        IFlowItems flowItem = flow instanceof IFlowItems ? (IFlowItems) flow : null;
+        IFlowFluid flowFluid = flow instanceof IFlowFluid ? (IFlowFluid) flow : null;
+
+        IItemTransactor transactor = ItemTransactorHelper.getTransactorForEntity(entity, faceFrom.getOpposite());
+
+        if (flowItem != null) {
+            long powerReqPerItem;
+            int max;
+            if (power == Long.MAX_VALUE) {
+                max = Integer.MAX_VALUE;
+                powerReqPerItem = 0;
+            } else {
+                double distance = Math.sqrt(entity.distanceToSqr(Vec3.atCenterOf(pipe.getHolder().getPipePos())));
+                powerReqPerItem = (long) (Math.max(1, distance) * POWER_PER_METRE + POWER_PER_ITEM);
+                max = (int) (power / powerReqPerItem);
+            }
+            ItemStack extracted = transactor.extract(StackFilter.ALL, 1, max, simulate);
+            if (!extracted.isEmpty()) {
+                if (!simulate) {
+                    flowItem.insertItemsForce(extracted, faceFrom, null, INSERT_SPEED);
+                }
+                return power - powerReqPerItem * extracted.getCount();
+            }
+        }
+        if (flowFluid != null) {
+            // TODO: Fluid extraction!
+        }
+        return power;
+    }
+
+    @PipeEventHandler
+    public void onPipeDrop(PipeEventItem.Drop drop) {
+        entityDropTime.put(drop.getEntity(), pipe.getHolder().getPipeWorld().getGameTime() + DROP_GAP);
+    }
+
+    // IMjRedstoneReceiver
+
+    @Override
+    public boolean canConnect(IMjConnector other) {
+        return true;
+    }
+
+    @Override
+    public long getPowerRequested() {
+        final long power = 512 * MjAPI.MJ;
+        return power - receivePower(power, true);
+    }
+
+    @Override
+    public long receivePower(long microJoules, boolean simulate) {
+        if (toWaitTicks > 0) {
+            return microJoules;
+        }
+        Direction openFace = getOpenFace();
+        if (openFace == null) {
+            return microJoules;
+        }
+
+        for (int d = 1; d < 5; d++) {
+            AABB aabb = getSuckingBox(openFace, d);
+            List<Entity> discoveredEntities = pipe.getHolder().getPipeWorld().getEntitiesOfClass(Entity.class, aabb);
+
+            for (Entity entity : discoveredEntities) {
+                long leftOver = trySuckEntity(entity, openFace, microJoules, simulate);
+                if (leftOver < microJoules) {
+                    return leftOver;
+                }
+            }
+        }
+        return microJoules - MjAPI.MJ;
+    }
+
+    @Override
+    public <T> T getCapability(BlockCapability<T, @Nullable Direction> capability, @Nullable Direction facing) {
+        T cap = mjCaps.getCapability(capability);
+        if (cap != null) {
+            return cap;
+        }
+        return super.getCapability(capability, facing);
+    }
+}

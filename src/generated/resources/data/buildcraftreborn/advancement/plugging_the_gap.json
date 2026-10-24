@@ -1,0 +1,26 @@
+{
+  "parent": "buildcraftreborn:pipe_dream",
+  "criteria": {
+    "code_trigger": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.buildcraftreborn.plugging_the_gap.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "buildcraftreborn:plug_blocker"
+    },
+    "title": {
+      "translate": "advancements.buildcraftreborn.plugging_the_gap.title"
+    }
+  },
+  "requirements": [
+    [
+      "code_trigger"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

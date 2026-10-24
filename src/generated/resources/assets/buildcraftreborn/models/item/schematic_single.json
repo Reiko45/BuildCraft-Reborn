@@ -1,0 +1,14 @@
+{
+  "parent": "minecraft:item/generated",
+  "overrides": [
+    {
+      "model": "buildcraftreborn:item/schematic_single_used",
+      "predicate": {
+        "buildcraftreborn:used": 1.0
+      }
+    }
+  ],
+  "textures": {
+    "layer0": "buildcraftreborn:item/schematic_single/clean"
+  }
+}

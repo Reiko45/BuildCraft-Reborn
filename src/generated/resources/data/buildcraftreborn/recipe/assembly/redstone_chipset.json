@@ -1,0 +1,15 @@
+{
+  "type": "buildcraftreborn:assembly",
+  "ingredients": [
+    {
+      "ingredient": {
+        "tag": "c:dusts/redstone"
+      }
+    }
+  ],
+  "mj": 10000,
+  "result": {
+    "count": 1,
+    "id": "buildcraftreborn:redstone_red_chipset"
+  }
+}

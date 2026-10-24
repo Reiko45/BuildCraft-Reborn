@@ -1,0 +1,26 @@
+{
+  "parent": "buildcraftreborn:pipe_dream",
+  "criteria": {
+    "code_trigger": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.buildcraftreborn.logic_transportation.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "buildcraftreborn:wire_red"
+    },
+    "title": {
+      "translate": "advancements.buildcraftreborn.logic_transportation.title"
+    }
+  },
+  "requirements": [
+    [
+      "code_trigger"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

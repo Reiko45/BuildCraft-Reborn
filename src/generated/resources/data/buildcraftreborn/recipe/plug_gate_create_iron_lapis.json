@@ -1,0 +1,36 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "key": {
+    "g": {
+      "type": "neoforge:components",
+      "components": {
+        "buildcraftreborn:gate": {
+          "logic": "and",
+          "material": "iron",
+          "modifier": "no_modifier"
+        }
+      },
+      "items": "buildcraftreborn:plug_gate"
+    },
+    "m": {
+      "tag": "c:gems/lapis"
+    }
+  },
+  "pattern": [
+    " m ",
+    "mgm",
+    " m "
+  ],
+  "result": {
+    "components": {
+      "buildcraftreborn:gate": {
+        "logic": "and",
+        "material": "iron",
+        "modifier": "lapis"
+      }
+    },
+    "count": 1,
+    "id": "buildcraftreborn:plug_gate"
+  }
+}

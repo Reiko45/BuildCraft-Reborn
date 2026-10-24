@@ -1,0 +1,11 @@
+[
+    {
+        "selectors": [
+            "buildcraftreborn:filler",
+            "buildcraftreborn:builder"
+        ],
+        "replaceNbt": {
+            "builder": null
+        }
+    }
+]

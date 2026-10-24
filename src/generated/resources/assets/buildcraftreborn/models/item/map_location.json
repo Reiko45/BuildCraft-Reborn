@@ -1,0 +1,38 @@
+{
+  "parent": "minecraft:item/generated",
+  "overrides": [
+    {
+      "model": "buildcraftreborn:item/map_location_spot",
+      "predicate": {
+        "buildcraftreborn:type": 1.0
+      }
+    },
+    {
+      "model": "buildcraftreborn:item/map_location_area",
+      "predicate": {
+        "buildcraftreborn:type": 2.0
+      }
+    },
+    {
+      "model": "buildcraftreborn:item/map_location_path",
+      "predicate": {
+        "buildcraftreborn:type": 3.0
+      }
+    },
+    {
+      "model": "buildcraftreborn:item/map_location_zone",
+      "predicate": {
+        "buildcraftreborn:type": 4.0
+      }
+    },
+    {
+      "model": "buildcraftreborn:item/map_location_path_repeating",
+      "predicate": {
+        "buildcraftreborn:type": 5.0
+      }
+    }
+  ],
+  "textures": {
+    "layer0": "buildcraftreborn:item/map_location/clean"
+  }
+}

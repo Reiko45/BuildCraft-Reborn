@@ -1,0 +1,52 @@
+{
+  "values": {
+    "buildcraftreborn:fuel_dense": {
+      "burn_time": 90000,
+      "power_per_tick": 4.0
+    },
+    "buildcraftreborn:fuel_gaseous": {
+      "burn_time": 1875,
+      "power_per_tick": 8.0
+    },
+    "buildcraftreborn:fuel_light": {
+      "burn_time": 15000,
+      "power_per_tick": 6.0
+    },
+    "buildcraftreborn:fuel_mixed_heavy": {
+      "burn_time": 19200,
+      "power_per_tick": 5.0
+    },
+    "buildcraftreborn:fuel_mixed_light": {
+      "burn_time": 10000,
+      "power_per_tick": 3.0
+    },
+    "buildcraftreborn:oil": {
+      "burn_time": 10000,
+      "power_per_tick": 3.0,
+      "residue": {
+        "amount": 125,
+        "id": "buildcraftreborn:oil_residue"
+      }
+    },
+    "buildcraftreborn:oil_dense": {
+      "burn_time": 30000,
+      "power_per_tick": 4.0,
+      "residue": {
+        "amount": 500,
+        "id": "buildcraftreborn:oil_residue"
+      }
+    },
+    "buildcraftreborn:oil_distilled": {
+      "burn_time": 37500,
+      "power_per_tick": 1.0
+    },
+    "buildcraftreborn:oil_heavy": {
+      "burn_time": 40000,
+      "power_per_tick": 2.0,
+      "residue": {
+        "amount": 333,
+        "id": "buildcraftreborn:oil_residue"
+      }
+    }
+  }
+}

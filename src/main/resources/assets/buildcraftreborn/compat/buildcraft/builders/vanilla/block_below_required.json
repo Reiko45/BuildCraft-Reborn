@@ -1,0 +1,54 @@
+[
+    {
+        "selectors": [
+            "minecraft:cactus",
+            "minecraft:redstone_wire",
+            "minecraft:tripwire",
+            "minecraft:sugar_cane",
+            "minecraft:dead_bush",
+            "minecraft:lily_pad",
+            "minecraft:red_mushroom",
+            "minecraft:brown_mushroom",
+            "minecraft:nether_wart",
+            "minecraft:short_grass",
+            "minecraft:fern",
+            "minecraft:tall_grass",
+            "minecraft:large_fern",
+            "minecraft:repeater",
+            "minecraft:comparator",
+            "#minecraft:crops",
+            "#minecraft:saplings",
+            "#minecraft:small_flowers",
+            "#minecraft:tall_flowers",
+            "#minecraft:doors",
+            "#minecraft:rails",
+            "#minecraft:beds",
+            "#minecraft:standing_signs",
+            "#minecraft:pressure_plates",
+            "#minecraft:wool_carpets",
+            "minecraft:white_banner",
+            "minecraft:orange_banner",
+            "minecraft:magenta_banner",
+            "minecraft:light_blue_banner",
+            "minecraft:yellow_banner",
+            "minecraft:lime_banner",
+            "minecraft:pink_banner",
+            "minecraft:gray_banner",
+            "minecraft:light_gray_banner",
+            "minecraft:cyan_banner",
+            "minecraft:purple_banner",
+            "minecraft:blue_banner",
+            "minecraft:brown_banner",
+            "minecraft:green_banner",
+            "minecraft:red_banner",
+            "minecraft:black_banner"
+        ],
+        "requiredBlockOffsets": [
+            [
+                0,
+                -1,
+                0
+            ]
+        ]
+    }
+]

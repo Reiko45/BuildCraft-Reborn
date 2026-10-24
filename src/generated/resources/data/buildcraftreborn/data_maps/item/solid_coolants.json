@@ -1,0 +1,16 @@
+{
+  "values": {
+    "minecraft:ice": {
+      "fluid": {
+        "amount": 1500,
+        "id": "minecraft:water"
+      }
+    },
+    "minecraft:packed_ice": {
+      "fluid": {
+        "amount": 2000,
+        "id": "minecraft:water"
+      }
+    }
+  }
+}

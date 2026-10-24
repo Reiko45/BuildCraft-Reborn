@@ -1,0 +1,55 @@
+[
+    {
+        "selectors": [
+            "minecraft:repeater"
+        ],
+        "ignoredProperties": [
+            "powered",
+            "locked"
+        ]
+    },
+    {
+        "selectors": [
+            "minecraft:comparator"
+        ],
+        "ignoredProperties": [
+            "powered"
+        ]
+    },
+    {
+        "selectors": [
+            "minecraft:redstone_ore",
+            "minecraft:deepslate_redstone_ore"
+        ],
+        "ignoredProperties": [
+            "lit"
+        ]
+    },
+    {
+        "selectors": [
+            "minecraft:redstone_torch",
+            "minecraft:redstone_wall_torch"
+        ],
+        "ignoredProperties": [
+            "lit"
+        ]
+    },
+    {
+        "selectors": [
+            "minecraft:redstone_lamp"
+        ],
+        "ignoredProperties": [
+            "lit"
+        ]
+    },
+    {
+        "selectors": [
+            "minecraft:furnace",
+            "minecraft:blast_furnace",
+            "minecraft:smoker"
+        ],
+        "ignoredProperties": [
+            "lit"
+        ]
+    }
+]

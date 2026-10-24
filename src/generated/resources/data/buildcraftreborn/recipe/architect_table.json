@@ -1,0 +1,33 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "b": {
+      "tag": "c:dyes/black"
+    },
+    "c": {
+      "item": "minecraft:crafting_table"
+    },
+    "d": {
+      "tag": "c:gears/diamond"
+    },
+    "m": {
+      "item": "buildcraftreborn:marker_volume"
+    },
+    "s": {
+      "item": "buildcraftreborn:blueprint"
+    },
+    "y": {
+      "tag": "c:dyes/yellow"
+    }
+  },
+  "pattern": [
+    "bmb",
+    "ycy",
+    "dsd"
+  ],
+  "result": {
+    "count": 1,
+    "id": "buildcraftreborn:architect"
+  }
+}

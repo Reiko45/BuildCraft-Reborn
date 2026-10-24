@@ -1,0 +1,185 @@
+/*
+ * Copyright (c) 2017 SpaceToad and the BuildCraft team
+ * Ported to Minecraft 1.21.1 by BuildCraft Reborn.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public License, v. 2.0. If a copy of the MPL was not
+ * distributed with this file, You can obtain one at https://mozilla.org/MPL/2.0/
+ */
+package buildcraftreborn.transport.plug;
+
+import net.minecraft.core.HolderLookup;
+import org.jetbrains.annotations.Nullable;
+
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.nbt.CompoundTag;
+import buildcraftreborn.api.core.render.EnumRenderLayer;
+import net.minecraft.core.Direction;
+import net.minecraft.world.phys.AABB;
+
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.capabilities.BlockCapability;
+import net.neoforged.neoforge.energy.IEnergyStorage;
+
+import buildcraftreborn.api.mj.IMjReadable;
+import buildcraftreborn.api.mj.IMjReceiver;
+import buildcraftreborn.api.mj.MjAPI;
+import buildcraftreborn.api.transport.pipe.IPipeHolder;
+import buildcraftreborn.api.transport.pluggable.PipePluggable;
+import buildcraftreborn.api.transport.pluggable.PluggableDefinition;
+import buildcraftreborn.api.transport.pluggable.PluggableModelKey;
+
+import buildcraftreborn.transport.BCTransportItems;
+import buildcraftreborn.transport.client.model.key.KeyPlugPowerAdaptor;
+
+public class PluggablePowerAdaptor extends PipePluggable {
+
+    private static final AABB[] BOXES = new AABB[6];
+
+    static {
+        double ll = 0 / 16.0;
+        double lu = 4 / 16.0;
+        double ul = 12 / 16.0;
+        double uu = 16 / 16.0;
+
+        double min = 3 / 16.0;
+        double max = 13 / 16.0;
+
+        BOXES[Direction.DOWN.get3DDataValue()] = new AABB(min, ll, min, max, lu, max);
+        BOXES[Direction.UP.get3DDataValue()] = new AABB(min, ul, min, max, uu, max);
+        BOXES[Direction.NORTH.get3DDataValue()] = new AABB(min, min, ll, max, max, lu);
+        BOXES[Direction.SOUTH.get3DDataValue()] = new AABB(min, min, ul, max, max, uu);
+        BOXES[Direction.WEST.get3DDataValue()] = new AABB(ll, min, min, lu, max, max);
+        BOXES[Direction.EAST.get3DDataValue()] = new AABB(ul, min, min, uu, max, max);
+    }
+
+    private long storedMJ = 0;
+
+    public PluggablePowerAdaptor(PluggableDefinition definition, IPipeHolder holder, Direction side) {
+        super(definition, holder, side);
+    }
+
+    public PluggablePowerAdaptor(PluggableDefinition definition, IPipeHolder holder, Direction side, CompoundTag nbt) {
+        super(definition, holder, side);
+        storedMJ = nbt.getLong("storedMJ");
+    }
+
+    @Override
+    public CompoundTag writeToNbt(HolderLookup.Provider registries) {
+        CompoundTag nbt = super.writeToNbt(registries);
+        nbt.putLong("storedMJ", storedMJ);
+        return nbt;
+    }
+
+    @Override
+    public AABB getBoundingBox() {
+        return BOXES[side.get3DDataValue()];
+    }
+
+    @Override
+    public boolean isBlocking() {
+        return true;
+    }
+
+    @Override
+    public ItemStack getPickStack() {
+        return new ItemStack(BCTransportItems.PLUG_POWER_ADAPTOR.get());
+    }
+
+    @Override
+    @Nullable
+    public PluggableModelKey getModelRenderKey(EnumRenderLayer layer) {
+        if (layer == EnumRenderLayer.CUTOUT) {
+            return new KeyPlugPowerAdaptor(side);
+        }
+        return null;
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public <T> T getCapability(BlockCapability<T, @Nullable Direction> cap) {
+        if (holder.getPipe() == null) {
+            return null;
+        }
+        if (cap == MjAPI.CAP_CONNECTOR || cap == MjAPI.CAP_RECEIVER || cap == MjAPI.CAP_REDSTONE_RECEIVER) {
+            return holder.getPipe().getBehaviour().getCapability(cap, side);
+        }
+        if (MjAPI.isRfAutoConversionEnabled() && cap == Capabilities.EnergyStorage.BLOCK) {
+            IMjReceiver receiver = holder.getPipe().getBehaviour().getCapability(MjAPI.CAP_RECEIVER, side);
+            if (receiver == null) {
+                return null;
+            }
+            return (T) (new IEnergyStorage() {
+
+                @Override
+                public boolean canReceive() {
+                    return receiver.canReceive();
+                }
+
+                @Override
+                public boolean canExtract() {
+                    return false;
+                }
+
+                @Override
+                public int receiveEnergy(int maxReceive, boolean simulate) {
+
+                    if (maxReceive <= 0) {
+                        return 0;
+                    }
+
+                    if (!receiver.canReceive()) {
+                        return 0;
+                    }
+
+                    // TODO: Validate!
+
+                    long mjPerRf = MjAPI.getRfConversion().mjPerRf;
+                    long maxReceiveMj = maxReceive * mjPerRf + storedMJ;
+                    long excess = receiver.receivePower(maxReceiveMj, simulate);
+
+                    // Actual MJ that was accepted
+                    long acceptedMj = maxReceiveMj - excess;
+
+                    if (acceptedMj <= 0) {
+                        return 0;
+                    }
+
+                    long acceptedRF = acceptedMj / mjPerRf;
+                    long mjExcess = acceptedMj % mjPerRf;
+
+                    if (mjExcess > 0) {
+                        acceptedRF++;
+
+                        if (!simulate) {
+                            storedMJ = mjPerRf - mjExcess;
+                        }
+                    }
+
+                    return (int) acceptedRF;
+                }
+
+                @Override
+                public int getMaxEnergyStored() {
+                    if (receiver instanceof IMjReadable) {
+                        long mjPerRf = MjAPI.getRfConversion().mjPerRf;
+                        return (int) (((IMjReadable) receiver).getCapacity() / mjPerRf);
+                    } else {
+                        return 0;
+                    }
+                }
+
+                @Override
+                public int getEnergyStored() {
+                    return 0;
+                }
+
+                @Override
+                public int extractEnergy(int maxExtract, boolean simulate) {
+                    return 0;
+                }
+
+            });
+        }
+        return null;
+    }
+}

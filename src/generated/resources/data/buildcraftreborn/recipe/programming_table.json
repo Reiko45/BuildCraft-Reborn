@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "O": {
+      "tag": "c:obsidians/normal"
+    },
+    "c": {
+      "item": "buildcraftreborn:redstone_red_chipset"
+    },
+    "e": {
+      "tag": "c:gems/emerald"
+    },
+    "g": {
+      "tag": "c:gears/diamond"
+    }
+  },
+  "pattern": [
+    "OeO",
+    "OcO",
+    "OgO"
+  ],
+  "result": {
+    "count": 1,
+    "id": "buildcraftreborn:programming_table"
+  }
+}

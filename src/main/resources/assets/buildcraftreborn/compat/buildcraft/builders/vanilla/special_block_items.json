@@ -1,0 +1,137 @@
+[
+    {
+        "selectors": [
+            "minecraft:attached_pumpkin_stem"
+        ],
+        "requiredExtractors": [
+            {
+                "type": "constant",
+                "items": [
+                    {
+                        "item": "minecraft:pumpkin_seeds"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "selectors": [
+            "minecraft:attached_melon_stem"
+        ],
+        "requiredExtractors": [
+            {
+                "type": "constant",
+                "items": [
+                    {
+                        "item": "minecraft:melon_seeds"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "selectors": [
+            "minecraft:kelp_plant"
+        ],
+        "requiredExtractors": [
+            {
+                "type": "constant",
+                "items": [
+                    {
+                        "item": "minecraft:kelp"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "selectors": [
+            "minecraft:twisting_vines_plant"
+        ],
+        "requiredExtractors": [
+            {
+                "type": "constant",
+                "items": [
+                    {
+                        "item": "minecraft:twisting_vines"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "selectors": [
+            "minecraft:weeping_vines_plant"
+        ],
+        "requiredExtractors": [
+            {
+                "type": "constant",
+                "items": [
+                    {
+                        "item": "minecraft:weeping_vines"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "selectors": [
+            "minecraft:cave_vines_plant"
+        ],
+        "requiredExtractors": [
+            {
+                "type": "constant",
+                "items": [
+                    {
+                        "item": "minecraft:glow_berries"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "selectors": [
+            "minecraft:big_dripleaf_stem"
+        ],
+        "requiredExtractors": [
+            {
+                "type": "constant",
+                "items": [
+                    {
+                        "item": "minecraft:big_dripleaf"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "selectors": [
+            "minecraft:bamboo_sapling"
+        ],
+        "requiredExtractors": [
+            {
+                "type": "constant",
+                "items": [
+                    {
+                        "item": "minecraft:bamboo"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "selectors": [
+            "minecraft:tall_seagrass[half=lower]"
+        ],
+        "requiredExtractors": [
+            {
+                "type": "constant",
+                "items": [
+                    {
+                        "item": "minecraft:seagrass"
+                    }
+                ]
+            }
+        ]
+    }
+]

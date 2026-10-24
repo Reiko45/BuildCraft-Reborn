@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "buildcraftreborn:block/flood_gate/open",
+    "east": "buildcraftreborn:block/flood_gate/open",
+    "north": "buildcraftreborn:block/flood_gate/open",
+    "particle": "buildcraftreborn:block/flood_gate/open",
+    "south": "buildcraftreborn:block/flood_gate/open",
+    "up": "buildcraftreborn:block/flood_gate/top",
+    "west": "buildcraftreborn:block/flood_gate/open"
+  }
+}

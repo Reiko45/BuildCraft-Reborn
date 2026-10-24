@@ -1,0 +1,55 @@
+{
+  "parent": "buildcraftreborn:guide",
+  "criteria": {
+    "combustion_engine": {
+      "conditions": {
+        "items": [
+          {
+            "items": "buildcraftreborn:engine_iron"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "redstone_engine": {
+      "conditions": {
+        "items": [
+          {
+            "items": "buildcraftreborn:engine_wood"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "stirling_engine": {
+      "conditions": {
+        "items": [
+          {
+            "items": "buildcraftreborn:engine_stone"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.buildcraftreborn.engine.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "buildcraftreborn:engine_stone"
+    },
+    "title": {
+      "translate": "advancements.buildcraftreborn.engine.title"
+    }
+  },
+  "requirements": [
+    [
+      "redstone_engine",
+      "stirling_engine",
+      "combustion_engine"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

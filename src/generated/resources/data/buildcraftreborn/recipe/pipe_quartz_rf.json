@@ -1,0 +1,8 @@
+{
+  "type": "buildcraftreborn:pipe_upgrade",
+  "additive": {
+    "tag": "c:dusts/redstone"
+  },
+  "from": "buildcraftreborn:pipe_quartz_power",
+  "result": "buildcraftreborn:pipe_quartz_rf"
+}

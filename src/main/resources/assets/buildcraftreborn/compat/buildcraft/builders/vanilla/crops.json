@@ -1,0 +1,11 @@
+[
+    {
+        "selectors": [
+            "#minecraft:crops",
+            "minecraft:sugar_cane"
+        ],
+        "ignoredProperties": [
+            "age"
+        ]
+    }
+]

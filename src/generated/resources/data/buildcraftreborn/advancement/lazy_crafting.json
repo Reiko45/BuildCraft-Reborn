@@ -1,0 +1,26 @@
+{
+  "parent": "buildcraftreborn:wrenched",
+  "criteria": {
+    "code_trigger": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.buildcraftreborn.lazy_crafting.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "buildcraftreborn:autoworkbench_item"
+    },
+    "title": {
+      "translate": "advancements.buildcraftreborn.lazy_crafting.title"
+    }
+  },
+  "requirements": [
+    [
+      "code_trigger"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

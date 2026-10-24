@@ -1,0 +1,35 @@
+{
+  "type": "buildcraftreborn:assembly",
+  "ingredients": [
+    {
+      "ingredient": {
+        "type": "neoforge:components",
+        "components": {
+          "buildcraftreborn:gate": {
+            "logic": "and",
+            "material": "gold",
+            "modifier": "no_modifier"
+          }
+        },
+        "items": "buildcraftreborn:plug_gate"
+      }
+    },
+    {
+      "ingredient": {
+        "item": "buildcraftreborn:redstone_quartz_chipset"
+      }
+    }
+  ],
+  "mj": 140000,
+  "result": {
+    "components": {
+      "buildcraftreborn:gate": {
+        "logic": "and",
+        "material": "gold",
+        "modifier": "quartz"
+      }
+    },
+    "count": 1,
+    "id": "buildcraftreborn:plug_gate"
+  }
+}

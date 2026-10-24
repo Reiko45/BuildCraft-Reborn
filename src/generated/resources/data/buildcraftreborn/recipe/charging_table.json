@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "O": {
+      "tag": "c:obsidians/normal"
+    },
+    "c": {
+      "item": "buildcraftreborn:redstone_red_chipset"
+    },
+    "g": {
+      "tag": "c:gears/gold"
+    },
+    "r": {
+      "tag": "c:dusts/redstone"
+    }
+  },
+  "pattern": [
+    "OrO",
+    "OcO",
+    "OgO"
+  ],
+  "result": {
+    "count": 1,
+    "id": "buildcraftreborn:charging_table"
+  }
+}

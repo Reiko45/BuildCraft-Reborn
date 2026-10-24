@@ -1,0 +1,45 @@
+{
+  "render_type": "minecraft:cutout",
+  "elements": [
+    {
+      "from": [
+        2,
+        0,
+        2
+      ],
+      "to": [
+        14,
+        16,
+        14
+      ],
+      "faces": {
+        "down": {
+          "texture": "#down",
+          "cullface": "down"
+        },
+        "up": {
+          "texture": "#up",
+          "cullface": "up"
+        },
+        "north": {
+          "texture": "#side"
+        },
+        "south": {
+          "texture": "#side"
+        },
+        "west": {
+          "texture": "#side"
+        },
+        "east": {
+          "texture": "#side"
+        }
+      }
+    }
+  ],
+  "textures": {
+    "particle": "buildcraftreborn:block/tank/side",
+    "up": "buildcraftreborn:block/tank/end",
+    "down": "buildcraftreborn:block/tank/end",
+    "side": "buildcraftreborn:block/tank/side"
+  }
+}

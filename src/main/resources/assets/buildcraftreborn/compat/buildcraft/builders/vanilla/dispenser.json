@@ -1,0 +1,11 @@
+[
+    {
+        "selectors": [
+            "minecraft:dispenser",
+            "minecraft:dropper"
+        ],
+        "ignoredProperties": [
+            "triggered"
+        ]
+    }
+]

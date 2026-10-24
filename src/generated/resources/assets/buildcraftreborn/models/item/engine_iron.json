@@ -1,0 +1,8 @@
+{
+  "parent": "buildcraftreborn:block/engine_static",
+  "textures": {
+    "back": "buildcraftreborn:block/engine/iron/back",
+    "side": "buildcraftreborn:block/engine/iron/side",
+    "trunk": "buildcraftreborn:block/engine/trunk_blue"
+  }
+}

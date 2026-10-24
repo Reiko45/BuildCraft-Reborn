@@ -1,0 +1,104 @@
+{
+  "parent": "minecraft:item/handheld",
+  "overrides": [
+    {
+      "model": "buildcraftreborn:item/paintbrush_white",
+      "predicate": {
+        "buildcraftreborn:colour": 1.0
+      }
+    },
+    {
+      "model": "buildcraftreborn:item/paintbrush_orange",
+      "predicate": {
+        "buildcraftreborn:colour": 2.0
+      }
+    },
+    {
+      "model": "buildcraftreborn:item/paintbrush_magenta",
+      "predicate": {
+        "buildcraftreborn:colour": 3.0
+      }
+    },
+    {
+      "model": "buildcraftreborn:item/paintbrush_light_blue",
+      "predicate": {
+        "buildcraftreborn:colour": 4.0
+      }
+    },
+    {
+      "model": "buildcraftreborn:item/paintbrush_yellow",
+      "predicate": {
+        "buildcraftreborn:colour": 5.0
+      }
+    },
+    {
+      "model": "buildcraftreborn:item/paintbrush_lime",
+      "predicate": {
+        "buildcraftreborn:colour": 6.0
+      }
+    },
+    {
+      "model": "buildcraftreborn:item/paintbrush_pink",
+      "predicate": {
+        "buildcraftreborn:colour": 7.0
+      }
+    },
+    {
+      "model": "buildcraftreborn:item/paintbrush_gray",
+      "predicate": {
+        "buildcraftreborn:colour": 8.0
+      }
+    },
+    {
+      "model": "buildcraftreborn:item/paintbrush_light_gray",
+      "predicate": {
+        "buildcraftreborn:colour": 9.0
+      }
+    },
+    {
+      "model": "buildcraftreborn:item/paintbrush_cyan",
+      "predicate": {
+        "buildcraftreborn:colour": 10.0
+      }
+    },
+    {
+      "model": "buildcraftreborn:item/paintbrush_purple",
+      "predicate": {
+        "buildcraftreborn:colour": 11.0
+      }
+    },
+    {
+      "model": "buildcraftreborn:item/paintbrush_blue",
+      "predicate": {
+        "buildcraftreborn:colour": 12.0
+      }
+    },
+    {
+      "model": "buildcraftreborn:item/paintbrush_brown",
+      "predicate": {
+        "buildcraftreborn:colour": 13.0
+      }
+    },
+    {
+      "model": "buildcraftreborn:item/paintbrush_green",
+      "predicate": {
+        "buildcraftreborn:colour": 14.0
+      }
+    },
+    {
+      "model": "buildcraftreborn:item/paintbrush_red",
+      "predicate": {
+        "buildcraftreborn:colour": 15.0
+      }
+    },
+    {
+      "model": "buildcraftreborn:item/paintbrush_black",
+      "predicate": {
+        "buildcraftreborn:colour": 16.0
+      }
+    }
+  ],
+  "textures": {
+    "layer0": "buildcraftreborn:item/paintbrush/clean"
+  }
+}

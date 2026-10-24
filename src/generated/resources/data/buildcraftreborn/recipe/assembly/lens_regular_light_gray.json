@@ -1,0 +1,20 @@
+{
+  "type": "buildcraftreborn:assembly",
+  "ingredients": [
+    {
+      "ingredient": {
+        "item": "minecraft:light_gray_stained_glass"
+      }
+    }
+  ],
+  "mj": 500,
+  "result": {
+    "components": {
+      "buildcraftreborn:lens": {
+        "colour": "light_gray"
+      }
+    },
+    "count": 1,
+    "id": "buildcraftreborn:plug_lens"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "parent": "buildcraftreborn:block/tank",
+  "textures": {
+    "particle": "buildcraftreborn:block/tank/side_joined_below",
+    "side": "buildcraftreborn:block/tank/side_joined_below"
+  }
+}

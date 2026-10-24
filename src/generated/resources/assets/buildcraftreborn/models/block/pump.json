@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "bottom": "buildcraftreborn:block/pump/bottom",
+    "side": "buildcraftreborn:block/pump/side",
+    "top": "buildcraftreborn:block/pump/top"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "parent": "buildcraftreborn:root",
+  "criteria": {
+    "code_trigger": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.buildcraftreborn.fluid_storage.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "buildcraftreborn:tank"
+    },
+    "title": {
+      "translate": "advancements.buildcraftreborn.fluid_storage.title"
+    }
+  },
+  "requirements": [
+    [
+      "code_trigger"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

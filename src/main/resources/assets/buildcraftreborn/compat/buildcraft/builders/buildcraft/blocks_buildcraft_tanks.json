@@ -1,0 +1,192 @@
+[
+    {
+        "selectors": [
+            "buildcraftreborn:tank"
+        ],
+        "requiredExtractors": [
+            {
+                "type": "item_from_block"
+            },
+            {
+                "type": "tank",
+                "path": [
+                    "tanks",
+                    "tank",
+                    "Fluid"
+                ]
+            }
+        ]
+    },
+    {
+        "selectors": [
+            "buildcraftreborn:distiller"
+        ],
+        "requiredExtractors": [
+            {
+                "type": "item_from_block"
+            },
+            {
+                "type": "tank",
+                "path": [
+                    "tanks",
+                    "in",
+                    "Fluid"
+                ]
+            },
+            {
+                "type": "tank",
+                "path": [
+                    "tanks",
+                    "gasOut",
+                    "Fluid"
+                ]
+            },
+            {
+                "type": "tank",
+                "path": [
+                    "tanks",
+                    "liquidOut",
+                    "Fluid"
+                ]
+            }
+        ]
+    },
+    {
+        "selectors": [
+            "buildcraftreborn:flood_gate"
+        ],
+        "requiredExtractors": [
+            {
+                "type": "item_from_block"
+            },
+            {
+                "type": "tank",
+                "path": [
+                    "tanks",
+                    "tank",
+                    "Fluid"
+                ]
+            }
+        ]
+    },
+    {
+        "selectors": [
+            "buildcraftreborn:heat_exchange"
+        ],
+        "requiredExtractors": [
+            {
+                "type": "item_from_block"
+            },
+            {
+                "type": "tank",
+                "path": [
+                    "section",
+                    "input",
+                    "Fluid"
+                ]
+            },
+            {
+                "type": "tank",
+                "path": [
+                    "section",
+                    "output",
+                    "Fluid"
+                ]
+            }
+        ]
+    },
+    {
+        "selectors": [
+            "buildcraftreborn:pump"
+        ],
+        "requiredExtractors": [
+            {
+                "type": "item_from_block"
+            },
+            {
+                "type": "tank",
+                "path": [
+                    "tanks",
+                    "tank",
+                    "Fluid"
+                ]
+            }
+        ]
+    },
+    {
+        "selectors": [
+            "buildcraftreborn:engine_iron"
+        ],
+        "requiredExtractors": [
+            {
+                "type": "item_from_block"
+            },
+            {
+                "type": "tank",
+                "path": [
+                    "tanks",
+                    "fuel",
+                    "Fluid"
+                ]
+            },
+            {
+                "type": "tank",
+                "path": [
+                    "tanks",
+                    "coolant",
+                    "Fluid"
+                ]
+            },
+            {
+                "type": "tank",
+                "path": [
+                    "tanks",
+                    "residue",
+                    "Fluid"
+                ]
+            }
+        ]
+    },
+    {
+        "selectors": [
+            "buildcraftreborn:builder"
+        ],
+        "requiredExtractors": [
+            {
+                "type": "item_from_block"
+            },
+            {
+                "type": "tank",
+                "path": [
+                    "tanks",
+                    "tank1",
+                    "Fluid"
+                ]
+            },
+            {
+                "type": "tank",
+                "path": [
+                    "tanks",
+                    "tank2",
+                    "Fluid"
+                ]
+            },
+            {
+                "type": "tank",
+                "path": [
+                    "tanks",
+                    "tank3",
+                    "Fluid"
+                ]
+            },
+            {
+                "type": "tank",
+                "path": [
+                    "tanks",
+                    "tank4",
+                    "Fluid"
+                ]
+            }
+        ]
+    }
+]

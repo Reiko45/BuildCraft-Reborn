@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "buildcraftreborn:blueprint"
+    },
+    "b": {
+      "item": "minecraft:bookshelf"
+    },
+    "g": {
+      "tag": "c:gears/iron"
+    },
+    "i": {
+      "tag": "c:ingots/iron"
+    },
+    "r": {
+      "tag": "c:dusts/redstone"
+    }
+  },
+  "pattern": [
+    "igi",
+    "bBb",
+    "iri"
+  ],
+  "result": {
+    "count": 1,
+    "id": "buildcraftreborn:library"
+  }
+}

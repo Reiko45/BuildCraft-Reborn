@@ -1,0 +1,21 @@
+{
+  "type": "buildcraftreborn:assembly",
+  "ingredients": [
+    {
+      "ingredient": {
+        "item": "buildcraftreborn:engine_wood"
+      }
+    },
+    {
+      "count": 2,
+      "ingredient": {
+        "tag": "c:ingots/iron"
+      }
+    }
+  ],
+  "mj": 1000,
+  "result": {
+    "count": 1,
+    "id": "buildcraftreborn:plug_pulsar"
+  }
+}

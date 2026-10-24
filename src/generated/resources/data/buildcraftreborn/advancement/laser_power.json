@@ -1,0 +1,33 @@
+{
+  "parent": "buildcraftreborn:root",
+  "criteria": {
+    "get_laser": {
+      "conditions": {
+        "items": [
+          {
+            "items": "buildcraftreborn:laser"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.buildcraftreborn.laser_power.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "buildcraftreborn:laser"
+    },
+    "title": {
+      "translate": "advancements.buildcraftreborn.laser_power.title"
+    }
+  },
+  "requirements": [
+    [
+      "get_laser"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

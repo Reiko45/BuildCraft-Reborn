@@ -1,0 +1,26 @@
+{
+  "parent": "buildcraftreborn:draining_the_world",
+  "criteria": {
+    "code_trigger": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.buildcraftreborn.oil_platform.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "buildcraftreborn:pump"
+    },
+    "title": {
+      "translate": "advancements.buildcraftreborn.oil_platform.title"
+    }
+  },
+  "requirements": [
+    [
+      "code_trigger"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

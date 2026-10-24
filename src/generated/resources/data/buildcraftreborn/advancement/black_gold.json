@@ -1,0 +1,27 @@
+{
+  "parent": "buildcraftreborn:oil_platform",
+  "criteria": {
+    "code_trigger": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.buildcraftreborn.black_gold.description"
+    },
+    "frame": "challenge",
+    "icon": {
+      "count": 1,
+      "id": "buildcraftreborn:pump"
+    },
+    "title": {
+      "translate": "advancements.buildcraftreborn.black_gold.title"
+    }
+  },
+  "requirements": [
+    [
+      "code_trigger"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

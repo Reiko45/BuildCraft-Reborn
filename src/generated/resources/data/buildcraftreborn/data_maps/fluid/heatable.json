@@ -1,0 +1,189 @@
+{
+  "values": {
+    "buildcraftreborn:fuel_dense": {
+      "amount": 10,
+      "heat_from": 0,
+      "heat_to": 1,
+      "result": {
+        "amount": 10,
+        "id": "buildcraftreborn:fuel_dense_heat_1"
+      }
+    },
+    "buildcraftreborn:fuel_dense_heat_1": {
+      "amount": 10,
+      "heat_from": 1,
+      "heat_to": 2,
+      "result": {
+        "amount": 10,
+        "id": "buildcraftreborn:fuel_dense_heat_2"
+      }
+    },
+    "buildcraftreborn:fuel_gaseous": {
+      "amount": 10,
+      "heat_from": 0,
+      "heat_to": 1,
+      "result": {
+        "amount": 10,
+        "id": "buildcraftreborn:fuel_gaseous_heat_1"
+      }
+    },
+    "buildcraftreborn:fuel_gaseous_heat_1": {
+      "amount": 10,
+      "heat_from": 1,
+      "heat_to": 2,
+      "result": {
+        "amount": 10,
+        "id": "buildcraftreborn:fuel_gaseous_heat_2"
+      }
+    },
+    "buildcraftreborn:fuel_light": {
+      "amount": 10,
+      "heat_from": 0,
+      "heat_to": 1,
+      "result": {
+        "amount": 10,
+        "id": "buildcraftreborn:fuel_light_heat_1"
+      }
+    },
+    "buildcraftreborn:fuel_light_heat_1": {
+      "amount": 10,
+      "heat_from": 1,
+      "heat_to": 2,
+      "result": {
+        "amount": 10,
+        "id": "buildcraftreborn:fuel_light_heat_2"
+      }
+    },
+    "buildcraftreborn:fuel_mixed_heavy": {
+      "amount": 10,
+      "heat_from": 0,
+      "heat_to": 1,
+      "result": {
+        "amount": 10,
+        "id": "buildcraftreborn:fuel_mixed_heavy_heat_1"
+      }
+    },
+    "buildcraftreborn:fuel_mixed_heavy_heat_1": {
+      "amount": 10,
+      "heat_from": 1,
+      "heat_to": 2,
+      "result": {
+        "amount": 10,
+        "id": "buildcraftreborn:fuel_mixed_heavy_heat_2"
+      }
+    },
+    "buildcraftreborn:fuel_mixed_light": {
+      "amount": 10,
+      "heat_from": 0,
+      "heat_to": 1,
+      "result": {
+        "amount": 10,
+        "id": "buildcraftreborn:fuel_mixed_light_heat_1"
+      }
+    },
+    "buildcraftreborn:fuel_mixed_light_heat_1": {
+      "amount": 10,
+      "heat_from": 1,
+      "heat_to": 2,
+      "result": {
+        "amount": 10,
+        "id": "buildcraftreborn:fuel_mixed_light_heat_2"
+      }
+    },
+    "buildcraftreborn:oil": {
+      "amount": 10,
+      "heat_from": 0,
+      "heat_to": 1,
+      "result": {
+        "amount": 10,
+        "id": "buildcraftreborn:oil_heat_1"
+      }
+    },
+    "buildcraftreborn:oil_dense": {
+      "amount": 10,
+      "heat_from": 0,
+      "heat_to": 1,
+      "result": {
+        "amount": 10,
+        "id": "buildcraftreborn:oil_dense_heat_1"
+      }
+    },
+    "buildcraftreborn:oil_dense_heat_1": {
+      "amount": 10,
+      "heat_from": 1,
+      "heat_to": 2,
+      "result": {
+        "amount": 10,
+        "id": "buildcraftreborn:oil_dense_heat_2"
+      }
+    },
+    "buildcraftreborn:oil_distilled": {
+      "amount": 10,
+      "heat_from": 0,
+      "heat_to": 1,
+      "result": {
+        "amount": 10,
+        "id": "buildcraftreborn:oil_distilled_heat_1"
+      }
+    },
+    "buildcraftreborn:oil_distilled_heat_1": {
+      "amount": 10,
+      "heat_from": 1,
+      "heat_to": 2,
+      "result": {
+        "amount": 10,
+        "id": "buildcraftreborn:oil_distilled_heat_2"
+      }
+    },
+    "buildcraftreborn:oil_heat_1": {
+      "amount": 10,
+      "heat_from": 1,
+      "heat_to": 2,
+      "result": {
+        "amount": 10,
+        "id": "buildcraftreborn:oil_heat_2"
+      }
+    },
+    "buildcraftreborn:oil_heavy": {
+      "amount": 10,
+      "heat_from": 0,
+      "heat_to": 1,
+      "result": {
+        "amount": 10,
+        "id": "buildcraftreborn:oil_heavy_heat_1"
+      }
+    },
+    "buildcraftreborn:oil_heavy_heat_1": {
+      "amount": 10,
+      "heat_from": 1,
+      "heat_to": 2,
+      "result": {
+        "amount": 10,
+        "id": "buildcraftreborn:oil_heavy_heat_2"
+      }
+    },
+    "buildcraftreborn:oil_residue": {
+      "amount": 10,
+      "heat_from": 0,
+      "heat_to": 1,
+      "result": {
+        "amount": 10,
+        "id": "buildcraftreborn:oil_residue_heat_1"
+      }
+    },
+    "buildcraftreborn:oil_residue_heat_1": {
+      "amount": 10,
+      "heat_from": 1,
+      "heat_to": 2,
+      "result": {
+        "amount": 10,
+        "id": "buildcraftreborn:oil_residue_heat_2"
+      }
+    },
+    "minecraft:water": {
+      "amount": 10,
+      "heat_from": 0,
+      "heat_to": 1
+    }
+  }
+}

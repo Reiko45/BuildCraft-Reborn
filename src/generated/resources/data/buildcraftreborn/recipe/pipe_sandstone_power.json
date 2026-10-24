@@ -1,0 +1,8 @@
+{
+  "type": "buildcraftreborn:pipe_upgrade",
+  "additive": {
+    "tag": "c:dusts/redstone"
+  },
+  "from": "buildcraftreborn:pipe_sandstone_item",
+  "result": "buildcraftreborn:pipe_sandstone_power"
+}

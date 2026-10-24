@@ -1,0 +1,8 @@
+{
+  "type": "buildcraftreborn:pipe_upgrade",
+  "additive": {
+    "item": "buildcraftreborn:waterproof"
+  },
+  "from": "buildcraftreborn:pipe_diamond_item",
+  "result": "buildcraftreborn:pipe_diamond_fluid"
+}

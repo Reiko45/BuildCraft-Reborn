@@ -1,0 +1,89 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "buildcraftreborn:block/flood_gate/top"
+      }
+    },
+    {
+      "apply": {
+        "model": "buildcraftreborn:block/flood_gate/down_open"
+      },
+      "when": {
+        "connected_down": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "buildcraftreborn:block/flood_gate/down_closed"
+      },
+      "when": {
+        "connected_down": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "buildcraftreborn:block/flood_gate/north_open"
+      },
+      "when": {
+        "connected_north": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "buildcraftreborn:block/flood_gate/north_closed"
+      },
+      "when": {
+        "connected_north": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "buildcraftreborn:block/flood_gate/south_open"
+      },
+      "when": {
+        "connected_south": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "buildcraftreborn:block/flood_gate/south_closed"
+      },
+      "when": {
+        "connected_south": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "buildcraftreborn:block/flood_gate/west_open"
+      },
+      "when": {
+        "connected_west": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "buildcraftreborn:block/flood_gate/west_closed"
+      },
+      "when": {
+        "connected_west": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "buildcraftreborn:block/flood_gate/east_open"
+      },
+      "when": {
+        "connected_east": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "buildcraftreborn:block/flood_gate/east_closed"
+      },
+      "when": {
+        "connected_east": "false"
+      }
+    }
+  ]
+}

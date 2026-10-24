@@ -1,0 +1,26 @@
+{
+  "elements": [
+    {
+      "faces": {
+        "south": {
+          "cullface": "south",
+          "texture": "#face"
+        }
+      },
+      "from": [
+        0,
+        0,
+        0
+      ],
+      "to": [
+        16,
+        16,
+        16
+      ]
+    }
+  ],
+  "textures": {
+    "face": "buildcraftreborn:block/flood_gate/open",
+    "particle": "buildcraftreborn:block/flood_gate/open"
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "parent": "buildcraftreborn:pipe_logic",
+  "criteria": {
+    "code_trigger": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.buildcraftreborn.extended_logic.description"
+    },
+    "icon": {
+      "components": {
+        "buildcraftreborn:gate": {
+          "logic": "or",
+          "material": "gold",
+          "modifier": "diamond"
+        }
+      },
+      "count": 1,
+      "id": "buildcraftreborn:plug_gate"
+    },
+    "title": {
+      "translate": "advancements.buildcraftreborn.extended_logic.title"
+    }
+  },
+  "requirements": [
+    [
+      "code_trigger"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

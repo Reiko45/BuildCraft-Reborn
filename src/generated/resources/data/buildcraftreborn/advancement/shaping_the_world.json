@@ -1,0 +1,26 @@
+{
+  "parent": "buildcraftreborn:gears",
+  "criteria": {
+    "code_trigger": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.buildcraftreborn.shaping_the_world.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "buildcraftreborn:quarry"
+    },
+    "title": {
+      "translate": "advancements.buildcraftreborn.shaping_the_world.title"
+    }
+  },
+  "requirements": [
+    [
+      "code_trigger"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

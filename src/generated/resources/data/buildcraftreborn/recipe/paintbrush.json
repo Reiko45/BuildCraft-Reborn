@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "g": {
+      "tag": "c:gears/wood"
+    },
+    "i": {
+      "tag": "c:strings"
+    },
+    "s": {
+      "tag": "c:rods/wooden"
+    },
+    "w": {
+      "item": "minecraft:white_wool"
+    }
+  },
+  "pattern": [
+    " iw",
+    " gi",
+    "s  "
+  ],
+  "result": {
+    "count": 1,
+    "id": "buildcraftreborn:paintbrush"
+  }
+}

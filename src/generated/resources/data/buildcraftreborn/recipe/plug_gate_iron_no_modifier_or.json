@@ -1,0 +1,32 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "group": "plug_gate",
+  "key": {
+    "i": {
+      "type": "neoforge:components",
+      "components": {
+        "buildcraftreborn:gate": {
+          "logic": "and",
+          "material": "iron",
+          "modifier": "no_modifier"
+        }
+      },
+      "items": "buildcraftreborn:plug_gate"
+    }
+  },
+  "pattern": [
+    "i"
+  ],
+  "result": {
+    "components": {
+      "buildcraftreborn:gate": {
+        "logic": "or",
+        "material": "iron",
+        "modifier": "no_modifier"
+      }
+    },
+    "count": 1,
+    "id": "buildcraftreborn:plug_gate"
+  }
+}

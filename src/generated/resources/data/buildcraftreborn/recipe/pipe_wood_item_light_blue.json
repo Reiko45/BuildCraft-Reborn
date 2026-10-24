@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "g": {
+      "item": "minecraft:light_blue_stained_glass"
+    },
+    "l": {
+      "tag": "minecraft:planks"
+    },
+    "r": {
+      "tag": "minecraft:planks"
+    }
+  },
+  "pattern": [
+    "lgr"
+  ],
+  "result": {
+    "components": {
+      "buildcraftreborn:colour": "light_blue"
+    },
+    "count": 8,
+    "id": "buildcraftreborn:pipe_wood_item"
+  }
+}

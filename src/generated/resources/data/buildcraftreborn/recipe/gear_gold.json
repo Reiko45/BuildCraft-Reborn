@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "i": {
+      "tag": "c:gears/iron"
+    },
+    "o": {
+      "tag": "c:ingots/gold"
+    }
+  },
+  "pattern": [
+    " o ",
+    "oio",
+    " o "
+  ],
+  "result": {
+    "count": 1,
+    "id": "buildcraftreborn:gear_gold"
+  }
+}

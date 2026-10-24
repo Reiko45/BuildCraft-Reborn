@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "key": {
+    "g": {
+      "tag": "c:gears/diamond"
+    },
+    "r": {
+      "item": "minecraft:redstone_torch"
+    },
+    "t": {
+      "item": "buildcraftreborn:tank"
+    }
+  },
+  "pattern": [
+    "rtr",
+    "tgt"
+  ],
+  "result": {
+    "count": 1,
+    "id": "buildcraftreborn:distiller"
+  }
+}

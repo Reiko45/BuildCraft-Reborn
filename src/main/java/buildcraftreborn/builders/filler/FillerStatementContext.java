@@ -1,0 +1,75 @@
+/*
+ * Copyright (c) 2017 SpaceToad and the BuildCraft team
+ * Ported to Minecraft 1.21.1 by BuildCraft Reborn.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public License, v. 2.0. If a copy of the MPL was not
+ * distributed with this file, You can obtain one at https://mozilla.org/MPL/2.0/
+ */
+package buildcraftreborn.builders.filler;
+
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+
+import com.google.common.collect.ImmutableList;
+
+import buildcraftreborn.api.filler.FillerManager;
+import buildcraftreborn.api.filler.IFillerPattern;
+
+import buildcraftreborn.lib.gui.ISimpleDrawable;
+import buildcraftreborn.lib.statement.StatementContext;
+
+import buildcraftreborn.builders.BCBuildersStatements;
+import buildcraftreborn.builders.snapshot.pattern.PatternShape2d;
+
+public enum FillerStatementContext implements StatementContext<IFillerPattern> {
+    CONTEXT_ALL;
+
+    private static final List<Group> groups = ImmutableList.copyOf(Group.values());
+
+    static {
+        setupPossible();
+    }
+
+    public static void setupPossible() {
+        for (Group group : Group.values()) {
+            group.patterns.clear();
+        }
+        for (IFillerPattern pattern : FillerManager.registry.getPatterns()) {
+            // TODO (AlexIIL): 8.1.x: add support for other groups
+            if (pattern instanceof PatternShape2d) {
+                Group.SHAPES_2D.patterns.add(pattern);
+            } else {
+                Group.DEFAULT.patterns.add(pattern);
+            }
+        }
+        for (Group group : Group.values()) {
+            group.patterns.sort(Comparator.comparing(IFillerPattern::getUniqueTag));
+        }
+        if (Group.DEFAULT.patterns.remove(BCBuildersStatements.PATTERN_NONE)) {
+            Group.DEFAULT.patterns.add(0, BCBuildersStatements.PATTERN_NONE);
+        }
+    }
+
+    @Override
+    public List<Group> getAllPossible() {
+        return groups;
+    }
+
+    public enum Group implements StatementGroup<IFillerPattern> {
+        DEFAULT,
+        SHAPES_2D;
+
+        final List<IFillerPattern> patterns = new ArrayList<>();
+
+        @Override
+        public ISimpleDrawable getSourceIcon() {
+            return null;
+        }
+
+        @Override
+        public List<IFillerPattern> getValues() {
+            return patterns;
+        }
+    }
+}

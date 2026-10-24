@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_brush": {
+      "conditions": {
+        "items": [
+          {
+            "items": "buildcraftreborn:paintbrush"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "buildcraftreborn:paintbrush_light_gray"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_brush"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "buildcraftreborn:paintbrush_light_gray"
+    ]
+  }
+}

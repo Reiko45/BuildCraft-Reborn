@@ -1,0 +1,33 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "buildcraftreborn:config",
+      "flag": "energy.enable_rf_engine"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "key": {
+    "G": {
+      "tag": "c:gears/iron"
+    },
+    "g": {
+      "tag": "c:glass_blocks/colorless"
+    },
+    "p": {
+      "item": "minecraft:piston"
+    },
+    "w": {
+      "tag": "c:dusts/redstone"
+    }
+  },
+  "pattern": [
+    "www",
+    " g ",
+    "GpG"
+  ],
+  "result": {
+    "count": 1,
+    "id": "buildcraftreborn:engine_rf"
+  }
+}

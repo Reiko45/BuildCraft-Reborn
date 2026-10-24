@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_plug": {
+      "conditions": {
+        "items": [
+          {
+            "items": "buildcraftreborn:plug_blocker"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "buildcraftreborn:plug_gate_create_iron_no_modifier"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_plug"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "buildcraftreborn:plug_gate_create_iron_no_modifier"
+    ]
+  }
+}

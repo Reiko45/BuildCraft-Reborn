@@ -1,0 +1,237 @@
+/*
+ * Copyright (c) 2011-2017 SpaceToad and the BuildCraft Team http://www.mod-buildcraft.com
+ * Ported to Minecraft 1.21.1 by BuildCraft Reborn.
+ *
+ * The BuildCraft API is distributed under the terms of the MIT License. Please check the contents of the license,
+ * which is located as "LICENSE-API" in the BuildCraft Reborn source code distribution.
+ */
+package buildcraftreborn.api.transport.pipe;
+
+import org.jetbrains.annotations.Nullable;
+
+import net.minecraft.core.HolderLookup;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resources.ResourceLocation;
+
+import net.neoforged.fml.ModLoadingContext;
+
+public final class PipeDefinition {
+    public final ResourceLocation identifier;
+    public final IPipeCreator logicConstructor;
+    public final IPipeLoader logicLoader;
+    public final PipeFlowType flowType;
+    public final String[] textures;
+    /** @deprecated Use # */
+    @Deprecated
+    public final int itemTextureTop, itemTextureCenter, itemTextureBottom;
+    public final PipeFaceTex itemModelTop, itemModelCenter, itemModelBottom;
+    public final boolean canBeColoured;
+    private EnumPipeColourType colourType;
+
+    public PipeDefinition(PipeDefinitionBuilder builder) {
+        this.identifier = builder.identifier;
+        this.textures = new String[builder.textureSuffixes.length];
+        for (int i = 0; i < textures.length; i++) {
+            textures[i] = builder.texturePrefix + builder.textureSuffixes[i];
+        }
+        this.logicConstructor = builder.logicConstructor;
+        this.logicLoader = builder.logicLoader;
+        this.flowType = builder.flowType;
+        this.itemTextureTop = builder.itemTextureTop;
+        this.itemTextureCenter = builder.itemTextureCenter;
+        this.itemTextureBottom = builder.itemTextureBottom;
+        this.itemModelBottom = builder.itemModelBottom;
+        this.itemModelCenter = builder.itemModelCenter;
+        this.itemModelTop = builder.itemModelTop;
+        this.canBeColoured = builder.canBeColoured;
+        this.colourType = builder.colourType;
+    }
+
+    
+    public EnumPipeColourType getColourType() {
+        if (colourType != null) {
+            return colourType;
+        }
+        if (flowType.fallbackColourType != null) {
+            return flowType.fallbackColourType;
+        }
+        return EnumPipeColourType.TRANSLUCENT;
+    }
+
+    public void setColourType(@Nullable EnumPipeColourType colourType) {
+        this.colourType = colourType;
+    }
+
+    @FunctionalInterface
+    public interface IPipeCreator {
+        PipeBehaviour createBehaviour(IPipe t);
+    }
+
+    @FunctionalInterface
+    public interface IPipeLoader {
+        PipeBehaviour loadBehaviour(IPipe t, CompoundTag u, HolderLookup.Provider registries);
+    }
+
+    public static class PipeDefinitionBuilder {
+        public ResourceLocation identifier;
+        public String texturePrefix;
+        public String[] textureSuffixes = { "" };
+        public IPipeCreator logicConstructor;
+        public IPipeLoader logicLoader;
+        public PipeFlowType flowType;
+        @Deprecated
+        public int itemTextureTop = 0, itemTextureCenter = 0, itemTextureBottom = 0;
+        public PipeFaceTex itemModelTop = PipeFaceTex.get(0);
+        public PipeFaceTex itemModelCenter = PipeFaceTex.get(0);
+        public PipeFaceTex itemModelBottom = PipeFaceTex.get(0);
+        public boolean canBeColoured;
+        public EnumPipeColourType colourType;
+
+        public PipeDefinitionBuilder() {}
+
+        public PipeDefinitionBuilder(ResourceLocation identifier, IPipeCreator logicConstructor,
+            IPipeLoader logicLoader, PipeFlowType flowType) {
+            this.identifier = identifier;
+            this.logicConstructor = logicConstructor;
+            this.logicLoader = logicLoader;
+            this.flowType = flowType;
+        }
+
+        public PipeDefinitionBuilder idTexPrefix(String both) {
+            return id(both).texPrefix(both);
+        }
+
+        public PipeDefinitionBuilder idTex(String both) {
+            return id(both).tex(both);
+        }
+
+        private static String getActiveModId() {
+            String namespace = ModLoadingContext.get().getActiveNamespace();
+            if (namespace == null || namespace.isEmpty() || "minecraft".equals(namespace)) {
+                throw new IllegalStateException(
+                    "Cannot interact with PipeDefinition outside of an actively scoped mod!");
+            }
+            return namespace;
+        }
+
+        public PipeDefinitionBuilder id(String post) {
+            identifier = ResourceLocation.fromNamespaceAndPath(getActiveModId(), post);
+            return this;
+        }
+
+        public PipeDefinitionBuilder tex(String prefix, String... suffixes) {
+            return texPrefix(prefix).texSuffixes(suffixes);
+        }
+
+        /** Sets the texture prefix to be: <code>[current_mod_id]:block/pipes/[prefix]</code> where [current_mod_id] is
+         * the modid of the currently loaded mod, and [prefix] is the string parameter given. (1.21: under
+         * {@code block/} so the textures are stitched onto the block atlas; 1.12 used {@code pipes/}.)
+         * 
+         * @return this */
+        public PipeDefinitionBuilder texPrefix(String prefix) {
+            return texPrefixDirect(getActiveModId() + ":block/pipes/" + prefix);
+        }
+
+        /** Sets the {@link #texturePrefix} to the input string, without any additions or changes (unlike
+         * {@link #texPrefix(String)})
+         * 
+         * @return this */
+        public PipeDefinitionBuilder texPrefixDirect(String prefix) {
+            texturePrefix = prefix;
+            return this;
+        }
+
+        /** Sets {@link #textureSuffixes} to the given array, or to <code>{""}</code> if the argument list is empty or
+         * null.
+         * 
+         * @return this. */
+        public PipeDefinitionBuilder texSuffixes(String... suffixes) {
+            if (suffixes == null || suffixes.length == 0) {
+                textureSuffixes = new String[] { "" };
+            } else {
+                textureSuffixes = suffixes;
+            }
+            return this;
+        }
+
+        public PipeDefinitionBuilder itemTex(int all) {
+            itemModelBottom = PipeFaceTex.get(all);
+            itemModelCenter = itemModelBottom;
+            itemModelTop = itemModelBottom;
+            itemTextureTop = all;
+            itemTextureCenter = all;
+            itemTextureBottom = all;
+            return this;
+        }
+
+        public PipeDefinitionBuilder itemTex(int top, int center, int bottom) {
+            itemModelBottom = PipeFaceTex.get(bottom);
+            itemModelCenter = PipeFaceTex.get(center);
+            itemModelTop = PipeFaceTex.get(top);
+            itemTextureTop = top;
+            itemTextureCenter = center;
+            itemTextureBottom = bottom;
+            return this;
+        }
+
+        public PipeDefinitionBuilder logic(IPipeCreator creator, IPipeLoader loader) {
+            logicConstructor = creator;
+            logicLoader = loader;
+            return this;
+        }
+
+        public PipeDefinitionBuilder disableColouring() {
+            canBeColoured = false;
+            return this;
+        }
+
+        public PipeDefinitionBuilder enableColouring(EnumPipeColourType type) {
+            canBeColoured = true;
+            colourType = type;
+            return this;
+        }
+
+        public PipeDefinitionBuilder enableColouring() {
+            return enableColouring(null);
+        }
+
+        public PipeDefinitionBuilder enableTranslucentColouring() {
+            return enableColouring(EnumPipeColourType.TRANSLUCENT);
+        }
+
+        public PipeDefinitionBuilder enableBorderColouring() {
+            return enableColouring(EnumPipeColourType.BORDER_OUTER);
+        }
+
+        public PipeDefinitionBuilder enableInnerBorderColouring() {
+            return enableColouring(EnumPipeColourType.BORDER_INNER);
+        }
+
+        public PipeDefinitionBuilder enableCustomColouring() {
+            return enableColouring(EnumPipeColourType.CUSTOM);
+        }
+
+        public PipeDefinitionBuilder flowItem() {
+            return flow(PipeApi.flowItems);
+        }
+
+        public PipeDefinitionBuilder flowFluid() {
+            return flow(PipeApi.flowFluids);
+        }
+
+        public PipeDefinitionBuilder flowPower() {
+            return flow(PipeApi.flowPower);
+        }
+
+        public PipeDefinitionBuilder flow(PipeFlowType flow) {
+            flowType = flow;
+            return this;
+        }
+
+        public PipeDefinition define() {
+            PipeDefinition def = new PipeDefinition(this);
+            PipeApi.pipeRegistry.registerPipe(def);
+            return def;
+        }
+    }
+}

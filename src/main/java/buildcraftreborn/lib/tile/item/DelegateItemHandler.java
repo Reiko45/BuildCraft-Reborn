@@ -1,0 +1,63 @@
+/*
+ * Copyright (c) 2017 SpaceToad and the BuildCraft team
+ * Ported to Minecraft 1.21.1 by BuildCraft Reborn.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public License, v. 2.0. If a copy of the MPL was not
+ * distributed with this file, You can obtain one at https://mozilla.org/MPL/2.0/
+ */
+package buildcraftreborn.lib.tile.item;
+
+import net.minecraft.world.item.ItemStack;
+
+import net.neoforged.neoforge.items.IItemHandlerModifiable;
+
+public class DelegateItemHandler implements IItemHandlerModifiable, IItemHandlerFiltered {
+    private final IItemHandlerModifiable delegate;
+
+    public DelegateItemHandler(IItemHandlerModifiable delegate) {
+        this.delegate = delegate;
+    }
+
+    @Override
+    public int getSlots() {
+        return delegate.getSlots();
+    }
+
+    @Override
+    public ItemStack getStackInSlot(int slot) {
+        return delegate.getStackInSlot(slot);
+    }
+
+    @Override
+    public ItemStack insertItem(int slot, ItemStack stack, boolean simulate) {
+        return delegate.insertItem(slot, stack, simulate);
+    }
+
+    @Override
+    public ItemStack extractItem(int slot, int amount, boolean simulate) {
+        return delegate.extractItem(slot, amount, simulate);
+    }
+
+    @Override
+    public void setStackInSlot(int slot, ItemStack stack) {
+        delegate.setStackInSlot(slot, stack);
+    }
+
+    @Override
+    public int getSlotLimit(int slot) {
+        return delegate.getSlotLimit(slot);
+    }
+
+    @Override
+    public boolean isItemValid(int slot, ItemStack stack) {
+        return delegate.isItemValid(slot, stack);
+    }
+
+    @Override
+    public ItemStack getFilter(int slot) {
+        if (delegate instanceof IItemHandlerFiltered filtered) {
+            return filtered.getFilter(slot);
+        }
+        return IItemHandlerFiltered.super.getFilter(slot);
+    }
+}

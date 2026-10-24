@@ -1,0 +1,26 @@
+{
+  "parent": "buildcraftreborn:wrenched",
+  "criteria": {
+    "code_trigger": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.buildcraftreborn.retired_hopper.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "buildcraftreborn:chute"
+    },
+    "title": {
+      "translate": "advancements.buildcraftreborn.retired_hopper.title"
+    }
+  },
+  "requirements": [
+    [
+      "code_trigger"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

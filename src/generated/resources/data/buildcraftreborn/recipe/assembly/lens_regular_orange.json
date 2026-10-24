@@ -1,0 +1,20 @@
+{
+  "type": "buildcraftreborn:assembly",
+  "ingredients": [
+    {
+      "ingredient": {
+        "item": "minecraft:orange_stained_glass"
+      }
+    }
+  ],
+  "mj": 500,
+  "result": {
+    "components": {
+      "buildcraftreborn:lens": {
+        "colour": "orange"
+      }
+    },
+    "count": 1,
+    "id": "buildcraftreborn:plug_lens"
+  }
+}

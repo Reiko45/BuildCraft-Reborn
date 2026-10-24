@@ -1,0 +1,5 @@
+{
+  "type": "buildcraftreborn:pipe_upgrade",
+  "from": "buildcraftreborn:pipe_sandstone_rf",
+  "result": "buildcraftreborn:pipe_sandstone_power"
+}

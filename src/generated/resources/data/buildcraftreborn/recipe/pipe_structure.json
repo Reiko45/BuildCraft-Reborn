@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "c": {
+      "tag": "c:cobblestones"
+    },
+    "g": {
+      "item": "minecraft:gravel"
+    }
+  },
+  "pattern": [
+    "cgc"
+  ],
+  "result": {
+    "count": 8,
+    "id": "buildcraftreborn:pipe_structure"
+  }
+}

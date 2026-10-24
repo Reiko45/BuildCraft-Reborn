@@ -1,0 +1,82 @@
+{
+  "elements": [
+    {
+      "comment": "Bottom box",
+      "from": [
+        5,
+        0,
+        5
+      ],
+      "to": [
+        11,
+        3,
+        11
+      ],
+      "faces": {
+        "down": {
+          "uv": [
+            0,
+            0,
+            6,
+            6
+          ],
+          "texture": "#bottom"
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            6,
+            6
+          ],
+          "texture": "#bottom"
+        },
+        "north": {
+          "uv": [
+            10,
+            13,
+            16,
+            16
+          ],
+          "texture": "#bottom"
+        },
+        "south": {
+          "uv": [
+            10,
+            13,
+            16,
+            16
+          ],
+          "texture": "#bottom"
+        },
+        "west": {
+          "uv": [
+            10,
+            13,
+            16,
+            16
+          ],
+          "texture": "#bottom"
+        },
+        "east": {
+          "uv": [
+            10,
+            13,
+            16,
+            16
+          ],
+          "texture": "#bottom"
+        }
+      }
+    }
+  ],
+  "textures": {
+    "particle": "buildcraftreborn:block/chute/top",
+    "top": "buildcraftreborn:block/chute/top",
+    "top_bottom": "buildcraftreborn:block/chute/top_bottom",
+    "top_side": "buildcraftreborn:block/chute/top_side",
+    "bottom": "buildcraftreborn:block/chute/bottom",
+    "side": "buildcraftreborn:block/chute/side",
+    "side2": "buildcraftreborn:block/chute/side2"
+  }
+}

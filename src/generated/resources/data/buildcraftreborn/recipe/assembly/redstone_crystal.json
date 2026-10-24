@@ -1,0 +1,15 @@
+{
+  "type": "buildcraftreborn:assembly",
+  "ingredients": [
+    {
+      "ingredient": {
+        "tag": "c:storage_blocks/redstone"
+      }
+    }
+  ],
+  "mj": 1000000,
+  "result": {
+    "count": 1,
+    "id": "buildcraftreborn:redstone_crystal"
+  }
+}

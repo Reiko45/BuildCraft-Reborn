@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "D": {
+      "tag": "c:gears/diamond"
+    },
+    "G": {
+      "tag": "c:gears/gold"
+    },
+    "I": {
+      "tag": "c:ingots/iron"
+    },
+    "M": {
+      "item": "minecraft:map"
+    },
+    "R": {
+      "tag": "c:dusts/redstone"
+    }
+  },
+  "pattern": [
+    "IRI",
+    "GMG",
+    "IDI"
+  ],
+  "result": {
+    "count": 1,
+    "id": "buildcraftreborn:zone_planner"
+  }
+}

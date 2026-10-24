@@ -1,0 +1,5 @@
+{
+  "type": "buildcraftreborn:pipe_upgrade",
+  "from": "buildcraftreborn:pipe_diamond_rf",
+  "result": "buildcraftreborn:pipe_diamond_power"
+}

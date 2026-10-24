@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_diamond_pipe": {
+      "conditions": {
+        "items": [
+          {
+            "items": "buildcraftreborn:pipe_diamond_item"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "buildcraftreborn:filtered_buffer"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_diamond_pipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "buildcraftreborn:filtered_buffer"
+    ]
+  }
+}

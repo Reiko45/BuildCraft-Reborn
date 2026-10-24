@@ -1,0 +1,30 @@
+[
+    {
+        "selectors": [
+            "minecraft:chest",
+            "minecraft:trapped_chest",
+            "minecraft:barrel",
+            "minecraft:brewing_stand",
+            "minecraft:dispenser",
+            "minecraft:dropper",
+            "minecraft:furnace",
+            "minecraft:blast_furnace",
+            "minecraft:smoker",
+            "minecraft:hopper",
+            "minecraft:crafter",
+            "minecraft:chiseled_bookshelf",
+            "#minecraft:shulker_boxes"
+        ],
+        "requiredExtractors": [
+            {
+                "type": "item_from_block"
+            },
+            {
+                "type": "items_list",
+                "path": [
+                    "Items"
+                ]
+            }
+        ]
+    }
+]

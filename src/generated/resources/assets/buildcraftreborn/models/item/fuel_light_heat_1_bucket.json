@@ -1,0 +1,6 @@
+{
+  "parent": "neoforge:item/bucket",
+  "flip_gas": true,
+  "fluid": "buildcraftreborn:fuel_light_heat_1",
+  "loader": "neoforge:fluid_container"
+}

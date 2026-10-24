@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "buildcraftreborn:marker_volume"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_torch": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:redstone_torch"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_torch"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "buildcraftreborn:marker_volume"
+    ]
+  }
+}

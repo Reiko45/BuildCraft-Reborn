@@ -1,0 +1,31 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "key": {
+    "b": {
+      "item": "buildcraftreborn:plug_blocker"
+    },
+    "m": {
+      "item": "minecraft:nether_brick"
+    },
+    "r": {
+      "tag": "c:dusts/redstone"
+    }
+  },
+  "pattern": [
+    " m ",
+    "mrm",
+    " b "
+  ],
+  "result": {
+    "components": {
+      "buildcraftreborn:gate": {
+        "logic": "and",
+        "material": "nether_brick",
+        "modifier": "no_modifier"
+      }
+    },
+    "count": 1,
+    "id": "buildcraftreborn:plug_gate"
+  }
+}

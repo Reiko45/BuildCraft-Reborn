@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "key": {
+    "b": {
+      "item": "minecraft:bucket"
+    },
+    "g": {
+      "tag": "c:gears/iron"
+    },
+    "i": {
+      "tag": "c:ingots/iron"
+    },
+    "r": {
+      "tag": "c:dusts/redstone"
+    },
+    "t": {
+      "item": "buildcraftreborn:tank"
+    }
+  },
+  "pattern": [
+    "iri",
+    "igi",
+    "tbt"
+  ],
+  "result": {
+    "count": 1,
+    "id": "buildcraftreborn:pump"
+  }
+}

@@ -1,0 +1,12 @@
+[
+    {
+        "selectors": [
+            "minecraft:ladder",
+            "minecraft:tripwire_hook",
+            "#minecraft:trapdoors"
+        ],
+        "ignoredProperties": [
+            "open"
+        ]
+    }
+]

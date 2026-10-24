@@ -1,0 +1,12 @@
+[
+    {
+        "selectors": [
+            "#minecraft:doors"
+        ],
+        "ignoredProperties": [
+            "powered",
+            "open",
+            "hinge"
+        ]
+    }
+]

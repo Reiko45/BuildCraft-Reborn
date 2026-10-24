@@ -1,0 +1,86 @@
+{
+  "parent": "buildcraftreborn:root",
+  "criteria": {
+    "gear_diamond": {
+      "conditions": {
+        "items": [
+          {
+            "items": "buildcraftreborn:gear_diamond"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "gear_gold": {
+      "conditions": {
+        "items": [
+          {
+            "items": "buildcraftreborn:gear_gold"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "gear_iron": {
+      "conditions": {
+        "items": [
+          {
+            "items": "buildcraftreborn:gear_iron"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "gear_stone": {
+      "conditions": {
+        "items": [
+          {
+            "items": "buildcraftreborn:gear_stone"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "gear_wood": {
+      "conditions": {
+        "items": [
+          {
+            "items": "buildcraftreborn:gear_wood"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.buildcraftreborn.gears.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "count": 1,
+      "id": "buildcraftreborn:gear_diamond"
+    },
+    "title": {
+      "translate": "advancements.buildcraftreborn.gears.title"
+    }
+  },
+  "requirements": [
+    [
+      "gear_wood"
+    ],
+    [
+      "gear_stone"
+    ],
+    [
+      "gear_iron"
+    ],
+    [
+      "gear_gold"
+    ],
+    [
+      "gear_diamond"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

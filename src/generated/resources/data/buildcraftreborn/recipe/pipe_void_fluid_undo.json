@@ -1,0 +1,5 @@
+{
+  "type": "buildcraftreborn:pipe_upgrade",
+  "from": "buildcraftreborn:pipe_void_fluid",
+  "result": "buildcraftreborn:pipe_void_item"
+}

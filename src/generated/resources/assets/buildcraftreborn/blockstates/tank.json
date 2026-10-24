@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "joined_below=false": {
+      "model": "buildcraftreborn:block/tank"
+    },
+    "joined_below=true": {
+      "model": "buildcraftreborn:block/tank_joined_below"
+    }
+  }
+}

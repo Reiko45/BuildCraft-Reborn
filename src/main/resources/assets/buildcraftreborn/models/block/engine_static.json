@@ -1,0 +1,61 @@
+{
+    "__comment": "The engine as an item: 1.12's buildcraftlib:models/item/engine_base (engine_base.json evaluated at progress 0.2, blue stage, facing up) as a plain model. In the world, engines are drawn by RenderEngine_BC8.",
+    "parent": "block/block",
+    "textures": {
+        "trunk": "buildcraftreborn:block/engine/trunk_blue",
+        "chamber": "buildcraftreborn:block/engine/chamber_base",
+        "particle": "#back"
+    },
+    "elements": [
+        {
+            "name": "base",
+            "from": [ 0, 0, 0 ],
+            "to": [ 16, 4, 16 ],
+            "faces": {
+                "down":  { "uv": [ 0, 0, 16, 16 ], "texture": "#back" },
+                "up":    { "uv": [ 0, 0, 16, 16 ], "texture": "#back" },
+                "north": { "uv": [ 0, 0, 16, 4 ], "texture": "#side" },
+                "south": { "uv": [ 0, 0, 16, 4 ], "texture": "#side" },
+                "west":  { "uv": [ 0, 0, 16, 4 ], "texture": "#side" },
+                "east":  { "uv": [ 0, 0, 16, 4 ], "texture": "#side" }
+            }
+        },
+        {
+            "name": "base_moving",
+            "from": [ 0, 7.198, 0 ],
+            "to": [ 16, 11.198, 16 ],
+            "faces": {
+                "down":  { "uv": [ 0, 0, 16, 16 ], "texture": "#back" },
+                "up":    { "uv": [ 0, 0, 16, 16 ], "texture": "#back" },
+                "north": { "uv": [ 0, 0, 16, 4 ], "texture": "#side" },
+                "south": { "uv": [ 0, 0, 16, 4 ], "texture": "#side" },
+                "west":  { "uv": [ 0, 0, 16, 4 ], "texture": "#side" },
+                "east":  { "uv": [ 0, 0, 16, 4 ], "texture": "#side" }
+            }
+        },
+        {
+            "name": "trunk",
+            "from": [ 4, 4, 4 ],
+            "to": [ 12, 16, 12 ],
+            "faces": {
+                "down":  { "uv": [ 0, 0, 8, 8 ], "texture": "#trunk" },
+                "up":    { "uv": [ 0, 0, 8, 8 ], "texture": "#trunk" },
+                "north": { "uv": [ 8, 0, 16, 12 ], "texture": "#trunk" },
+                "south": { "uv": [ 8, 0, 16, 12 ], "texture": "#trunk" },
+                "west":  { "uv": [ 8, 0, 16, 12 ], "texture": "#trunk" },
+                "east":  { "uv": [ 8, 0, 16, 12 ], "texture": "#trunk" }
+            }
+        },
+        {
+            "name": "chamber",
+            "from": [ 3, 4, 3 ],
+            "to": [ 13, 7.198, 13 ],
+            "faces": {
+                "north": { "uv": [ 3, 3.198, 13, 0 ], "texture": "#chamber" },
+                "south": { "uv": [ 3, 3.198, 13, 0 ], "texture": "#chamber" },
+                "west":  { "uv": [ 3, 3.198, 13, 0 ], "texture": "#chamber" },
+                "east":  { "uv": [ 3, 3.198, 13, 0 ], "texture": "#chamber" }
+            }
+        }
+    ]
+}

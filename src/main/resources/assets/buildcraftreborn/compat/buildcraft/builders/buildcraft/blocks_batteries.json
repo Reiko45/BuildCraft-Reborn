@@ -1,0 +1,19 @@
+[
+    {
+        "selectors": [
+            "buildcraftreborn:quarry",
+            "buildcraftreborn:filler",
+            "buildcraftreborn:builder",
+            "buildcraftreborn:chute",
+            "buildcraftreborn:distiller",
+            "buildcraftreborn:pump",
+            "buildcraftreborn:mining_well",
+            "buildcraftreborn:laser"
+        ],
+        "replaceNbt": {
+            "battery": {
+                "stored": 0
+            }
+        }
+    }
+]

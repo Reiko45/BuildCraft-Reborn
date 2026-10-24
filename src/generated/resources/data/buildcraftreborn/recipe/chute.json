@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "key": {
+    "c": {
+      "item": "minecraft:chest"
+    },
+    "g": {
+      "tag": "c:gears/stone"
+    },
+    "i": {
+      "tag": "c:ingots/iron"
+    }
+  },
+  "pattern": [
+    "ici",
+    "igi",
+    " i "
+  ],
+  "result": {
+    "count": 1,
+    "id": "buildcraftreborn:chute"
+  }
+}

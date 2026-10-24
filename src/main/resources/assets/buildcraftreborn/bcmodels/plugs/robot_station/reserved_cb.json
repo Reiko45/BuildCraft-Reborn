@@ -1,0 +1,165 @@
+{
+    "textures": {
+        "#base": "buildcraftreborn:block/robot_station/base",
+        "#state": "buildcraftreborn:block/robot_station/state_reserved_cb",
+        "particle": "#base"
+    },
+    "elements": [
+        {
+            "__comment": "the plate against the pipe",
+            "from": [
+                3,
+                4,
+                4
+            ],
+            "to": [
+                4,
+                12,
+                12
+            ],
+            "shade": true,
+            "faces": {
+                "west": {
+                    "uv": [
+                        0,
+                        0,
+                        8,
+                        8
+                    ],
+                    "texture": "#base"
+                },
+                "east": {
+                    "uv": [
+                        0,
+                        0,
+                        8,
+                        8
+                    ],
+                    "texture": "#base"
+                },
+                "up": {
+                    "uv": [
+                        0,
+                        0,
+                        1,
+                        8
+                    ],
+                    "texture": "#base"
+                },
+                "down": {
+                    "uv": [
+                        0,
+                        0,
+                        1,
+                        8
+                    ],
+                    "texture": "#base"
+                },
+                "north": {
+                    "uv": [
+                        0,
+                        0,
+                        1,
+                        8
+                    ],
+                    "texture": "#base"
+                },
+                "south": {
+                    "uv": [
+                        0,
+                        0,
+                        1,
+                        8
+                    ],
+                    "texture": "#base"
+                }
+            }
+        },
+        {
+            "__comment": "the stem robots dock on",
+            "from": [
+                0,
+                7,
+                7
+            ],
+            "to": [
+                3,
+                9,
+                9
+            ],
+            "shade": true,
+            "faces": {
+                "west": {
+                    "uv": [
+                        3,
+                        3,
+                        5,
+                        5
+                    ],
+                    "texture": "#base"
+                },
+                "up": {
+                    "uv": [
+                        8,
+                        2,
+                        11,
+                        4
+                    ],
+                    "texture": "#base"
+                },
+                "down": {
+                    "uv": [
+                        8,
+                        6,
+                        11,
+                        8
+                    ],
+                    "texture": "#base"
+                },
+                "north": {
+                    "uv": [
+                        8,
+                        4,
+                        11,
+                        6
+                    ],
+                    "texture": "#base"
+                },
+                "south": {
+                    "uv": [
+                        8,
+                        0,
+                        11,
+                        2
+                    ],
+                    "texture": "#base"
+                }
+            }
+        },
+        {
+            "__comment": "the state lights",
+            "from": [
+                2.8,
+                0,
+                0
+            ],
+            "to": [
+                2.8,
+                16,
+                16
+            ],
+            "shade": true,
+            "faces": {
+                "west": {
+                    "uv": [
+                        0,
+                        0,
+                        16,
+                        16
+                    ],
+                    "texture": "#state"
+                }
+            }
+        }
+    ]
+}

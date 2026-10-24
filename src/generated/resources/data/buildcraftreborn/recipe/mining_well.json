@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "key": {
+    "g": {
+      "tag": "c:gears/iron"
+    },
+    "i": {
+      "tag": "c:ingots/iron"
+    },
+    "p": {
+      "item": "minecraft:iron_pickaxe"
+    },
+    "r": {
+      "tag": "c:dusts/redstone"
+    }
+  },
+  "pattern": [
+    "iri",
+    "igi",
+    "ipi"
+  ],
+  "result": {
+    "count": 1,
+    "id": "buildcraftreborn:mining_well"
+  }
+}

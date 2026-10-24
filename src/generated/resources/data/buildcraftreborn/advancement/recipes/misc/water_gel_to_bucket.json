@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_gel": {
+      "conditions": {
+        "items": [
+          {
+            "items": "buildcraftreborn:gel"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "buildcraftreborn:water_gel_to_bucket"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_gel"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "buildcraftreborn:water_gel_to_bucket"
+    ]
+  }
+}

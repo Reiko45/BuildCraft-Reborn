@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "g": {
+      "item": "minecraft:brown_stained_glass"
+    },
+    "l": {
+      "tag": "c:storage_blocks/lapis"
+    },
+    "r": {
+      "tag": "c:storage_blocks/lapis"
+    }
+  },
+  "pattern": [
+    "lgr"
+  ],
+  "result": {
+    "components": {
+      "buildcraftreborn:colour": "brown"
+    },
+    "count": 8,
+    "id": "buildcraftreborn:pipe_lapis_item"
+  }
+}

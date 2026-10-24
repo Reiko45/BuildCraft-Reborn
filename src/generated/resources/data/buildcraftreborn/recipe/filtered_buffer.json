@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "key": {
+    "c": {
+      "item": "minecraft:chest"
+    },
+    "d": {
+      "item": "buildcraftreborn:pipe_diamond_item"
+    },
+    "p": {
+      "item": "minecraft:piston"
+    },
+    "w": {
+      "tag": "minecraft:planks"
+    }
+  },
+  "pattern": [
+    "wdw",
+    "wcw",
+    "wpw"
+  ],
+  "result": {
+    "count": 1,
+    "id": "buildcraftreborn:filtered_buffer"
+  }
+}

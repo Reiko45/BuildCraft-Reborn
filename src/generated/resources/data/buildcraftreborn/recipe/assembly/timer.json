@@ -1,0 +1,15 @@
+{
+  "type": "buildcraftreborn:assembly",
+  "ingredients": [
+    {
+      "ingredient": {
+        "item": "minecraft:clock"
+      }
+    }
+  ],
+  "mj": 500,
+  "result": {
+    "count": 1,
+    "id": "buildcraftreborn:plug_timer"
+  }
+}

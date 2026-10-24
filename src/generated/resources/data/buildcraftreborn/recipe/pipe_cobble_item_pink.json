@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "g": {
+      "item": "minecraft:pink_stained_glass"
+    },
+    "l": {
+      "tag": "c:cobblestones"
+    },
+    "r": {
+      "tag": "c:cobblestones"
+    }
+  },
+  "pattern": [
+    "lgr"
+  ],
+  "result": {
+    "components": {
+      "buildcraftreborn:colour": "pink"
+    },
+    "count": 8,
+    "id": "buildcraftreborn:pipe_cobble_item"
+  }
+}

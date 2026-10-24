@@ -1,0 +1,26 @@
+{
+  "parent": "buildcraftreborn:wrenched",
+  "criteria": {
+    "code_trigger": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.buildcraftreborn.free_power.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "buildcraftreborn:engine_wood"
+    },
+    "title": {
+      "translate": "advancements.buildcraftreborn.free_power.title"
+    }
+  },
+  "requirements": [
+    [
+      "code_trigger"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

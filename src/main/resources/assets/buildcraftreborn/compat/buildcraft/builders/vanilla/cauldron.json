@@ -1,0 +1,110 @@
+[
+    {
+        "selectors": [
+            "minecraft:water_cauldron[level=1]"
+        ],
+        "requiredExtractors": [
+            {
+                "type": "item_from_block"
+            },
+            {
+                "type": "constant",
+                "items": [
+                    {
+                        "item": "minecraft:potion",
+                        "components": {
+                            "minecraft:potion_contents": {
+                                "potion": "minecraft:water"
+                            }
+                        },
+                        "amount": 1
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "selectors": [
+            "minecraft:water_cauldron[level=2]"
+        ],
+        "requiredExtractors": [
+            {
+                "type": "item_from_block"
+            },
+            {
+                "type": "constant",
+                "items": [
+                    {
+                        "item": "minecraft:potion",
+                        "components": {
+                            "minecraft:potion_contents": {
+                                "potion": "minecraft:water"
+                            }
+                        },
+                        "amount": 2
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "selectors": [
+            "minecraft:water_cauldron[level=3]"
+        ],
+        "requiredExtractors": [
+            {
+                "type": "item_from_block"
+            },
+            {
+                "type": "constant",
+                "items": [
+                    {
+                        "item": "minecraft:potion",
+                        "components": {
+                            "minecraft:potion_contents": {
+                                "potion": "minecraft:water"
+                            }
+                        },
+                        "amount": 3
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "selectors": [
+            "minecraft:lava_cauldron"
+        ],
+        "requiredExtractors": [
+            {
+                "type": "item_from_block"
+            },
+            {
+                "type": "constant",
+                "items": [
+                    {
+                        "item": "minecraft:lava_bucket"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "selectors": [
+            "minecraft:powder_snow_cauldron"
+        ],
+        "requiredExtractors": [
+            {
+                "type": "item_from_block"
+            },
+            {
+                "type": "constant",
+                "items": [
+                    {
+                        "item": "minecraft:powder_snow_bucket"
+                    }
+                ]
+            }
+        ]
+    }
+]
