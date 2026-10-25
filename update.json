@@ -1,9 +1,10 @@
 {
   "homepage": "https://github.com/Reiko45/BuildCraft-Reborn/releases",
   "promos": {
-    "1.21.1-latest": "1.1.2"
+    "1.21.1-latest": "1.2.0"
   },
   "1.21.1": {
+    "1.2.0": "BuildCraft 7.1's crafting by package: the recipe packager, the stamping table and packages. A logo in the mods list.",
     "1.1.2": "Oil and fuel work with other mods through the common fluid tags c:oil, c:crude_oil, c:fuel and c:light_fuel. Links, update checks and a new description in the mods list.",
     "1.1.1": "Fixes pickaxes: with the mod installed, stone and ores mined slowly and dropped nothing.",
     "1.1.0": "BuildCraft 7.1's robots: 17 redstone boards, docking stations, the programming and charging tables, the requester and the construction mark.",
