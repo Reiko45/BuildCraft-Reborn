@@ -45,7 +45,6 @@ import buildcraftreborn.api.mj.MjAPI;
 import buildcraftreborn.api.mj.MjBattery;
 import buildcraftreborn.api.mj.MjCapabilityHelper;
 import buildcraftreborn.api.tiles.IDebuggable;
-import buildcraftreborn.api.tools.IToolWrench;
 import buildcraftreborn.builders.BCBuildersBlocks;
 import buildcraftreborn.builders.item.ItemSnapshot;
 import buildcraftreborn.builders.snapshot.Blueprint;
@@ -56,6 +55,7 @@ import buildcraftreborn.builders.snapshot.Snapshot;
 import buildcraftreborn.builders.snapshot.SnapshotBuilder;
 import buildcraftreborn.lib.fluid.Tank;
 import buildcraftreborn.lib.fluid.TankManager;
+import buildcraftreborn.lib.misc.EntityUtil;
 import buildcraftreborn.lib.misc.StackUtil;
 import buildcraftreborn.lib.misc.data.Box;
 import buildcraftreborn.lib.mj.MjBatteryReceiver;
@@ -223,7 +223,7 @@ public class TileConstructionMarker extends TileBC_Neptune implements ITickable,
             }
             return false;
         }
-        if (player.isShiftKeyDown() && (held.isEmpty() || held.getItem() instanceof IToolWrench)) {
+        if (player.isShiftKeyDown() && (held.isEmpty() || EntityUtil.isWrench(held))) {
             ItemStack stored = invSnapshot.getStackInSlot(0);
             if (stored.isEmpty()) {
                 return false;

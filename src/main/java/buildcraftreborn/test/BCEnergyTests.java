@@ -50,6 +50,7 @@ import buildcraftreborn.BuildCraftReborn;
 import buildcraftreborn.api.fuels.BuildcraftFuelRegistry;
 import buildcraftreborn.api.fuels.IFuel;
 import buildcraftreborn.api.fuels.IFuelManager.IDirtyFuel;
+import buildcraftreborn.api.mj.IMjReadable;
 import buildcraftreborn.api.mj.IMjReceiver;
 import buildcraftreborn.api.mj.MjAPI;
 import buildcraftreborn.api.recipes.IRefineryRecipeManager.IDistillationRecipe;
@@ -67,11 +68,14 @@ import buildcraftreborn.energy.tile.TileDynamoMJ;
 import buildcraftreborn.energy.tile.TileEngineIron_BC8;
 import buildcraftreborn.energy.tile.TileEngineRF;
 import buildcraftreborn.energy.tile.TileEngineStone_BC8;
+import buildcraftreborn.lib.BCLibConfig;
 import buildcraftreborn.lib.engine.TileEngineBase_BC8;
 import buildcraftreborn.lib.fluid.BCFluid;
 import buildcraftreborn.lib.fluid.BCFluidDataMaps;
 import buildcraftreborn.lib.fluid.BCFluidDataMaps.FuelData;
+import buildcraftreborn.lib.misc.EntityUtil;
 import buildcraftreborn.lib.recipe.RefineryRecipeRegistry;
+import buildcraftreborn.silicon.BCSiliconBlocks;
 
 /** Phase 2 tests for engines, fuels, fluids and the wrench. Engines sit on top of the test machine (which takes MJ
  * into its battery) with a redstone block above them. */
@@ -512,6 +516,60 @@ public final class BCEnergyTests {
         helper.assertTrue(recipes.byKey(BuildCraftReborn.id("mj_dynamo")).isPresent() == BCEnergyConfig.enableMjDynamo(),
             "MJ dynamo recipe doesn't follow enableMjDynamo");
         helper.assertTrue(recipes.byKey(BuildCraftReborn.id("engine_iron")).isPresent(), "Engine recipes are missing");
+        helper.succeed();
+    }
+
+    // Other mods' power and wrenches (2.1.0)
+
+    /** BuildCraft machines take Forge Energy, at 10 FE to the MJ (acceptForgeEnergy, on by default), but give none
+     * out; engines don't take it, nor does the MJ dynamo (which would loop it back out); and with the option off,
+     * machines take MJ only. */
+    @GameTest(template = "empty")
+    public static void machinesTakeForgeEnergy(GameTestHelper helper) {
+        BlockPos laserPos = new BlockPos(1, 1, 1);
+        helper.setBlock(laserPos, BCSiliconBlocks.LASER.get());
+        BlockPos laser = helper.absolutePos(laserPos);
+        IEnergyStorage fe = helper.getLevel().getCapability(Capabilities.EnergyStorage.BLOCK, laser, Direction.DOWN);
+        helper.assertTrue(fe != null && fe.canReceive() && !fe.canExtract(), "The laser doesn't take FE: " + fe);
+        IMjReadable mj = helper.getLevel().getCapability(MjAPI.CAP_READABLE, laser, Direction.DOWN);
+        helper.assertTrue(mj != null, "The laser has no MJ battery");
+        helper.assertTrue(fe.receiveEnergy(1000, true) == 1000 && mj.getStored() == 0, "Simulating changed the laser");
+        int took = fe.receiveEnergy(1000, false);
+        helper.assertTrue(took == 1000, "The laser took " + took + " of 1000 FE");
+        helper.assertTrue(mj.getStored() == 100 * MjAPI.MJ, "1000 FE made " + MjAPI.formatMj(mj.getStored()) + " MJ");
+        helper.assertTrue(fe.getEnergyStored() == 1000, "The laser shows " + fe.getEnergyStored() + " FE");
+
+        BlockPos engine = helper.absolutePos(new BlockPos(3, 1, 1));
+        helper.setBlock(new BlockPos(3, 1, 1), BCEnergyBlocks.ENGINE_STONE.get());
+        BlockPos dynamoPos = new BlockPos(5, 1, 1);
+        helper.setBlock(dynamoPos, BCEnergyBlocks.MJ_DYNAMO.get());
+        BlockPos dynamo = helper.absolutePos(dynamoPos);
+        for (Direction side : Direction.values()) {
+            helper.assertTrue(helper.getLevel().getCapability(Capabilities.EnergyStorage.BLOCK, engine, side) == null,
+                "The stirling engine has FE on its " + side + " side");
+            IEnergyStorage dynamoFe = helper.getLevel().getCapability(Capabilities.EnergyStorage.BLOCK, dynamo, side);
+            helper.assertTrue(dynamoFe == null || !dynamoFe.canReceive(), "The MJ dynamo takes FE on " + side);
+        }
+
+        BCLibConfig.ACCEPT_FORGE_ENERGY.set(false);
+        try {
+            helper.assertTrue(helper.getLevel().getCapability(Capabilities.EnergyStorage.BLOCK, laser,
+                Direction.DOWN) == null, "The laser takes FE with acceptForgeEnergy off");
+        } finally {
+            BCLibConfig.ACCEPT_FORGE_ENERGY.set(true);
+        }
+        helper.succeed();
+    }
+
+    /** BuildCraft's wrench is in the common c:tools/wrench tag (so other mods take it as a wrench), and what's in that
+     * tag is a wrench to BuildCraft. (BCInteropTests turns a BuildCraft block with PneumaticCraft's wrench.) */
+    @GameTest(template = "empty")
+    public static void wrenchIsInTheCommonTag(GameTestHelper helper) {
+        ItemStack wrench = new ItemStack(BCCoreItems.WRENCH.get());
+        helper.assertTrue(wrench.is(Tags.Items.TOOLS_WRENCH), "BuildCraft's wrench isn't in c:tools/wrench");
+        helper.assertTrue(wrench.is(Tags.Items.TOOLS), "BuildCraft's wrench isn't in c:tools");
+        helper.assertTrue(EntityUtil.isWrench(wrench), "BuildCraft's wrench isn't a wrench");
+        helper.assertFalse(EntityUtil.isWrench(new ItemStack(Items.STICK)), "A stick is a wrench");
         helper.succeed();
     }
 }

@@ -454,6 +454,10 @@ public class TileDynamoMJ extends TileBC_Neptune implements ITickable, IEngineLi
             }
             return super.getCapability(capability, side);
         }
+        if (capability == Capabilities.EnergyStorage.BLOCK) {
+            // (it takes MJ only: FE in on its other sides would loop back out of its front)
+            return super.getCapability(capability, side);
+        }
         T value = mjCaps.getCapability(capability);
         return value != null ? value : super.getCapability(capability, side);
     }

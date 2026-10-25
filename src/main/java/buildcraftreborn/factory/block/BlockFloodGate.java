@@ -24,9 +24,9 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.BlockHitResult;
 
 import buildcraftreborn.api.properties.BuildCraftProperties;
-import buildcraftreborn.api.tools.IToolWrench;
 import buildcraftreborn.factory.tile.TileFloodGate;
 import buildcraftreborn.lib.block.BlockBCTile_Neptune;
+import buildcraftreborn.lib.misc.EntityUtil;
 import buildcraftreborn.lib.tile.TileBC_Neptune;
 
 /** The flood gate. Right-click a side (other than the top) with a wrench to close or open it. */
@@ -62,7 +62,7 @@ public class BlockFloodGate extends BlockBCTile_Neptune {
     @Override
     protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level world, BlockPos pos,
         Player player, InteractionHand hand, BlockHitResult hit) {
-        if (stack.getItem() instanceof IToolWrench) {
+        if (EntityUtil.isWrench(stack)) {
             Direction side = hit.getDirection();
             BooleanProperty prop = CONNECTED_MAP.get(side);
             if (prop == null) {

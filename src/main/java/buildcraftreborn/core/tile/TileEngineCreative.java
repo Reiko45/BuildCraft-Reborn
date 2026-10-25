@@ -26,10 +26,10 @@ import net.neoforged.neoforge.network.handling.IPayloadContext;
 import buildcraftreborn.api.enums.EnumPowerStage;
 import buildcraftreborn.api.mj.IMjConnector;
 import buildcraftreborn.api.mj.MjAPI;
-import buildcraftreborn.api.tools.IToolWrench;
 import buildcraftreborn.core.BCCoreBlocks;
 import buildcraftreborn.lib.engine.EngineConnector;
 import buildcraftreborn.lib.engine.TileEngineBase_BC8;
+import buildcraftreborn.lib.misc.EntityUtil;
 import buildcraftreborn.lib.misc.MathUtil;
 import buildcraftreborn.lib.net.PacketBufferBC;
 
@@ -126,7 +126,7 @@ public class TileEngineCreative extends TileEngineBase_BC8 {
 
     @Override
     public boolean onActivated(Player player, InteractionHand hand, ItemStack held) {
-        if (!held.isEmpty() && held.getItem() instanceof IToolWrench) {
+        if (EntityUtil.isWrench(held)) {
             if (!level.isClientSide) {
                 currentOutputIndex++;
                 currentOutputIndex %= outputs.length;

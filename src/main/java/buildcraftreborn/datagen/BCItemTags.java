@@ -15,6 +15,7 @@ import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.data.tags.TagsProvider;
 import net.minecraft.world.level.block.Block;
 
+import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 import buildcraftreborn.BuildCraftReborn;
@@ -41,5 +42,7 @@ public final class BCItemTags extends ItemTagsProvider {
             .addTag(BCCoreTags.GEARS_IRON)
             .addTag(BCCoreTags.GEARS_GOLD)
             .addTag(BCCoreTags.GEARS_DIAMOND);
+        // Other mods take what's in c:tools/wrench as a wrench (and BuildCraft takes theirs: EntityUtil.isWrench)
+        tag(Tags.Items.TOOLS_WRENCH).add(BCCoreItems.WRENCH.get());
     }
 }

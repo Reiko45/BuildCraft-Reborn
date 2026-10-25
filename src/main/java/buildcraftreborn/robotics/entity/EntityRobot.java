@@ -82,6 +82,7 @@ import buildcraftreborn.api.robots.RobotManager;
 import buildcraftreborn.api.statements.StatementSlot;
 import buildcraftreborn.api.tiles.IDebuggable;
 import buildcraftreborn.api.tools.IToolWrench;
+import buildcraftreborn.lib.misc.EntityUtil;
 import buildcraftreborn.lib.misc.FakePlayerProvider;
 import buildcraftreborn.lib.misc.NBTUtilBC;
 import buildcraftreborn.robotics.BCRoboticsEntities;
@@ -1147,14 +1148,16 @@ public class EntityRobot extends EntityRobotBase implements IItemHandlerModifiab
             return InteractionResult.PASS;
         }
 
-        if (player.isShiftKeyDown() && stack.getItem() instanceof IToolWrench wrench) {
+        if (player.isShiftKeyDown() && EntityUtil.isWrench(stack)) {
             if (NeoForge.EVENT_BUS.post(new RobotEvent.Dismantle(this, player)).isCanceled()) {
                 return InteractionResult.PASS;
             }
 
             onRobotHit(false);
 
-            wrench.wrenchUsed(player, hand, stack, new EntityHitResult(this));
+            if (stack.getItem() instanceof IToolWrench wrench) {
+                wrench.wrenchUsed(player, hand, stack, new EntityHitResult(this));
+            }
             return InteractionResult.sidedSuccess(level().isClientSide);
         } else if (wearables.size() < MAX_WEARABLES && isWearable(stack)) {
             if (!level().isClientSide) {

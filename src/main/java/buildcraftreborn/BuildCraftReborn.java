@@ -19,6 +19,7 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 
+import buildcraftreborn.api.mj.IMjToRfStatus;
 import buildcraftreborn.builders.BCBuilders;
 import buildcraftreborn.compat.top.BCPluginTOP;
 import buildcraftreborn.core.BCCore;
@@ -34,6 +35,7 @@ import buildcraftreborn.lib.chunkload.ChunkLoaderManager;
 import buildcraftreborn.lib.fluid.BCFluidDataMaps;
 import buildcraftreborn.lib.marker.MarkerCache;
 import buildcraftreborn.lib.misc.ExpressionCompat;
+import buildcraftreborn.lib.misc.MjForgeEnergyStatus;
 import buildcraftreborn.lib.net.BCNetwork;
 import buildcraftreborn.robotics.BCRobotics;
 import buildcraftreborn.silicon.BCSilicon;
@@ -79,6 +81,7 @@ public final class BuildCraftReborn {
         container.registerConfig(ModConfig.Type.COMMON, BCLibConfig.COMMON_SPEC);
         container.registerConfig(ModConfig.Type.CLIENT, BCLibConfig.CLIENT_SPEC);
         container.registerConfig(ModConfig.Type.COMMON, BCEnergyConfig.SPEC, MODID + "-energy.toml");
+        IMjToRfStatus.set(MjForgeEnergyStatus.INSTANCE);
     }
 
     private static void commonSetup(FMLCommonSetupEvent event) {

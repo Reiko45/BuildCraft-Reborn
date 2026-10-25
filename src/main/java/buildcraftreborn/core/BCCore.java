@@ -58,6 +58,7 @@ public final class BCCore {
         MarkerCache.registerCache(VolumeCache.INSTANCE);
         MarkerCache.registerCache(PathCache.INSTANCE);
         VolumeBoxEvents.register();
+        WrenchInterop.register();
         NeoForge.EVENT_BUS.addListener((ServerTickEvent.Post event) -> BCAdvDebugging.INSTANCE.onServerPostTick());
         NeoForge.EVENT_BUS.addListener((ServerStoppedEvent event) -> BCAdvDebugging.INSTANCE.onServerStopped());
     }

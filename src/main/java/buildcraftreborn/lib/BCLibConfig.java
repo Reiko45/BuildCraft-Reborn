@@ -29,6 +29,8 @@ public final class BCLibConfig {
     public static final ModConfigSpec.IntValue NETWORK_UPDATE_RATE;
     public static final ModConfigSpec.DoubleValue MINING_MULTIPLIER;
     public static final ModConfigSpec.IntValue MINING_MAX_DEPTH;
+    public static final ModConfigSpec.BooleanValue ACCEPT_FORGE_ENERGY;
+    public static final ModConfigSpec.DoubleValue FORGE_ENERGY_PER_MJ;
 
     // Client display
     public static final ModConfigSpec.BooleanValue USE_COLOURED_LABELS;
@@ -75,6 +77,14 @@ public final class BCLibConfig {
         MINING_MAX_DEPTH = common
             .comment("How much further down can miners (like the quarry or the mining well) dig?")
             .defineInRange("miningMaxDepth", 512, 32, 4096);
+        ACCEPT_FORGE_ENERGY = common
+            .comment("Should BuildCraft machines (quarries, lasers, mining wells, builders...) and wooden kinesis pipes",
+                "take Forge Energy (FE) from other mods' generators and cables, as well as MJ? BuildCraft's engines",
+                "and kinesis pipes still only give MJ (the MJ dynamo turns MJ into FE).")
+            .define("acceptForgeEnergy", true);
+        FORGE_ENERGY_PER_MJ = common
+            .comment("How much Forge Energy makes 1 MJ, for machines taking FE, the RF engine and the MJ dynamo.")
+            .defineInRange("forgeEnergyPerMj", 10.0, 5.0, 10_000.0);
         COMMON_SPEC = common.build();
 
         ModConfigSpec.Builder client = new ModConfigSpec.Builder();
@@ -117,6 +127,16 @@ public final class BCLibConfig {
     }
 
     private BCLibConfig() {}
+
+    /** Whether MJ machines take Forge Energy too (new in 2.1.0; 1.12 had no such option). */
+    public static boolean acceptForgeEnergy() {
+        return !COMMON_SPEC.isLoaded() || ACCEPT_FORGE_ENERGY.get();
+    }
+
+    /** How many FE make 1 MJ (1.12: 10, fixed). */
+    public static double forgeEnergyPerMj() {
+        return COMMON_SPEC.isLoaded() ? FORGE_ENERGY_PER_MJ.get() : 10;
+    }
 
     /** How far apart markers can be and still connect (1.12's {@code markerMaxDistance}). */
     public static int markerMaxDistance() {

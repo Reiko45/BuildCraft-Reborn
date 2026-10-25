@@ -38,13 +38,13 @@ import buildcraftreborn.api.fuels.IFuelManager.IDirtyFuel;
 import buildcraftreborn.api.fuels.ISolidCoolant;
 import buildcraftreborn.api.mj.IMjConnector;
 import buildcraftreborn.api.mj.MjAPI;
-import buildcraftreborn.api.tools.IToolWrench;
 import buildcraftreborn.energy.BCEnergyBlocks;
 import buildcraftreborn.energy.container.ContainerEngineIron_BC8;
 import buildcraftreborn.lib.engine.EngineConnector;
 import buildcraftreborn.lib.engine.TileEngineBase_BC8;
 import buildcraftreborn.lib.fluid.Tank;
 import buildcraftreborn.lib.gui.help.ElementHelpInfo;
+import buildcraftreborn.lib.misc.EntityUtil;
 import buildcraftreborn.lib.net.PacketBufferBC;
 
 /** The combustion engine: burns liquid fuel, needs coolant to stay out of the red, and collects residue from dirty
@@ -143,8 +143,7 @@ public class TileEngineIron_BC8 extends TileEngineBase_BC8 implements MenuProvid
             return true;
         }
         if (!current.isEmpty()) {
-            if (player.getMainHandItem().getItem() instanceof IToolWrench
-                || player.getOffhandItem().getItem() instanceof IToolWrench) {
+            if (EntityUtil.getWrenchHand(player) != null) {
                 // Let the wrench rotate the engine
                 return false;
             }

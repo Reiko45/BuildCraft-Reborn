@@ -21,7 +21,15 @@ public interface IMjToRfStatus {
 
     MjRfConversion getConversion();
 
+    /** @return Whether MJ and RF convert both ways on their own: MJ machines take and give RF, and MJ sources (engines,
+     *         kinesis pipes) power RF machines. */
     boolean isAutoconvertEnabled();
+
+    /** @return Whether MJ receivers also take RF (Forge Energy), converted to MJ. Engines and kinesis pipes still only
+     *         give MJ unless {@link #isAutoconvertEnabled()}. */
+    default boolean acceptsRf() {
+        return isAutoconvertEnabled();
+    }
 }
 
 final class MjToRfStatusHolder implements IMjToRfStatus {

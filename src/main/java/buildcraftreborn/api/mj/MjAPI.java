@@ -58,6 +58,11 @@ public class MjAPI {
         return IMjToRfStatus.get().isAutoconvertEnabled();
     }
 
+    /** @return Whether MJ receivers also take RF (Forge Energy), converted at {@link #getRfConversion()}. */
+    public static boolean acceptsRf() {
+        return IMjToRfStatus.get().acceptsRf();
+    }
+
     // ########################################
     //
     // Null based classes

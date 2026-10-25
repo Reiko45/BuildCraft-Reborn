@@ -15,9 +15,10 @@ import net.neoforged.neoforge.capabilities.BlockCapability;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.energy.IEnergyStorage;
 
-/** Exposes a single {@link IMjConnector} through every MJ capability it implements, plus a Forge Energy view when
- * RF auto-conversion is enabled. Block entities hand one of these to their capability provider and answer
- * {@link #getCapability(BlockCapability)} for each MJ capability (and {@link Capabilities.EnergyStorage#BLOCK}). */
+/** Exposes a single {@link IMjConnector} through every MJ capability it implements, plus a Forge Energy view: one that
+ * takes FE for a receiver when {@link MjAPI#acceptsRf()}, or one for any connector when RF auto-conversion is enabled.
+ * Block entities hand one of these to their capability provider and answer {@link #getCapability(BlockCapability)} for
+ * each MJ capability (and {@link Capabilities.EnergyStorage#BLOCK}). */
 public class MjCapabilityHelper {
     private final IMjConnector connector;
     @Nullable
@@ -28,8 +29,7 @@ public class MjCapabilityHelper {
     private final IMjReadable readable;
     @Nullable
     private final IMjPassiveProvider provider;
-    @Nullable
-    private final IEnergyStorage rfAutoConvert;
+    private final IEnergyStorage rfView = new RfView();
 
     public MjCapabilityHelper(IMjConnector mj) {
         this.connector = mj;
@@ -37,7 +37,6 @@ public class MjCapabilityHelper {
         this.rsReceiver = mj instanceof IMjRedstoneReceiver r ? r : null;
         this.readable = mj instanceof IMjReadable r ? r : null;
         this.provider = mj instanceof IMjPassiveProvider p ? p : null;
-        this.rfAutoConvert = MjAPI.isRfAutoConversionEnabled() ? new RfView() : null;
     }
 
     /** @return The value for the given capability, or null if the connector doesn't provide it. */
@@ -50,11 +49,19 @@ public class MjCapabilityHelper {
         else if (capability == MjAPI.CAP_REDSTONE_RECEIVER) value = rsReceiver;
         else if (capability == MjAPI.CAP_READABLE) value = readable;
         else if (capability == MjAPI.CAP_PASSIVE_PROVIDER) value = provider;
-        else if (capability == Capabilities.EnergyStorage.BLOCK) value = rfAutoConvert;
+        else if (capability == Capabilities.EnergyStorage.BLOCK) value = getRfView();
         return (T) value;
     }
 
-    /** Forge Energy view of the connector, used only when RF auto-conversion is enabled. */
+    @Nullable
+    private IEnergyStorage getRfView() {
+        if (MjAPI.isRfAutoConversionEnabled() || (receiver != null && MjAPI.acceptsRf())) {
+            return rfView;
+        }
+        return null;
+    }
+
+    /** Forge Energy view of the connector: takes FE into a receiver (nothing gives FE out, as in 1.12). */
     private final class RfView implements IEnergyStorage {
         @Override
         public int getEnergyStored() {
@@ -114,7 +121,7 @@ public class MjCapabilityHelper {
 
         @Override
         public boolean canExtract() {
-            return provider != null;
+            return false;
         }
 
         /** Nothing in BuildCraft supports extracting RF from MJ machines (same as 1.12). */

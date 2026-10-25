@@ -1,5 +1,13 @@
 # Changelog
 
+## 2.1.0
+
+Other mods' power and wrenches.
+
+- **BuildCraft machines take Forge Energy** from other mods' generators and cables (Mekanism, Powah, Immersive Engineering and the rest), as well as MJ: the quarry, builder, filler, mining well, pump, chute, auto workbench, distiller, construction mark and laser (so the laser tables too), and wooden kinesis pipes and the power adapter, at 10 FE to the MJ. It's on by default: `acceptForgeEnergy` and `forgeEnergyPerMj` in `config/buildcraftreborn-common.toml` (the rate applies to the RF engine and the MJ dynamo too). BuildCraft's engines and kinesis pipes still only give MJ, and the MJ dynamo doesn't take FE (it would loop back out of it).
+- **Wrenches work both ways.** Other mods' wrenches (the common `c:tools/wrench` tag) turn BuildCraft blocks on a sneaking right click, and do everything else BuildCraft's wrench does: pipe modes, the iron and creative engines, flood gate sides, construction marks and dismantling robots. BuildCraft's wrench is in that tag, so other mods take it as a wrench.
+- New GameTests: machines take FE (and stop when the option is off), and PneumaticCraft's wrench turns a BuildCraft block (153 GameTests with PneumaticCraft).
+
 ## 2.0.0
 
 The first release out of beta, and the guide book in every language.

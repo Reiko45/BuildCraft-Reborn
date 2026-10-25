@@ -10,8 +10,11 @@ package buildcraftreborn.test;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
+
+import com.mojang.authlib.GameProfile;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -21,12 +24,21 @@ import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.gametest.framework.TestFunction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
 
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.Vec3;
 import net.neoforged.fml.ModList;
 import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.common.Tags;
+import net.neoforged.neoforge.common.util.FakePlayer;
+import net.neoforged.neoforge.common.util.FakePlayerFactory;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler.FluidAction;
@@ -44,6 +56,7 @@ import buildcraftreborn.energy.BCRefinedFuels;
 import buildcraftreborn.energy.tile.TileEngineIron_BC8;
 import buildcraftreborn.factory.BCFactoryBlocks;
 import buildcraftreborn.factory.tile.TileDistiller_BC8;
+import buildcraftreborn.lib.misc.EntityUtil;
 
 /** Tests with another mod's fluids, run only when that mod is loaded ({@code gradlew runGameTestServer
  * -Pinterop_runtime=true} adds PneumaticCraft). They check that oil and refined fuels from another mod work in
@@ -68,6 +81,8 @@ public final class BCInteropTests {
                 BCInteropTests::pneumaticCraftDieselBurnsInCombustionEngine);
             add(tests, "pneumaticcraft_fuels_burn_with_their_values", 20,
                 BCInteropTests::pneumaticCraftFuelsBurnWithTheirValues);
+            add(tests, "pneumaticcraft_wrench_turns_buildcraft_blocks", 20,
+                BCInteropTests::pneumaticCraftWrenchTurnsBuildCraftBlocks);
         }
         return tests;
     }
@@ -177,6 +192,29 @@ public final class BCInteropTests {
             "PneumaticCraft's oil isn't in c:crude_oil any more");
         helper.assertTrue(BCEnergyFluids.crudeOil[0].getSource().builtInRegistryHolder().is(BCEnergyTags.CRUDE_OIL),
             "BuildCraft's oil isn't in c:crude_oil");
+        helper.succeed();
+    }
+
+    /** Another mod's wrench (PneumaticCraft's, in c:tools/wrench) turns a BuildCraft block on a sneaking right click,
+     * as BuildCraft's wrench does. */
+    private static void pneumaticCraftWrenchTurnsBuildCraftBlocks(GameTestHelper helper) {
+        ItemStack wrench = new ItemStack(BuiltInRegistries.ITEM.get(ResourceLocation.fromNamespaceAndPath(
+            "pneumaticcraft", "pneumatic_wrench")));
+        helper.assertTrue(wrench.is(Tags.Items.TOOLS_WRENCH) && EntityUtil.isWrench(wrench),
+            "PneumaticCraft's wrench isn't a wrench to BuildCraft: " + wrench);
+        BlockPos pos = new BlockPos(1, 1, 1);
+        helper.setBlock(pos, BCFactoryBlocks.CHUTE.get());
+        BlockState before = helper.getBlockState(pos);
+        FakePlayer player = FakePlayerFactory.get(helper.getLevel(), new GameProfile(UUID.nameUUIDFromBytes(
+            "bc_interop_wrench".getBytes()), "bc_interop_wrench"));
+        player.setItemInHand(InteractionHand.MAIN_HAND, wrench);
+        player.setShiftKeyDown(true);
+        BlockPos abs = helper.absolutePos(pos);
+        InteractionResult result = player.gameMode.useItemOn(player, helper.getLevel(), wrench,
+            InteractionHand.MAIN_HAND, new BlockHitResult(Vec3.atCenterOf(abs), Direction.UP, abs, false));
+        helper.assertTrue(result.consumesAction(), "The wrench click did nothing: " + result);
+        helper.assertTrue(!helper.getBlockState(pos).equals(before), "The chute didn't turn: " + before);
+        player.setShiftKeyDown(false);
         helper.succeed();
     }
 }

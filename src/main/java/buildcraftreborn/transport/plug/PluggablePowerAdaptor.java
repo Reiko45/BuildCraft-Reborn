@@ -103,7 +103,7 @@ public class PluggablePowerAdaptor extends PipePluggable {
         if (cap == MjAPI.CAP_CONNECTOR || cap == MjAPI.CAP_RECEIVER || cap == MjAPI.CAP_REDSTONE_RECEIVER) {
             return holder.getPipe().getBehaviour().getCapability(cap, side);
         }
-        if (MjAPI.isRfAutoConversionEnabled() && cap == Capabilities.EnergyStorage.BLOCK) {
+        if (MjAPI.acceptsRf() && cap == Capabilities.EnergyStorage.BLOCK) {
             IMjReceiver receiver = holder.getPipe().getBehaviour().getCapability(MjAPI.CAP_RECEIVER, side);
             if (receiver == null) {
                 return null;

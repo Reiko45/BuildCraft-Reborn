@@ -429,6 +429,8 @@ public final class BCLanguage extends LanguageProvider {
         config("large_max_height", "Large spout maximum height");
         config("markerMaxDistance", "Marker range");
         config("miningBreaksPlayerProtectedBlocks", "Machines break protected blocks");
+        config("acceptForgeEnergy", "Machines take Forge Energy");
+        config("forgeEnergyPerMj", "Forge Energy per MJ");
         config("pumpsConsumeWater", "Pumps consume water");
         config("pumpMaxDistance", "Pump range");
         config("updateFactor", "Network update interval (ticks)");
