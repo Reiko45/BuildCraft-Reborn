@@ -150,12 +150,13 @@ public final class BCLanguage extends LanguageProvider {
                 .get(), chipset[1]);
         }
         add(BCSiliconItems.GATE_COPIER.get(), "Gate Copier");
+        // A coloured item's name (lens, filter, pipe wire, painted pipe, paintbrush): the colour, then the name.
+        // Languages can reorder them ("%2$s %1$s") or bracket the colour ("%2$s (%1$s)") where it would have to agree.
+        add("item.buildcraftreborn.coloured", "%s %s");
         add("buildcraft.item.nonclean.usage", "Shift-right click to clean");
         // (gates and lenses are named from their variant; these are fallbacks)
         add(BCSiliconItems.PLUG_GATE.get(), "Gate");
         add(BCSiliconItems.PLUG_LENS.get(), "Lens");
-        // A lens's name: its colour, then "Lens" or "Filter" (languages can swap them with %2$s %1$s)
-        add("item.buildcraftreborn.plug_lens.named", "%s %s");
         add(BCSiliconItems.PLUG_PULSAR.get(), "Pipe Pulsar");
         add(BCSiliconItems.PLUG_LIGHT_SENSOR.get(), "Light Sensor");
         add(BCSiliconItems.PLUG_TIMER.get(), "Timer");

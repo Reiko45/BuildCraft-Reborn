@@ -19,6 +19,7 @@ import com.google.common.collect.ImmutableMap;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.core.Direction;
 import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.Component;
 
 import buildcraftreborn.lib.BCLibConfig;
 
@@ -208,6 +209,15 @@ public final class ColourUtil {
     /** Same as {@link #getTextFullTooltip(DyeColor)} (1.12 used a special font renderer here). */
     public static String getTextFullTooltipSpecial(DyeColor colour) {
         return getTextFullTooltip(colour);
+    }
+
+    /** The name of a coloured item (lens, filter, pipe wire, painted pipe, paintbrush): the colour as
+     * {@link #getTextFullTooltipSpecial} gives it, then the name, through {@code item.buildcraftreborn.coloured}
+     * ("%s %s" in English). 1.12 put the colour first in every language; this lets each language order them, or write
+     * "Lente (Rojo)" where the colour would have to agree with the noun. */
+    public static Component getColouredName(@Nullable DyeColor colour, Component colourless, Component name) {
+        Component colourText = colour == null ? colourless : Component.literal(getTextFullTooltipSpecial(colour));
+        return Component.translatable("item.buildcraftreborn.coloured", colourText, name);
     }
 
     /** Returns a string formatted for use in a tooltip (or anything else with a black background). If

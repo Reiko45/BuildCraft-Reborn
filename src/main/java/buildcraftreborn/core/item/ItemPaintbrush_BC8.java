@@ -69,8 +69,7 @@ public class ItemPaintbrush_BC8 extends Item implements IItemSubtypes {
         if (brush.colour == null) {
             return super.getName(stack);
         }
-        return Component.literal(ColourUtil.getTextFullTooltipSpecial(brush.colour) + " ")
-            .append(super.getName(stack));
+        return ColourUtil.getColouredName(brush.colour, Component.empty(), super.getName(stack));
     }
 
     @Override

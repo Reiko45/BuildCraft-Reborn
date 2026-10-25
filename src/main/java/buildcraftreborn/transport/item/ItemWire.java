@@ -33,6 +33,6 @@ public class ItemWire extends Item {
 
     @Override
     public Component getName(ItemStack stack) {
-        return Component.literal(ColourUtil.getTextFullTooltipSpecial(colour) + " ").append(super.getName(stack));
+        return ColourUtil.getColouredName(colour, Component.empty(), super.getName(stack));
     }
 }

@@ -14,6 +14,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -24,17 +25,25 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
+import net.minecraft.ChatFormatting;
 import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.gametest.framework.GameTest;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.locale.Language;
 import net.minecraft.server.ServerAdvancementManager;
+import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.item.ItemStack;
 
 import net.neoforged.fml.ModList;
 import net.neoforged.neoforge.gametest.GameTestHolder;
 import net.neoforged.neoforge.gametest.PrefixGameTestTemplate;
 
 import buildcraftreborn.BuildCraftReborn;
+import buildcraftreborn.core.BCCoreItems;
+import buildcraftreborn.lib.item.BCItemComponents;
+import buildcraftreborn.silicon.BCSiliconItems;
+import buildcraftreborn.transport.BCTransportItems;
+import buildcraftreborn.transport.BCTransportPipes;
 
 /** Phase 6 tests for the translations and advancements: every translation file is valid, only has keys English has,
  * and keeps English's placeholders (a wrong one would break the text); every advancement has its text. */
@@ -128,6 +137,30 @@ public final class BCLocalisationTests {
         helper.assertTrue(advancements.get(BuildCraftReborn.id("sticky_dipping")) != null, "No sticky_dipping");
         helper.assertTrue(count >= 30, "Only " + count + " advancements");
         helper.assertTrue(problems.isEmpty(), "Problems: " + problems);
+        helper.succeed();
+    }
+
+    /** Coloured items are named through item.buildcraftreborn.coloured (so other languages can order or bracket the
+     * colour), which reads as before in English. */
+    @GameTest(template = "empty")
+    public static void colouredItemNames(GameTestHelper helper) {
+        Map<String, ItemStack> want = new LinkedHashMap<>();
+        want.put("Red Pipe Wire", new ItemStack(BCTransportItems.WIRES.get(DyeColor.RED).get()));
+        want.put("Light Blue Lens", BCSiliconItems.PLUG_LENS.get().getStack(DyeColor.LIGHT_BLUE, false));
+        want.put("Black Filter", BCSiliconItems.PLUG_LENS.get().getStack(DyeColor.BLACK, true));
+        want.put("Clear Lens", BCSiliconItems.PLUG_LENS.get().getStack(null, false));
+        ItemStack pipe = new ItemStack(BCTransportItems.PIPES.get(BCTransportPipes.woodItem).get());
+        want.put("Wooden Transport Pipe", pipe.copy());
+        pipe.set(BCItemComponents.COLOUR.get(), DyeColor.GREEN);
+        want.put("Green Wooden Transport Pipe", pipe);
+        ItemStack brush = new ItemStack(BCCoreItems.PAINTBRUSH.get());
+        want.put("Paintbrush", brush.copy());
+        brush.set(BCItemComponents.COLOUR.get(), DyeColor.ORANGE);
+        want.put("Orange Paintbrush", brush);
+        for (Map.Entry<String, ItemStack> e : want.entrySet()) {
+            String name = ChatFormatting.stripFormatting(e.getValue().getHoverName().getString());
+            helper.assertTrue(e.getKey().equals(name), "Named \"" + name + "\", not \"" + e.getKey() + "\"");
+        }
         helper.succeed();
     }
 }

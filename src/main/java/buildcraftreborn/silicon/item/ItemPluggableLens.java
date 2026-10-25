@@ -85,10 +85,7 @@ public class ItemPluggableLens extends Item implements IItemPluggable, IItemSubt
     @Override
     public Component getName(ItemStack stack) {
         LensData data = getData(stack);
-        Component colour = data.colourOpt().isEmpty() ? Component.translatable("color.clear")
-            : Component.literal(ColourUtil.getTextFullTooltipSpecial(data.colourOpt().get()));
-        // (a format key, so languages that put the colour after the noun can: "%2$s %1$s")
-        return Component.translatable("item.buildcraftreborn.plug_lens.named", colour,
+        return ColourUtil.getColouredName(data.colourOpt().orElse(null), Component.translatable("color.clear"),
             Component.translatable(data.isFilter() ? "item.Filter.name" : "item.Lens.name"));
     }
 
