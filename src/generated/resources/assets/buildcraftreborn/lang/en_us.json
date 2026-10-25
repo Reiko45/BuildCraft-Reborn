@@ -648,6 +648,7 @@
   "item.buildcraftreborn.plug_facade": "Facade",
   "item.buildcraftreborn.plug_gate": "Gate",
   "item.buildcraftreborn.plug_lens": "Lens",
+  "item.buildcraftreborn.plug_lens.named": "%s %s",
   "item.buildcraftreborn.plug_light_sensor": "Light Sensor",
   "item.buildcraftreborn.plug_power_adaptor": "Power Adapter",
   "item.buildcraftreborn.plug_pulsar": "Pipe Pulsar",

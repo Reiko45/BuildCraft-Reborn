@@ -154,6 +154,8 @@ public final class BCLanguage extends LanguageProvider {
         // (gates and lenses are named from their variant; these are fallbacks)
         add(BCSiliconItems.PLUG_GATE.get(), "Gate");
         add(BCSiliconItems.PLUG_LENS.get(), "Lens");
+        // A lens's name: its colour, then "Lens" or "Filter" (languages can swap them with %2$s %1$s)
+        add("item.buildcraftreborn.plug_lens.named", "%s %s");
         add(BCSiliconItems.PLUG_PULSAR.get(), "Pipe Pulsar");
         add(BCSiliconItems.PLUG_LIGHT_SENSOR.get(), "Light Sensor");
         add(BCSiliconItems.PLUG_TIMER.get(), "Timer");
