@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.2.3
+
+Complete translations.
+
+- All 31 languages now translate every line of the mod. Most languages had only BuildCraft's old community translations, which covered a third of the text or less, so the rest showed in English. The community translations are kept; the missing lines (about 15,000 across all languages) were translated by an AI model (Claude) using each language's existing BuildCraft terms and BuildCraft 7.1's translations, and haven't been checked by native speakers yet. Corrections are welcome on the issue tracker.
+- Serbian now comes in both of Minecraft's scripts: Cyrillic (`sr_sp`, as Minecraft's own Serbian is) and Latin (`sr_cs`, new). BuildCraft's Serbian translations were in Latin script.
+- Fixes in the old community translations: the iron kinesis pipe's power levels were one step off in ten languages ("Very High" read "Full Capacity"), its limit message said RF/t instead of MJ/t, the blank robot board was called "Cleaner" in some languages, and a few names meant something else (the Slovak blueprint was "List", the Czech oil spring was "spring-season oil", the Turkish dense oil was a question).
+- Lens names use a format key, so languages that put the colour after the noun can ("Lente roja").
+- A unit test checks that every language has every line, with the same format arguments as the English.
+
 ## 1.2.2
 
 Other mods' refined fuels in the combustion engine.
