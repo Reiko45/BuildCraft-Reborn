@@ -101,7 +101,8 @@ public final class BCLibConfig {
                 "ENABLED (the way they travel).")
             .defineEnum("itemRenderRotation", RenderRotation.ENABLED);
         RENDER_LASER_BEAMS = client
-            .comment("When false laser beams will not be visible while transmitting power.")
+            .comment("When false laser beams will not be visible while transmitting power, unless wearing robot "
+                + "goggles.")
             .define("renderLaserBeams", true);
         GUIDE_SHOW_DETAIL = client
             .comment("Show the detailed numbers (flow rates, power use...) in the guide book.")

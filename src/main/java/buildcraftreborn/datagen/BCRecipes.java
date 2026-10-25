@@ -222,6 +222,12 @@ public final class BCRecipes extends RecipeProvider {
             .define('P', Tags.Items.INGOTS_IRON).define('R', crystal).define('C', diamondChipset)
             .unlockedBy("has_crystal", has(crystal))
             .save(output, BuildCraftReborn.id("robot"));
+        // (the robot goggles had no recipe: BuildCraft never finished them)
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, BCRoboticsItems.ROBOT_GOGGLES.get())
+            .pattern("LCL").pattern("G G")
+            .define('L', Tags.Items.LEATHERS).define('C', redChipset).define('G', Tags.Items.GLASS_PANES)
+            .unlockedBy("has_chipset", has(redChipset))
+            .save(output, BuildCraftReborn.id("robot_goggles"));
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, BCRoboticsItems.REDSTONE_BOARD.get())
             .pattern("PPP").pattern("PRP").pattern("PPP")
             .define('P', Items.PAPER).define('R', Tags.Items.DUSTS_REDSTONE)

@@ -769,6 +769,13 @@
     "tag_subtype": "robotics",
     "stack": "buildcraftreborn:robot_station"
   },
+  "item/robot_goggles": {
+    "type": "item_stack",
+    "book": "buildcraftreborn:main",
+    "tag_type": "item",
+    "tag_subtype": "robotics",
+    "stack": "buildcraftreborn:robot_goggles"
+  },
   "block/programming_table": {
     "type": "item_stack",
     "book": "buildcraftreborn:main",

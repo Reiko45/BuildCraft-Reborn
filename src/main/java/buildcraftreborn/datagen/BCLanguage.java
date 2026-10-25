@@ -268,6 +268,11 @@ public final class BCLanguage extends LanguageProvider {
         add(BCRoboticsItems.REDSTONE_BOARD.get(), "Redstone Board");
         add(BCRoboticsItems.ROBOT_STATION.get(), "Docking Station");
         add(BCRoboticsItems.REDSTONE_CRYSTAL.get(), "Redstone Crystal");
+        // (the unfinished robotics' name)
+        add(BCRoboticsItems.ROBOT_GOGGLES.get(), "Robot Goggles");
+        add("item.buildcraftreborn.robot_goggles.tip", "Wear to see robots through walls");
+        add("item.buildcraftreborn.robot_goggles.tip.shift", "Red when a robot's battery is empty,\n"
+            + "yellow when half full, green when full.\nAlso shows laser beams the config hides.");
         add(BCRoboticsEntities.ROBOT.get(), "Robot");
         add(BCRobotics.TAB_ROBOTS_KEY, "BuildCraft Robots");
         add("buildcraftreborn.board.clean", "Clean");

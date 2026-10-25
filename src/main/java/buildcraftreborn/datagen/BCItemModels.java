@@ -121,6 +121,7 @@ public final class BCItemModels extends ItemModelProvider {
         withExistingParent("robot_station", mcLoc("item/generated")).texture("layer0",
             modLoc("block/robot_station/base"));
         basicItem(BCRoboticsItems.REDSTONE_CRYSTAL.get());
+        basicItem(BCRoboticsItems.ROBOT_GOGGLES.get());
         basicItem(BCSiliconPackaging.PACKAGE.get());
 
         // 1.12's forgebucket model with the shard's own base and fluid mask; the fluid comes from the stack

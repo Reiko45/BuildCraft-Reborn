@@ -90,6 +90,7 @@ import buildcraftreborn.robotics.ai.AIRobotMain;
 import buildcraftreborn.robotics.ai.AIRobotShutdown;
 import buildcraftreborn.robotics.ai.AIRobotSleep;
 import buildcraftreborn.robotics.boards.RedstoneBoardRobotEmptyNBT;
+import buildcraftreborn.robotics.client.RobotGogglesClient;
 import buildcraftreborn.robotics.item.ItemRobot;
 import buildcraftreborn.robotics.statements.ActionRobotWorkInArea;
 import buildcraftreborn.robotics.statements.ActionRobotWorkInArea.AreaType;
@@ -544,6 +545,31 @@ public class EntityRobot extends EntityRobotBase implements IItemHandlerModifiab
 
     public ResourceLocation getTexture() {
         return texture != null ? texture : RedstoneBoardRobotEmptyNBT.ROBOT_BASE;
+    }
+
+    // Robot goggles: to a player wearing them, robots glow through walls, tinted by their battery. BuildCraft's
+    // unfinished goggles drew robots as plain boxes in 1 - charge red and charge green instead.
+
+    @Override
+    public boolean isCurrentlyGlowing() {
+        return super.isCurrentlyGlowing() || level().isClientSide && RobotGogglesClient.isWorn();
+    }
+
+    @Override
+    public int getTeamColor() {
+        if (level().isClientSide && RobotGogglesClient.isWorn()) {
+            return getBatteryColour((double) battery.getStored() / MAX_POWER);
+        }
+        return super.getTeamColor();
+    }
+
+    /** The colour robot goggles show a robot in: red with an empty battery, through yellow, to green with a full one.
+     * @param charge From 0 (empty) to 1 (full). */
+    public static int getBatteryColour(double charge) {
+        double c = Mth.clamp(charge, 0, 1);
+        int red = c <= 0.5 ? 255 : (int) Math.round(255 * 2 * (1 - c));
+        int green = c >= 0.5 ? 255 : (int) Math.round(255 * 2 * c);
+        return red << 16 | green << 8;
     }
 
     // Saving

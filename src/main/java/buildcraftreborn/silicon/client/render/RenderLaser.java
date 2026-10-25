@@ -22,10 +22,11 @@ import buildcraftreborn.core.client.BuildCraftLaserManager;
 import buildcraftreborn.lib.BCLibConfig;
 import buildcraftreborn.lib.client.render.laser.LaserData_BC8;
 import buildcraftreborn.lib.client.render.laser.LaserRenderer_BC8;
+import buildcraftreborn.robotics.client.RobotGogglesClient;
 import buildcraftreborn.silicon.tile.TileLaser;
 
-/** Draws the laser beam, coloured by how much power the laser is sending (red to blue). 1.12 also showed the beam
- * when beams were turned off in the config but the player wore goggles; goggles come with the builders module. */
+/** Draws the laser beam, coloured by how much power the laser is sending (red to blue). When beams are turned off in
+ * the client config, a player wearing robot goggles still sees them (as with 1.12's development-only goggles). */
 public class RenderLaser implements BlockEntityRenderer<TileLaser> {
     private static final int MAX_POWER = BuildCraftLaserManager.POWERS.length - 1;
 
@@ -34,7 +35,7 @@ public class RenderLaser implements BlockEntityRenderer<TileLaser> {
     @Override
     public void render(TileLaser tile, float partialTicks, PoseStack poseStack, MultiBufferSource buffers,
         int combinedLight, int combinedOverlay) {
-        if (!BCLibConfig.renderLaserBeams() || tile.laserPos == null) {
+        if (!(BCLibConfig.renderLaserBeams() || RobotGogglesClient.isWorn()) || tile.laserPos == null) {
             return;
         }
         long avg = tile.getAverageClient();

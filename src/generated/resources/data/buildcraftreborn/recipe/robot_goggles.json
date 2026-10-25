@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "C": {
+      "item": "buildcraftreborn:redstone_red_chipset"
+    },
+    "G": {
+      "tag": "c:glass_panes"
+    },
+    "L": {
+      "tag": "c:leathers"
+    }
+  },
+  "pattern": [
+    "LCL",
+    "G G"
+  ],
+  "result": {
+    "count": 1,
+    "id": "buildcraftreborn:robot_goggles"
+  }
+}

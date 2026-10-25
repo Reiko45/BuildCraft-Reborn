@@ -24,6 +24,7 @@ import net.minecraft.network.syncher.EntityDataSerializer;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.MenuType;
+import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -60,6 +61,8 @@ public final class BCRegistries {
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITY_TYPES =
         DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE, MODID);
     public static final DeferredRegister<MenuType<?>> MENU_TYPES = DeferredRegister.create(Registries.MENU, MODID);
+    public static final DeferredRegister<ArmorMaterial> ARMOR_MATERIALS =
+        DeferredRegister.create(Registries.ARMOR_MATERIAL, MODID);
     /** Replaces item NBT and metadata from 1.12 (pipe colour, facade state, list filters, gate variant, ...). */
     public static final DeferredRegister.DataComponents DATA_COMPONENTS =
         DeferredRegister.createDataComponents(Registries.DATA_COMPONENT_TYPE, MODID);
@@ -126,6 +129,7 @@ public final class BCRegistries {
 
     public static void register(IEventBus modBus) {
         BLOCKS.register(modBus);
+        ARMOR_MATERIALS.register(modBus);
         ITEMS.register(modBus);
         BLOCK_ENTITY_TYPES.register(modBus);
         MENU_TYPES.register(modBus);

@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.3.0
+
+Robot goggles, which BuildCraft started after 7.1 and never finished.
+
+- **Robot goggles** go on your head. While you wear them, robots glow through walls in their battery's colour: red when it's empty, yellow when it's half full, green when it's full. Laser beams the client config hides (`renderLaserBeams`) show while you wear them too, as 1.12's development-only goggles did.
+- They're crafted from two leather, two glass panes and a redstone chipset, give no protection and never wear out. Robots can wear them as well.
+- BuildCraft's version (in the robotics code the 1.12 branch keeps under `src_old_license/`) had no recipe and no texture, and drew robots as plain boxes in their battery's colour. Here robots keep their look and get Minecraft's glowing outline, and the item and worn textures are new.
+- A guide book page, and the name and tooltip in all 31 languages (translated by AI like the rest of 1.2.3's lines).
+- New GameTests for the goggles, their recipe and the battery colours (145 GameTests).
+
 ## 1.2.3
 
 Complete translations.

@@ -8,6 +8,7 @@
 package buildcraftreborn.test;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import com.mojang.authlib.GameProfile;
@@ -19,10 +20,17 @@ import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.decoration.ArmorStand;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.monster.Spider;
+import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.CraftingInput;
+import net.minecraft.world.item.crafting.CraftingRecipe;
+import net.minecraft.world.item.crafting.RecipeHolder;
+import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.AABB;
 
@@ -36,6 +44,7 @@ import net.neoforged.neoforge.gametest.PrefixGameTestTemplate;
 import buildcraftreborn.BuildCraftReborn;
 import buildcraftreborn.api.boards.RedstoneBoardRegistry;
 import buildcraftreborn.api.boards.RedstoneBoardRobotNBT;
+import buildcraftreborn.api.enums.EnumRedstoneChipset;
 import buildcraftreborn.api.mj.IMjReceiver;
 import buildcraftreborn.api.mj.MjAPI;
 import buildcraftreborn.api.robots.DockingStation;
@@ -58,6 +67,7 @@ import buildcraftreborn.robotics.boards.BCBoardNBT;
 import buildcraftreborn.robotics.entity.EntityRobot;
 import buildcraftreborn.robotics.item.ItemRedstoneBoard;
 import buildcraftreborn.robotics.item.ItemRobot;
+import buildcraftreborn.robotics.item.ItemRobotGoggles;
 import buildcraftreborn.robotics.station.PluggableRobotStation;
 import buildcraftreborn.robotics.tile.TileChargingTable;
 import buildcraftreborn.robotics.tile.TileProgrammingTable;
@@ -499,6 +509,55 @@ public final class BCRobotTests {
         helper.assertBlockPresent(Blocks.OAK_SAPLING, new BlockPos(1, 2, 0));
         helper.assertTrue(!StripesHandlerPlant.INSTANCE.handle(helper.getLevel(), helper.absolutePos(new BlockPos(0,
             1, 2)), Direction.EAST, new ItemStack(Items.STONE), player, null), "Stone was planted");
+        helper.succeed();
+    }
+
+    // Robot goggles
+
+    /** The goggles are a helmet with no armour that never wears out, robots can wear them too, and they are made from
+     * leather, glass panes and a redstone chipset. */
+    @GameTest(template = "empty")
+    public static void robotGogglesAreHeadwear(GameTestHelper helper) {
+        ItemStack goggles = new ItemStack(BCRoboticsItems.ROBOT_GOGGLES.get());
+        helper.assertTrue(goggles.getItem() instanceof ArmorItem armor
+            && armor.getEquipmentSlot() == EquipmentSlot.HEAD, "The goggles aren't a helmet");
+        helper.assertFalse(goggles.isDamageableItem(), "The goggles wear out");
+        helper.assertTrue(goggles.getMaxStackSize() == 1, "The goggles stack");
+        helper.assertTrue(goggles.getAttributeModifiers().modifiers().isEmpty(),
+            "The goggles have " + goggles.getAttributeModifiers().modifiers());
+        helper.assertTrue(EntityRobot.isWearable(goggles), "Robots can't wear the goggles");
+        ArmorStand stand = helper.spawn(EntityType.ARMOR_STAND, new BlockPos(1, 1, 1));
+        helper.assertFalse(ItemRobotGoggles.isWornBy(stand), "A bare armour stand wears goggles");
+        stand.setItemSlot(EquipmentSlot.HEAD, goggles.copy());
+        helper.assertTrue(ItemRobotGoggles.isWornBy(stand), "The armour stand's goggles don't count");
+
+        ItemStack leather = new ItemStack(Items.LEATHER);
+        ItemStack pane = new ItemStack(Items.GLASS_PANE);
+        ItemStack chipset = new ItemStack(BCSiliconItems.CHIPSETS.get(EnumRedstoneChipset.RED).get());
+        CraftingInput input = CraftingInput.of(3, 2, List.of(leather, chipset, leather, pane, ItemStack.EMPTY, pane));
+        Optional<RecipeHolder<CraftingRecipe>> recipe = helper.getLevel().getRecipeManager()
+            .getRecipeFor(RecipeType.CRAFTING, input, helper.getLevel());
+        helper.assertTrue(recipe.isPresent() && recipe.get().id().equals(BuildCraftReborn.id("robot_goggles")),
+            "Leather, glass panes and a chipset make " + recipe.map(RecipeHolder::id));
+        helper.assertTrue(recipe.get().value().assemble(input, helper.getLevel().registryAccess())
+            .is(BCRoboticsItems.ROBOT_GOGGLES.get()), "The goggles recipe makes something else");
+        helper.succeed();
+    }
+
+    /** Robot goggles show robots red with an empty battery, yellow half full and green full. Only the client sees
+     * them glow: on the server a robot glows only with the glowing effect, as other mobs do. */
+    @GameTest(template = "empty")
+    public static void robotGogglesShowBatteries(GameTestHelper helper) {
+        int[][] colours = { { 0, 0xFF0000 }, { 25, 0xFF8000 }, { 50, 0xFFFF00 }, { 75, 0x80FF00 }, { 100, 0x00FF00 },
+            { 150, 0x00FF00 } };
+        for (int[] c : colours) {
+            int got = EntityRobot.getBatteryColour(c[0] / 100D);
+            helper.assertTrue(got == c[1], c[0] + "% charged is " + Integer.toHexString(got));
+        }
+        EntityRobot robot = helper.spawn(BCRoboticsEntities.ROBOT.get(), new BlockPos(2, 2, 2));
+        helper.assertFalse(robot.isCurrentlyGlowing(), "The robot glows on the server");
+        helper.assertTrue(robot.getTeamColor() == 0xFFFFFF, "The robot's outline is " + robot.getTeamColor());
+        robot.discard();
         helper.succeed();
     }
 }
