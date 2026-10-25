@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.2.2
+
+Other mods' refined fuels in the combustion engine.
+
+- The combustion engine burns other mods' diesel, gasoline, kerosene, biodiesel, ethanol and LPG through their common tags (`c:diesel`, `c:gasoline`, `c:kerosene`, `c:biodiesel`, `c:ethanol` and `c:bioethanol`, `c:lpg`), and the premium diesels (`c:high_power_biodiesel`, `c:boosted_diesel`). That covers PneumaticCraft, Modern Industrialization, Immersive Engineering, Oritech, Create: Diesel Generators, TFMG and Mekanism Generators. Each has its own power and burn time, near BuildCraft's light fuel and well below dense fuel (see the README for the table).
+- Some mods put every fuel they make in `c:fuel`, which BuildCraft burns as light fuel. A fuel with its own entry now burns with that, whichever order the entries load in, and anything only in `c:fuel` still burns like light fuel.
+- JEI and EMI list each fuel once: mods that tag their flowing fluids too no longer get a second entry for those.
+- New GameTests (142, or 147 with PneumaticCraft) and a unit test that pins the agreed fuel values.
+
 ## 1.2.1
 
 EMI support.

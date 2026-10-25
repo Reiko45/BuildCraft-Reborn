@@ -15,8 +15,8 @@ import net.minecraft.world.level.material.Fluid;
 
 import buildcraftreborn.BuildCraftReborn;
 
-/** Biome tags that replace 1.12's oil biome lists, and the common fluid tags BuildCraft's oil and fuel are shared
- * with other mods through. */
+/** Biome tags that replace 1.12's oil biome lists, the common fluid tags BuildCraft's oil and fuel are shared with
+ * other mods through, and the common tags of other mods' fuels that BuildCraft burns. */
 public final class BCEnergyTags {
     // Biome tags: these replace 1.12's excessiveBiomes, surfaceDepositBiomes and excludedBiomes config lists. The
     // biome checked is the one at the centre of each oil well.
@@ -39,10 +39,33 @@ public final class BCEnergyTags {
     public static final TagKey<Fluid> OIL = common("oil");
     /** Crude oil, as PneumaticCraft and Modern Industrialization name it (PneumaticCraft's refinery takes it). */
     public static final TagKey<Fluid> CRUDE_OIL = common("crude_oil");
-    /** Fuel, as Ad Astra names it (its rockets and rovers burn it). BuildCraft's main fuel is light fuel. */
+    /** Fuel, as Ad Astra names it (its rockets and rovers burn it). BuildCraft's main fuel is light fuel. Create:
+     * Diesel Generators and TFMG put every fuel they make in it as well, so it is only a fallback in the fuel data map:
+     * a fluid in one of the tags below burns as that (see BCFluidDataMaps.FUEL_MERGER). */
     public static final TagKey<Fluid> FUEL = common("fuel");
     /** Light fuel, as Modern Industrialization names it. */
     public static final TagKey<Fluid> LIGHT_FUEL = common("light_fuel");
+
+    // Other mods' refined fuels, which BuildCraft doesn't make but burns in the combustion engine (BCRefinedFuels)
+
+    /** PneumaticCraft, Modern Industrialization, Oritech, Create: Diesel Generators and TFMG. */
+    public static final TagKey<Fluid> DIESEL = common("diesel");
+    /** PneumaticCraft, Create: Diesel Generators and TFMG. */
+    public static final TagKey<Fluid> GASOLINE = common("gasoline");
+    /** PneumaticCraft and TFMG. */
+    public static final TagKey<Fluid> KEROSENE = common("kerosene");
+    /** PneumaticCraft and TFMG. */
+    public static final TagKey<Fluid> LPG = common("lpg");
+    /** PneumaticCraft, Modern Industrialization, Immersive Engineering, Oritech and Create: Diesel Generators. */
+    public static final TagKey<Fluid> BIODIESEL = common("biodiesel");
+    /** PneumaticCraft, Modern Industrialization, Immersive Engineering and Create: Diesel Generators. */
+    public static final TagKey<Fluid> ETHANOL = common("ethanol");
+    /** Mekanism Generators' bioethanol. */
+    public static final TagKey<Fluid> BIOETHANOL = common("bioethanol");
+    /** Immersive Engineering and Oritech. */
+    public static final TagKey<Fluid> HIGH_POWER_BIODIESEL = common("high_power_biodiesel");
+    /** Modern Industrialization. */
+    public static final TagKey<Fluid> BOOSTED_DIESEL = common("boosted_diesel");
 
     private BCEnergyTags() {}
 

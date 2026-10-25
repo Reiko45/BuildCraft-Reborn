@@ -6,7 +6,7 @@ An unofficial port of BuildCraft 8.0 from Minecraft 1.12.2 to **Minecraft 1.21.1
 
 ## Status
 
-**Version 1.2.0 adds BuildCraft 7.1's crafting by package** (and 1.2.1 adds EMI support), after 1.1.0 added 7.1's robots (8.0 never got as far as either), on top of 1.0.0-rc.1, which ported everything 8.0 had. The foundation every machine is built on is ported, and so are BuildCraft's core, energy, factory, transport, silicon, builders and robotics modules, the guide book, and support for JEI, EMI, Jade, The One Probe and CraftTweaker:
+**Version 1.2.0 adds BuildCraft 7.1's crafting by package** (1.2.1 adds EMI support, and 1.2.2 other mods' refined fuels), after 1.1.0 added 7.1's robots (8.0 never got as far as either), on top of 1.0.0-rc.1, which ported everything 8.0 had. The foundation every machine is built on is ported, and so are BuildCraft's core, energy, factory, transport, silicon, builders and robotics modules, the guide book, and support for JEI, EMI, Jade, The One Probe and CraftTweaker:
 
 - **Engines:** redstone, stirling, combustion and creative, with their GUIs, the power, owner and help ledgers, heat, overheating and the moving piston.
 - **Wrench:** rotates BuildCraft blocks and vanilla blocks (chests, furnaces, pistons, stairs, doors and the rest of 1.12's list).
@@ -27,6 +27,19 @@ An unofficial port of BuildCraft 8.0 from Minecraft 1.12.2 to **Minecraft 1.21.1
   - **Water gel:** the water gelifier turns water into gel, which spreads and sets; gelled water crafts back into a water bucket.
 - **Refinery recipes** (distillation, heating and cooling) are data maps too: `data/buildcraftreborn/data_maps/fluid/{distillation,heatable,coolable}.json`.
 - **Oil and fuel are shared with other mods** through common fluid tags: oil is in `c:oil` and `c:crude_oil`, light fuel in `c:fuel` and `c:light_fuel`, and gaseous fuel in `c:gaseous`. Other mods' fluids in those tags work in BuildCraft's machines too: oil burns, heats and distils like BuildCraft's oil, and fuel burns like light fuel. So, for example, PneumaticCraft refines BuildCraft's oil, BuildCraft's engines burn PneumaticCraft's oil, and Ad Astra's rockets fly on BuildCraft's fuel.
+- **Other mods' refined fuels burn in the combustion engine** (from 1.2.2), each with its own values, on BuildCraft's scale (light fuel is 6 MJ/t for 750 s):
+
+  | Fuel (tag) | Power | Burns for | A bucket | Made by |
+  | --- | --- | --- | --- | --- |
+  | Gasoline (`c:gasoline`) | 7 MJ/t | 600 s | 84,000 MJ | PneumaticCraft, Create: Diesel Generators, TFMG |
+  | Kerosene (`c:kerosene`) | 6 MJ/t | 750 s | 90,000 MJ | PneumaticCraft, TFMG |
+  | Diesel (`c:diesel`) | 5 MJ/t | 960 s | 96,000 MJ | PneumaticCraft, Modern Industrialization, Oritech, Create: Diesel Generators, TFMG |
+  | Biodiesel (`c:biodiesel`) | 5 MJ/t | 800 s | 80,000 MJ | PneumaticCraft, Modern Industrialization, Immersive Engineering, Oritech, Create: Diesel Generators |
+  | Ethanol (`c:ethanol`, `c:bioethanol`) | 4 MJ/t | 625 s | 50,000 MJ | PneumaticCraft, Modern Industrialization, Immersive Engineering, Create: Diesel Generators, Mekanism Generators |
+  | LPG (`c:lpg`) | 8 MJ/t | 500 s | 80,000 MJ | PneumaticCraft, TFMG |
+  | High power biodiesel, boosted diesel (`c:high_power_biodiesel`, `c:boosted_diesel`) | 6 MJ/t | 1,000 s | 120,000 MJ | Immersive Engineering, Oritech, Modern Industrialization |
+
+  Some mods put all their fuels in `c:fuel` as well; a fuel named here burns with these values anyway, and anything only in `c:fuel` burns like light fuel. Data packs can change all of them in the fuel data map.
 - **Pipes:** all 47 of 8.0's pipe types.
   - **Transport pipes** for items: wooden (extracts with engine power), cobblestone, stone, sandstone, quartz, golden, iron (routes), diamond (sorts, with its filter GUI), wooden diamond (round-robin extraction), clay (prefers machines), void, obsidian (sucks up items), lazuli (paints items), daizuli (routes painted items), emzuli (gate-controlled extraction presets) and stripes (places, breaks, plants, shears, uses and dispenses, and extends itself with pipes).
   - **Fluid pipes** (wooden, cobblestone, stone, sandstone, quartz, golden, iron, diamond, wooden diamond, clay and void), made waterproof with pipe sealant. The obsidian fluid pipe is registered but, as in 1.12, has no item.
@@ -143,7 +156,7 @@ On Windows use `gradlew.bat` instead of `./gradlew`.
 | `./gradlew runClient` | Start Minecraft with the mod |
 | `./gradlew runServer` | Start a dedicated server (set `eula=true` in `run/eula.txt` first) |
 | `./gradlew runData` | Regenerate models, lang, tags and recipes into `src/generated/resources` |
-| `./gradlew runGameTestServer` | Run every GameTest (140) on a headless server, then exit |
+| `./gradlew runGameTestServer` | Run every GameTest (142) on a headless server, then exit |
 | `./gradlew test` | Run the unit tests (expression language, packet buffer, boxes, snapshot NBT and indexes, and a check that the shipped data never mentions development-only content) |
 | `./gradlew build` | Build the mod jar into `build/libs` |
 
@@ -151,7 +164,7 @@ Commit `src/generated/resources` after running `runData`; the build reads it fro
 
 JEI, EMI, Jade, The One Probe and CraftTweaker are compiled against but never required. With `compat_runtime=true` in `gradle.properties` (the default) the dev runs load them; set it to `false` (or pass `-Pcompat_runtime=false`) to run without them. `recipe_viewer` picks the recipe viewer those runs load: `jei` (the default), `emi`, or `both` (for example `./gradlew runClient -Precipe_viewer=emi`).
 
-`-Pinterop_runtime=true` also loads PneumaticCraft in the dev runs, for the GameTests in `BCInteropTests` that check oil works both ways between the two mods (143 GameTests in all).
+`-Pinterop_runtime=true` also loads PneumaticCraft in the dev runs, for the GameTests in `BCInteropTests` that check oil works both ways between the two mods and PneumaticCraft's refined fuels burn in the combustion engine (147 GameTests in all).
 
 The dev runs can't catch everything: they register development-only content and run in development mode. Before a release, also boot the built jar on a real NeoForge server (from the NeoForge installer, `--installServer`) and check its log for errors.
 
@@ -247,12 +260,13 @@ The guide book's engine is in `lib/client/guide/`, and its pages in `assets/buil
 - [x] **Phase 7, robots (1.1.0).** BuildCraft 7.1's robots, all 17 boards, docking stations and their gate statements, the programming and charging tables, the requester, and the construction mark on 8.0's builder.
 - [x] **Phase 8, packages (1.2.0).** BuildCraft 7.1's recipe packager, stamping table and packages.
 - [x] **EMI support (1.2.1).** Everything the JEI plugin shows and does, for EMI.
+- [x] **Refined fuels (1.2.2).** Other mods' diesel, gasoline, kerosene, biodiesel, ethanol and LPG in the combustion engine.
 
 Each phase ends with GameTests for its exit criteria and a dedicated-server boot.
 
 ### Future plans
 
-- [ ] **Other mods' refined fuels in the combustion engine:** diesel, gasoline, biodiesel, ethanol and kerosene (`c:diesel`, `c:gasoline`, `c:biodiesel`, `c:ethanol` and `c:kerosene`, made by PneumaticCraft, Modern Industrialization, Oritech and Immersive Engineering). BuildCraft has no equivalent of these, so each needs its own power and burn time, balanced against BuildCraft's fuels. Oil and light fuel from other mods already work (1.1.2).
+- [x] **Other mods' refined fuels in the combustion engine (1.2.2).** Diesel, gasoline, kerosene, biodiesel, ethanol, LPG and the premium diesels, through their common tags.
 
 ## Upstream
 

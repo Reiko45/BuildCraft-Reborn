@@ -447,7 +447,7 @@ public final class BCLanguage extends LanguageProvider {
         add("jei.buildcraftreborn.burn_total", "total %s");
         add("jei.buildcraftreborn.cooling", "Cools by %s \u00b0C/mB");
 
-        // Names for the common tags BuildCraft adds, which JEI and EMI show for tag ingredients
+        // Names for the common tags BuildCraft adds or burns, which JEI and EMI show for tags
         add(Tags.getTagTranslationKey(BCCoreTags.GEARS), "Gears");
         add(Tags.getTagTranslationKey(BCCoreTags.GEARS_WOOD), "Wood Gears");
         add(Tags.getTagTranslationKey(BCCoreTags.GEARS_STONE), "Stone Gears");
@@ -458,6 +458,15 @@ public final class BCLanguage extends LanguageProvider {
         add(Tags.getTagTranslationKey(BCEnergyTags.CRUDE_OIL), "Crude Oil");
         add(Tags.getTagTranslationKey(BCEnergyTags.FUEL), "Fuel");
         add(Tags.getTagTranslationKey(BCEnergyTags.LIGHT_FUEL), "Light Fuel");
+        add(Tags.getTagTranslationKey(BCEnergyTags.DIESEL), "Diesel");
+        add(Tags.getTagTranslationKey(BCEnergyTags.GASOLINE), "Gasoline");
+        add(Tags.getTagTranslationKey(BCEnergyTags.KEROSENE), "Kerosene");
+        add(Tags.getTagTranslationKey(BCEnergyTags.LPG), "LPG");
+        add(Tags.getTagTranslationKey(BCEnergyTags.BIODIESEL), "Biodiesel");
+        add(Tags.getTagTranslationKey(BCEnergyTags.ETHANOL), "Ethanol");
+        add(Tags.getTagTranslationKey(BCEnergyTags.BIOETHANOL), "Bioethanol");
+        add(Tags.getTagTranslationKey(BCEnergyTags.HIGH_POWER_BIODIESEL), "High Power Biodiesel");
+        add(Tags.getTagTranslationKey(BCEnergyTags.BOOSTED_DIESEL), "Boosted Diesel");
         // Jade and The One Probe
         add("buildcraftreborn.probe.of", "%s / %s");
         add("buildcraftreborn.probe.making", "Making:");

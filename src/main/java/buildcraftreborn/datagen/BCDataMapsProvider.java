@@ -24,6 +24,7 @@ import net.neoforged.neoforge.fluids.FluidStack;
 import buildcraftreborn.api.mj.MjAPI;
 import buildcraftreborn.energy.BCEnergyFluids;
 import buildcraftreborn.energy.BCEnergyTags;
+import buildcraftreborn.energy.BCRefinedFuels;
 import buildcraftreborn.lib.fluid.BCFluid;
 import buildcraftreborn.lib.fluid.BCFluidDataMaps;
 import buildcraftreborn.lib.fluid.BCFluidDataMaps.CoolantData;
@@ -40,7 +41,8 @@ import buildcraftreborn.lib.misc.MathUtil;
  * {@code c:oil} or {@code c:crude_oil} burns, heats and distills like BuildCraft's oil, and anything in {@code c:fuel}
  * or {@code c:light_fuel} burns like light fuel. BuildCraft's own fluids are in those tags too, and their tag entries
  * hold exactly the same values as their own entries, so it doesn't matter which of the two a data pack load sees
- * last. */
+ * last. Other mods' refined fuels (diesel, gasoline and the rest, in {@link BCRefinedFuels}) burn with their own
+ * values, even when those mods put them in {@code c:fuel} too. */
 public final class BCDataMapsProvider extends DataMapProvider {
     // Relative amounts of the fluid -- the amount of oil used in refining will return X amount of fluid
     // single
@@ -85,6 +87,10 @@ public final class BCDataMapsProvider extends DataMapProvider {
         addDirtyFuel(BCEnergyFluids.oilHeavy, _light_dense_residue, 2, 4);
         FuelData oil = addDirtyFuel(BCEnergyFluids.crudeOil, _oil, 3, 4);
         OIL_TAGS.forEach(tag -> fuels.add(tag, oil, false));
+        // Other mods' diesel, gasoline and so on (these win over #c:fuel, see BCFluidDataMaps.FUEL_MERGER)
+        for (BCRefinedFuels.RefinedFuel fuel : BCRefinedFuels.ALL) {
+            fuels.add(fuel.tag(), new FuelData(fuel.powerPerTick(), fuel.burnTime(), Optional.empty()), false);
+        }
 
         builder(BCFluidDataMaps.COOLANTS)
             .add(Fluids.WATER.builtInRegistryHolder(), new CoolantData(0.0023f), false);

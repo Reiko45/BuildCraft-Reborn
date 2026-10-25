@@ -9,14 +9,17 @@ package buildcraftreborn.test;
 
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 
 import com.mojang.authlib.GameProfile;
+import com.mojang.datafixers.util.Either;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.gametest.framework.GameTest;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.server.level.ServerLevel;
@@ -59,12 +62,15 @@ import buildcraftreborn.energy.BCEnergyBlocks;
 import buildcraftreborn.energy.BCEnergyConfig;
 import buildcraftreborn.energy.BCEnergyFluids;
 import buildcraftreborn.energy.BCEnergyTags;
+import buildcraftreborn.energy.BCRefinedFuels;
 import buildcraftreborn.energy.tile.TileDynamoMJ;
 import buildcraftreborn.energy.tile.TileEngineIron_BC8;
 import buildcraftreborn.energy.tile.TileEngineRF;
 import buildcraftreborn.energy.tile.TileEngineStone_BC8;
 import buildcraftreborn.lib.engine.TileEngineBase_BC8;
 import buildcraftreborn.lib.fluid.BCFluid;
+import buildcraftreborn.lib.fluid.BCFluidDataMaps;
+import buildcraftreborn.lib.fluid.BCFluidDataMaps.FuelData;
 import buildcraftreborn.lib.recipe.RefineryRecipeRegistry;
 
 /** Phase 2 tests for engines, fuels, fluids and the wrench. Engines sit on top of the test machine (which takes MJ
@@ -235,10 +241,54 @@ public final class BCEnergyTests {
                 name + " doesn't heat like oil");
         }
         IFuel lightFuel = BuildcraftFuelRegistry.fuel.getFuel(new FluidStack(BCEnergyFluids.fuelLight[0].getSource(), 1));
+        // (c:fuel is only a fallback: what's also in a refined fuel's tag burns as that, see refinedFuelsBurn...)
+        Set<Fluid> refined = tagged(BCRefinedFuels.ALL.stream().map(BCRefinedFuels.RefinedFuel::tag).toList());
         for (Fluid fluid : tagged(List.of(BCEnergyTags.FUEL, BCEnergyTags.LIGHT_FUEL))) {
-            helper.assertTrue(sameFuel(BuildcraftFuelRegistry.fuel.getFuel(new FluidStack(fluid, 1)), lightFuel),
-                BuiltInRegistries.FLUID.getKey(fluid) + " doesn't burn like light fuel");
+            if (!refined.contains(fluid)) {
+                helper.assertTrue(sameFuel(BuildcraftFuelRegistry.fuel.getFuel(new FluidStack(fluid, 1)), lightFuel),
+                    BuiltInRegistries.FLUID.getKey(fluid) + " doesn't burn like light fuel");
+            }
         }
+        helper.succeed();
+    }
+
+    /** Other mods' diesel, gasoline and so on burn with their own values, even if they're in c:fuel as well. With
+     * {@code -Pinterop_runtime=true} the tags hold PneumaticCraft's fuels; otherwise they're empty, and
+     * {@link #fuelTagIsOnlyAFallback} checks the rule that makes c:fuel give way. */
+    @GameTest(template = "empty")
+    public static void refinedFuelsBurnWithTheirValues(GameTestHelper helper) {
+        for (BCRefinedFuels.RefinedFuel fuel : BCRefinedFuels.ALL) {
+            for (Fluid fluid : tagged(List.of(fuel.tag()))) {
+                String name = BuiltInRegistries.FLUID.getKey(fluid) + " (" + fuel.tag().location() + ")";
+                IFuel burns = BuildcraftFuelRegistry.fuel.getFuel(new FluidStack(fluid, 1));
+                helper.assertTrue(burns != null && !(burns instanceof IDirtyFuel), name + " isn't a clean fuel");
+                helper.assertTrue(burns.getPowerPerCycle() == Math.round(fuel.powerPerTick() * MjAPI.MJ)
+                    && burns.getTotalBurningTime() == fuel.burnTime(), name + " burns at "
+                    + MjAPI.formatMj(burns.getPowerPerCycle()) + " MJ/t for " + burns.getTotalBurningTime() + " ticks");
+            }
+        }
+        helper.succeed();
+    }
+
+    /** The fuel data map's merge rule: a #c:fuel entry never replaces what a fluid already has, in either order. */
+    @GameTest(template = "empty")
+    public static void fuelTagIsOnlyAFallback(GameTestHelper helper) {
+        FuelData diesel = new FuelData(5, 19_200, Optional.empty());
+        FuelData light = new FuelData(6, 15_000, Optional.empty());
+        FuelData other = new FuelData(1, 100, Optional.empty());
+        Either<TagKey<Fluid>, ResourceKey<Fluid>> dieselTag = Either.left(BCEnergyTags.DIESEL);
+        Either<TagKey<Fluid>, ResourceKey<Fluid>> fuelTag = Either.left(BCEnergyTags.FUEL);
+        Either<TagKey<Fluid>, ResourceKey<Fluid>> fluidId = Either.right(BCEnergyFluids.fuelLight[0].source.getKey());
+        var merger = BCFluidDataMaps.FUEL_MERGER;
+        var fluids = BuiltInRegistries.FLUID;
+        helper.assertTrue(merger.merge(fluids, dieselTag, diesel, fuelTag, light) == diesel,
+            "c:fuel replaced c:diesel's value");
+        helper.assertTrue(merger.merge(fluids, fuelTag, light, dieselTag, diesel) == diesel,
+            "c:diesel didn't replace c:fuel's value");
+        helper.assertTrue(merger.merge(fluids, fluidId, other, fuelTag, light) == other,
+            "c:fuel replaced a fluid's own value");
+        helper.assertTrue(merger.merge(fluids, fluidId, other, dieselTag, diesel) == diesel,
+            "A later entry didn't replace an earlier one");
         helper.succeed();
     }
 

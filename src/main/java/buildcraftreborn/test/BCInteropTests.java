@@ -9,6 +9,8 @@ package buildcraftreborn.test;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
 import net.minecraft.core.BlockPos;
@@ -18,6 +20,7 @@ import net.minecraft.gametest.framework.GameTestGenerator;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.gametest.framework.TestFunction;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
@@ -30,18 +33,22 @@ import net.neoforged.neoforge.fluids.capability.IFluidHandler.FluidAction;
 import net.neoforged.neoforge.gametest.GameTestHolder;
 
 import buildcraftreborn.BuildCraftReborn;
+import buildcraftreborn.api.fuels.BuildcraftFuelRegistry;
+import buildcraftreborn.api.fuels.IFuel;
 import buildcraftreborn.api.mj.IMjReceiver;
 import buildcraftreborn.api.mj.MjAPI;
 import buildcraftreborn.energy.BCEnergyBlocks;
 import buildcraftreborn.energy.BCEnergyFluids;
 import buildcraftreborn.energy.BCEnergyTags;
+import buildcraftreborn.energy.BCRefinedFuels;
 import buildcraftreborn.energy.tile.TileEngineIron_BC8;
 import buildcraftreborn.factory.BCFactoryBlocks;
 import buildcraftreborn.factory.tile.TileDistiller_BC8;
 
 /** Tests with another mod's fluids, run only when that mod is loaded ({@code gradlew runGameTestServer
- * -Pinterop_runtime=true} adds PneumaticCraft). They check that oil from another mod works in BuildCraft's machines
- * through the common tags, and that BuildCraft's oil is in the tag the other mod's machines take. */
+ * -Pinterop_runtime=true} adds PneumaticCraft). They check that oil and refined fuels from another mod work in
+ * BuildCraft's machines through the common tags, and that BuildCraft's oil is in the tag the other mod's machines
+ * take. */
 @GameTestHolder(BuildCraftReborn.MODID)
 public final class BCInteropTests {
     private static final String TEMPLATE = BuildCraftReborn.MODID + ":empty";
@@ -57,6 +64,10 @@ public final class BCInteropTests {
                 BCInteropTests::pneumaticCraftOilBurnsInCombustionEngine);
             add(tests, "pneumaticcraft_oil_distils", 400, BCInteropTests::pneumaticCraftOilDistils);
             add(tests, "pneumaticcraft_refines_buildcraft_oil", 20, BCInteropTests::pneumaticCraftRefinesBuildCraftOil);
+            add(tests, "pneumaticcraft_diesel_burns_in_combustion_engine", 400,
+                BCInteropTests::pneumaticCraftDieselBurnsInCombustionEngine);
+            add(tests, "pneumaticcraft_fuels_burn_with_their_values", 20,
+                BCInteropTests::pneumaticCraftFuelsBurnWithTheirValues);
         }
         return tests;
     }
@@ -71,27 +82,67 @@ public final class BCInteropTests {
         return oil;
     }
 
-    /** The test machine below takes the engine's MJ. */
-    private static void pneumaticCraftOilBurnsInCombustionEngine(GameTestHelper helper) {
-        Fluid oil = pncOil(helper);
+    private static Fluid pncFluid(GameTestHelper helper, String path) {
+        ResourceLocation id = ResourceLocation.fromNamespaceAndPath("pneumaticcraft", path);
+        Fluid fluid = BuiltInRegistries.FLUID.get(id);
+        helper.assertTrue(fluid != Fluids.EMPTY, "PneumaticCraft has no " + id);
+        return fluid;
+    }
+
+    /** A running combustion engine with a bucket of the fluid, on the test machine (which takes the engine's MJ).
+     * Succeeds once {@code burning} passes. */
+    private static void burnInCombustionEngine(GameTestHelper helper, Fluid fuel,
+        BiConsumer<TileEngineIron_BC8, TileTestMachine> burning) {
         BlockPos machinePos = new BlockPos(1, 0, 1);
         BlockPos enginePos = new BlockPos(1, 1, 1);
         helper.setBlock(machinePos, BCTestContent.TEST_MACHINE_BLOCK.get());
         helper.setBlock(enginePos, BCEnergyBlocks.ENGINE_IRON.get());
         TileEngineIron_BC8 engine = helper.getBlockEntity(enginePos);
         engine.rotateIfInvalid();
-        int filled = engine.tankFuel.fill(new FluidStack(oil, 1000), FluidAction.EXECUTE);
-        helper.assertTrue(filled == 1000, "Fuel tank took " + filled + " mB of PneumaticCraft oil");
+        int filled = engine.tankFuel.fill(new FluidStack(fuel, 1000), FluidAction.EXECUTE);
+        helper.assertTrue(filled == 1000, "Fuel tank took " + filled + " mB of " + BuiltInRegistries.FLUID.getKey(fuel));
         engine.tankCoolant.fill(new FluidStack(Fluids.WATER, 1000), FluidAction.EXECUTE);
         helper.setBlock(new BlockPos(1, 2, 1), Blocks.REDSTONE_BLOCK);
         TileTestMachine machine = helper.getBlockEntity(machinePos);
         helper.succeedWhen(() -> {
-            helper.assertTrue(engine.tankFuel.getFluidAmount() < 1000, "No PneumaticCraft oil was burnt");
+            helper.assertTrue(engine.tankFuel.getFluidAmount() < 1000, "Nothing was burnt");
+            helper.assertTrue(machine.battery.getStored() > 0, "Machine battery is still empty");
+            burning.accept(engine, machine);
+        });
+    }
+
+    private static void pneumaticCraftOilBurnsInCombustionEngine(GameTestHelper helper) {
+        burnInCombustionEngine(helper, pncOil(helper), (engine, machine) -> {
             // Oil burns dirty: the residue is BuildCraft's
             helper.assertTrue(engine.tankResidue.getFluid().is(BCEnergyFluids.oilResidue[0].getSource()),
                 "Residue tank holds " + engine.tankResidue.getDebugString());
-            helper.assertTrue(machine.battery.getStored() > 0, "Machine battery is still empty");
         });
+    }
+
+    private static void pneumaticCraftDieselBurnsInCombustionEngine(GameTestHelper helper) {
+        burnInCombustionEngine(helper, pncFluid(helper, "diesel"), (engine, machine) -> {
+            helper.assertTrue(engine.tankResidue.isEmpty(), "Diesel left " + engine.tankResidue.getDebugString());
+        });
+    }
+
+    /** PneumaticCraft's refined fuels are in the common tags BuildCraft burns them through (BCRefinedFuels), and burn
+     * with those values. */
+    private static void pneumaticCraftFuelsBurnWithTheirValues(GameTestHelper helper) {
+        Map<String, TagKey<Fluid>> fuels = Map.of("diesel", BCEnergyTags.DIESEL, "gasoline", BCEnergyTags.GASOLINE,
+            "kerosene", BCEnergyTags.KEROSENE, "lpg", BCEnergyTags.LPG, "biodiesel", BCEnergyTags.BIODIESEL,
+            "ethanol", BCEnergyTags.ETHANOL);
+        fuels.forEach((path, tag) -> {
+            Fluid fluid = pncFluid(helper, path);
+            helper.assertTrue(fluid.builtInRegistryHolder().is(tag), "PneumaticCraft's " + path + " isn't in "
+                + tag.location() + " any more");
+            BCRefinedFuels.RefinedFuel expected = BCRefinedFuels.ALL.stream().filter(f -> f.tag().equals(tag))
+                .findFirst().orElseThrow();
+            IFuel burns = BuildcraftFuelRegistry.fuel.getFuel(new FluidStack(fluid, 1));
+            helper.assertTrue(burns != null && burns.getPowerPerCycle() == Math.round(expected.powerPerTick() * MjAPI.MJ)
+                && burns.getTotalBurningTime() == expected.burnTime(), "PneumaticCraft's " + path
+                    + " doesn't burn with " + tag.location() + "'s values");
+        });
+        helper.succeed();
     }
 
     private static void pneumaticCraftOilDistils(GameTestHelper helper) {

@@ -61,7 +61,8 @@ public enum FuelRegistry implements IFuelManager {
         List<IFuel> all = new ArrayList<>();
         for (Map.Entry<ResourceKey<Fluid>, FuelData> entry : BuiltInRegistries.FLUID.getDataMap(BCFluidDataMaps.FUELS)
             .entrySet()) {
-            BuiltInRegistries.FLUID.getHolder(entry.getKey())
+            // (some mods put the flowing fluid in their tags too: that would list each fuel twice)
+            BuiltInRegistries.FLUID.getHolder(entry.getKey()).filter(fluid -> fluid.value().defaultFluidState().isSource())
                 .ifPresent(fluid -> all.add(fromData(new FluidStack(fluid, 1), entry.getValue())));
         }
         all.addAll(fuels);

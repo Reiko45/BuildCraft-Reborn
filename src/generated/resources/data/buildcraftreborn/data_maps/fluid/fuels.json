@@ -1,5 +1,17 @@
 {
   "values": {
+    "#c:biodiesel": {
+      "burn_time": 16000,
+      "power_per_tick": 5.0
+    },
+    "#c:bioethanol": {
+      "burn_time": 12500,
+      "power_per_tick": 4.0
+    },
+    "#c:boosted_diesel": {
+      "burn_time": 20000,
+      "power_per_tick": 6.0
+    },
     "#c:crude_oil": {
       "burn_time": 10000,
       "power_per_tick": 3.0,
@@ -8,13 +20,37 @@
         "id": "buildcraftreborn:oil_residue"
       }
     },
+    "#c:diesel": {
+      "burn_time": 19200,
+      "power_per_tick": 5.0
+    },
+    "#c:ethanol": {
+      "burn_time": 12500,
+      "power_per_tick": 4.0
+    },
     "#c:fuel": {
+      "burn_time": 15000,
+      "power_per_tick": 6.0
+    },
+    "#c:gasoline": {
+      "burn_time": 12000,
+      "power_per_tick": 7.0
+    },
+    "#c:high_power_biodiesel": {
+      "burn_time": 20000,
+      "power_per_tick": 6.0
+    },
+    "#c:kerosene": {
       "burn_time": 15000,
       "power_per_tick": 6.0
     },
     "#c:light_fuel": {
       "burn_time": 15000,
       "power_per_tick": 6.0
+    },
+    "#c:lpg": {
+      "burn_time": 10000,
+      "power_per_tick": 8.0
     },
     "#c:oil": {
       "burn_time": 10000,

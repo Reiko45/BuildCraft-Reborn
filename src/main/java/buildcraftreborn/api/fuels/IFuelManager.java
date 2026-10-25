@@ -35,7 +35,7 @@ public interface IFuelManager {
         return addDirtyFuel(new FluidStack(fuel, 1), powerPerCycle, totalBurningTime, residue);
     }
 
-    /** @return Every fuel: the data map entries followed by fuels added through this API. */
+    /** @return Every fuel: the data map entries (source fluids only) followed by fuels added through this API. */
     Collection<IFuel> getFuels();
 
     @Nullable

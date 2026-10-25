@@ -13,12 +13,17 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.FluidTags;
+import net.minecraft.tags.TagKey;
 import net.minecraft.util.ExtraCodecs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.material.Fluid;
 
 import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.registries.datamaps.AdvancedDataMapType;
 import net.neoforged.neoforge.registries.datamaps.DataMapType;
+import net.neoforged.neoforge.registries.datamaps.DataMapValueMerger;
 import net.neoforged.neoforge.registries.datamaps.RegisterDataMapTypesEvent;
 
 import buildcraftreborn.BuildCraftReborn;
@@ -28,7 +33,8 @@ import buildcraftreborn.BuildCraftReborn;
  * {@code BCDataMapsProvider} from 1.12's numbers.
  * <ul>
  * <li>{@code data/<namespace>/data_maps/fluid/fuels.json}: {@code power_per_tick} (MJ), {@code burn_time} (ticks per
- * bucket), optional {@code residue} (fluid stack produced per bucket burnt).</li>
+ * bucket), optional {@code residue} (fluid stack produced per bucket burnt). A {@code #c:fuel} entry doesn't override
+ * other entries ({@link #FUEL_MERGER}).</li>
  * <li>{@code data/<namespace>/data_maps/fluid/coolants.json}: {@code degrees_per_mb}.</li>
  * <li>{@code data/<namespace>/data_maps/item/solid_coolants.json}: {@code fluid}, the coolant one item melts into.</li>
  * </ul>
@@ -82,9 +88,19 @@ public final class BCFluidDataMaps {
         ).apply(i, HeatExchangeData::new));
     }
 
-    public static final DataMapType<Fluid, FuelData> FUELS = DataMapType
+    /** {@code c:fuel}, which other mods fill with every fuel they make (diesel, gasoline, LPG and creosote alike). */
+    private static final TagKey<Fluid> COMMON_FUEL = FluidTags.create(ResourceLocation.fromNamespaceAndPath("c", "fuel"));
+
+    /** In the fuel data map, a {@code #c:fuel} entry never replaces a value a fluid already has (from {@code #c:diesel},
+     * say), whichever order the entries load in: {@code c:fuel} is the fallback for fuels no other entry names. Every
+     * other entry overrides earlier ones as usual, and {@code "replace": true} on an entry still overrides anything. */
+    public static final DataMapValueMerger<Fluid, FuelData> FUEL_MERGER = (registry, first, firstValue, second,
+        secondValue) -> second.left().filter(COMMON_FUEL::equals).isPresent() ? firstValue : secondValue;
+
+    public static final DataMapType<Fluid, FuelData> FUELS = AdvancedDataMapType
         .builder(BuildCraftReborn.id("fuels"), Registries.FLUID, FuelData.CODEC)
         .synced(FuelData.CODEC, false)
+        .merger(FUEL_MERGER)
         .build();
 
     public static final DataMapType<Fluid, CoolantData> COOLANTS = DataMapType
