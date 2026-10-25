@@ -1,31 +1,14 @@
 <chapter name="block.buildcraftreborn.marker_path"/>
-The path marker is useful for <bold>stuffs</bold> and linking up a builders oart path woops that was spelt wrong lol oh well I guess this is just filler.
-<chapter name="Other"/>
-Other <bold>details <underline>include</underline> bold<italic> text</italic></bold>:
-
-Just <blue>in</blue> c<bold>ase</bold> <green>you <red><italic>d<underline>id</red>n</italic>'t</underline> get</green> that...
-
-<recipes_usages stack="buildcraftreborn:marker_path"/>
-<chapter name="Information"/>
 <lore>
-Some loric information that is totally not just a lot of really long filler text to test next page logic.
+A road won't build itself, but a Builder with a path to follow comes close.
 </lore>
 <no_lore>
-This should NOT appear in-game, unless lore has been turned off.
+The Path Mark marks out a path for a Builder to follow.
 </no_lore>
-<image src="buildcraftreborn:textures/item/marker_path.png" width="64" height="64"/>
-<image src="buildcraftreborn:textures/item/guide_book.png" width="64" height="64"/>
-<image src="buildcraftreborn:textures/gui/combustion_engine_gui.png"/>
-
-<hint>
-Path markers are really useless.
-</hint>
-<new_page/>
-To ensure that new pages <italic>work</italic>.
-HI THIS SHOULD BE ON ANOTHER PAGE
-
-<note id="mark_info">
-Hi there, I am a note!
-Just in case you wanted to know, this is how you make a path mark.
-<recipes stack="buildcraftreborn:marker_path" join="false"/>
-</note>
+<chapter name="Making a path"/>
+Place Path Marks where the path should go, up to 64 blocks apart. While you hold a Marker Connector, faint lasers show which marks can be joined: look at one and right click to join those two marks. Keep joining marks to make a longer path.
+<recipes_usages stack="buildcraftreborn:marker_path"/>
+Right click a Path Mark to turn its path around: a Builder follows the path from its start to its end.
+<link to="buildcraftreborn:item/marker_connector"/>
+<chapter name="Using a path"/>
+Place a Builder against a mark of the path, with the mark behind it. The Builder takes the path, the marks drop as items, and it builds its blueprint or template at each step along the path instead of just once.

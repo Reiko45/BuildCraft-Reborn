@@ -540,7 +540,10 @@ public final class BCLanguage extends LanguageProvider {
             { "chapter.subtype.resourcepack", "Resource Pack" },
             { "chapter.mod.buildcraft", "BuildCraft" },
             { "page.guide_page_format", "Guide Page File Format" },
-            { "page.guide_entry_format", "Guide Entry File Format" } };
+            { "page.guide_entry_format", "Guide Entry File Format" },
+            // (1.12 wrote these in English in every language)
+            { "everything", "Everything" }, { "show_lore", "Show Lore %s" }, { "show_hints", "Show Hints %s" },
+            { "loaded_mods", "Loaded Mods:" }, { "loaded_resource_packs", "Loaded Resource Packs:" } };
         for (String[] entry : guide) {
             add("buildcraft.guide." + entry[0], entry[1]);
         }

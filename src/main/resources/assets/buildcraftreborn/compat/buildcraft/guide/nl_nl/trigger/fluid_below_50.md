@@ -1,0 +1,17 @@
+<lore>
+Zit de tank naast de poort voor minder dan de helft vol?
+</lore>
+<no_lore>
+‘Bevat minder dan 50%’ is een poorttrigger die beschikbaar is op elke poort met een tank ernaast.
+</no_lore>
+
+<chapter name="Vereisten"/>
+Als deze trigger is gekozen, worden de verbonden acties alleen geactiveerd als de aangesloten tank voor minder dan 50% vol is.
+
+<chapter name="Parameters"/>
+Als ‘Bevat minder dan 50%’ is gekozen en de geplaatste poort parameters ondersteunt, wordt het filtervak ernaast beschikbaar als parameter.
+Leg je een vloeistofhouder in het filtervak, dan wordt vóór het activeren gecontroleerd of de tank minder dan 50% bevat van de vloeistof die in het filtervak is gekozen.
+
+<chapter name="Triggerrichtingen"/>
+Poorten kunnen de trigger ‘Bevat minder dan 50%’ meerdere keren in verschillende kleuren tonen, één voor elke aangesloten tank.
+De kleur van de trigger toont in welke richting de tank ten opzichte van de pijp ligt, zodat je de tanks van elkaar kunt onderscheiden.

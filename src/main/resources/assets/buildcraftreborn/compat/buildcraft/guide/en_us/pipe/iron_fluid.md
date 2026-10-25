@@ -8,7 +8,7 @@ A Iron Fluid Pipe is used to transport fluids in one direction from a pipe into 
 <recipes stack="buildcraftreborn:pipe_iron_fluid"/>
 
 <chapter name="Pipe Mechanics"/>
-Setting the direction the fluids will travel is by either: whacking the side of the pipe you want the items to go to with a wrench, giving it a redstone signal or with a gate.
+Setting the direction the fluids will travel is by either: whacking the side of the pipe you want the fluids to go to with a wrench, giving it a redstone signal or with a gate.
 
 The direction that the fluids will travel is in through the solid sides of the pipe and out towards the clear facing side.
 Fluids will not travel back in the direction it came from and only in the one direction set.

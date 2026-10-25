@@ -1,5 +1,16 @@
 # Changelog
 
+## 2.0.0
+
+The first release out of beta, and the guide book in every language.
+
+- **The guide book is translated** into all 31 languages: every one of its 118 pages, using the same names as the rest of the mod. BuildCraft's guide was only ever in English. Like 1.2.3's lines, the pages were translated by an AI model (Claude) and haven't been checked by native speakers yet; corrections are welcome on the issue tracker.
+- The guide's first page ("Show Lore", "Show Hints", "Loaded Mods") is translated too, and Chinese and Japanese text wraps properly after bold words.
+- The Path Mark's page was BuildCraft's leftover test text ("woops that was spelt wrong lol"); it now explains how to make a path and use it with a Builder. Fixes in other English pages: the stone fluid pipe's speed line named the cobblestone pipe, the red engine trigger asked "Is it blue?", the diamond transport pipe and iron fluid pipe pages mixed up items and fluids, the list page ended mid-sentence, the light sensor triggers mentioned a colour, the gate page's bold words weren't bold, and the pulsar page showed its lore with lore turned off.
+- Translation fixes: "Request Needed Items" was translated as "Provide computed items" in nine languages, some Norwegian names were still in English, and typos in Hungarian, Italian, Czech, German, Lithuanian, Slovak, Croatian, Finnish, Korean, Turkish, Estonian, French and Spanish names.
+- 2.0.0 is the first version the update checker recommends to everyone, not only as the latest.
+- A unit test checks that every language has every guide page with the English page's layout, links and recipes.
+
 ## 1.3.0
 
 Robot goggles, which BuildCraft started after 7.1 and never finished.

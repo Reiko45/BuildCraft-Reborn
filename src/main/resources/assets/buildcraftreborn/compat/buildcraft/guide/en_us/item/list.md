@@ -17,5 +17,5 @@ Exact Match: The item inserted is the same item. E.g.Has the same amount of dama
 Type: Items which the same but made of a different materials. E.g. for an iron gear, this would match against any sort of gear, for example a wooden gear, stone gear, etc.
 Material: Items which are made of exactly the same material. E.g. for an iron gear, this would match against anything made directly out of iron: such as iron blocks, ingots, ore, or nuggets.
 
-Unfortunatly not all items in the game are supported, for example this doesn't .
+Unfortunately not all items in the game are supported.
 

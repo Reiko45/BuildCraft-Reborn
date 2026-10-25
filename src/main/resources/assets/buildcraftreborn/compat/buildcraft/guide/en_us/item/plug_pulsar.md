@@ -1,6 +1,6 @@
-<no_lore>
+<lore>
 Being able to power your pipes for free without needing a big engine? How cool is that!
-</no_lore>
+</lore>
 <no_lore>
 The Pipe Pulsar is a pluggable used to provide small amounts of power to power accepting pipes.
 </no_lore>

@@ -23,6 +23,27 @@ import buildcraftreborn.lib.client.guide.font.IFontRenderer;
 /** Text with formatting codes, split into {@link FormatSegment}s so that it can be wrapped onto several lines. */
 public class FormatString {
     private static final String WORD_GAP = " \n\t";
+    /** Brackets and quotes that stay with what follows them. */
+    private static final String OPENING_PUNCTUATION = "「『（【〈《〔［｛“‘";
+
+    /** Chinese, Japanese and Korean text has no spaces between words, and a line can break after any of its
+     * characters (1.12 only broke a formatted line's later parts at spaces, so these moved whole to the next line). */
+    static boolean canBreakAfter(char c) {
+        if (WORD_GAP.indexOf(c) >= 0) {
+            return true;
+        }
+        if (OPENING_PUNCTUATION.indexOf(c) >= 0) {
+            return false;
+        }
+        Character.UnicodeScript script = Character.UnicodeScript.of(c);
+        if (script == Character.UnicodeScript.HAN || script == Character.UnicodeScript.HIRAGANA
+            || script == Character.UnicodeScript.KATAKANA) {
+            return true;
+        }
+        Character.UnicodeBlock block = Character.UnicodeBlock.of(c);
+        return block == Character.UnicodeBlock.CJK_SYMBOLS_AND_PUNCTUATION
+            || block == Character.UnicodeBlock.HALFWIDTH_AND_FULLWIDTH_FORMS;
+    }
     private static final Pattern FORMATTING_CODE_PATTERN = Pattern.compile("(?i)§[0-9A-FK-OR]");
 
     public final FormatSegment[] segments;
@@ -106,8 +127,7 @@ public class FormatString {
             boolean words = onWords;
             outer: while (true) {
                 for (int i = text.length(); i > prefix + 1; i--) {
-                    String c = text.substring(i - 1, i);
-                    if (words && !WORD_GAP.contains(c)) {
+                    if (words && !canBreakAfter(text.charAt(i - 1))) {
                         continue;
                     }
                     int w = font.getStringWidth(text.substring(0, i));

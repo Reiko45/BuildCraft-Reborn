@@ -1,0 +1,17 @@
+<lore>
+Czy zbiornik obok bramki jest zapełniony w mniej niż trzech czwartych?
+</lore>
+<no_lore>
+„Zawiera poniżej 75%” to wyzwalacz bramki dostępny w każdej bramce, obok której stoi zbiornik.
+</no_lore>
+
+<chapter name="Wymagania"/>
+Gdy ten wyzwalacz jest wybrany, podłączone akcje zostaną aktywowane tylko wtedy, gdy podłączony zbiornik jest zapełniony w mniej niż 75%.
+
+<chapter name="Parametry"/>
+Jeśli wybrano „Zawiera poniżej 75%”, a zainstalowana bramka obsługuje parametry, jako parametr dostępny staje się slot filtra obok wyzwalacza.
+Umieszczenie pojemnika z cieczą w slocie filtra pozwala przed aktywacją sprawdzić, czy zbiornik zawiera mniej niż 75% cieczy wybranej w slocie filtra.
+
+<chapter name="Kierunki wyzwalaczy"/>
+Bramka może wyświetlać wyzwalacz „Zawiera poniżej 75%” kilka razy, w różnych kolorach – każdy kolor odpowiada innemu podłączonemu zbiornikowi.
+Kolor wyzwalacza oznacza kierunek, w którym zbiornik znajduje się względem rury, dzięki czemu możesz odróżnić poszczególne zbiorniki.

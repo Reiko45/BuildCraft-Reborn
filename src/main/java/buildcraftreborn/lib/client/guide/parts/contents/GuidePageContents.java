@@ -122,13 +122,23 @@ public class GuidePageContents extends GuidePageBase {
         gui.refreshChapters();
     }
 
+    /** The lore and hints switches on the first page (1.12 wrote them in English in every language). */
+    private static String loreLabel() {
+        return LocaleUtil.localize("buildcraft.guide.show_lore", XmlPageLoader.SHOW_LORE ? "[x]" : "[ ]");
+    }
+
+    private static String hintsLabel() {
+        return LocaleUtil.localize("buildcraft.guide.show_hints", XmlPageLoader.SHOW_HINTS ? "[x]" : "[ ]");
+    }
+
     @Override
     protected void renderPage(int x, int y, int width, int height, int index) {
         IFontRenderer f = getFontRenderer();
         if (index == 0) {
             int xMiddle = x + width / 2;
             int _y = y;
-            String text = gui.book == null ? "Everything" : gui.book.title.getString();
+            String text = gui.book == null ? LocaleUtil.localize("buildcraft.guide.everything")
+                : gui.book.title.getString();
             float scale = 3f;
             for (String line : f.wrapString(text, width, false, scale)) {
                 f.drawString(graphics(), line, xMiddle, _y, 0, false, true, scale);
@@ -140,11 +150,9 @@ public class GuidePageContents extends GuidePageBase {
             _y = y + height - 80;
             f.drawString(graphics(), LocaleUtil.localize("options.title"), xMiddle, _y, 0, false, true, 2f);
             _y += 28;
-            f.drawString(graphics(), "Show Lore " + (XmlPageLoader.SHOW_LORE ? "[x]" : "[ ]"), xMiddle, _y, 0, false,
-                true);
+            f.drawString(graphics(), loreLabel(), xMiddle, _y, 0, false, true);
             _y += 14;
-            f.drawString(graphics(), "Show Hints " + (XmlPageLoader.SHOW_HINTS ? "[x]" : "[ ]"), xMiddle, _y, 0,
-                false, true);
+            f.drawString(graphics(), hintsLabel(), xMiddle, _y, 0, false, true);
         } else if (index == 1) {
             int lines = gui.bookData.loadedMods.size() + 1;
             if (!gui.bookData.loadedOther.isEmpty()) {
@@ -153,7 +161,8 @@ public class GuidePageContents extends GuidePageBase {
             int perLineHeight = f.getFontHeight("Ly") + 3;
             int _y = y + (height - lines * perLineHeight) / 2;
             if (!gui.bookData.loadedMods.isEmpty()) {
-                drawCenteredText(ChatFormatting.BOLD + "Loaded Mods:", x, _y, width);
+                drawCenteredText(ChatFormatting.BOLD + LocaleUtil.localize("buildcraft.guide.loaded_mods"), x, _y,
+                    width);
                 _y += perLineHeight;
                 for (String text : gui.bookData.loadedMods) {
                     drawCenteredText(text, x, _y, width);
@@ -161,7 +170,8 @@ public class GuidePageContents extends GuidePageBase {
                 }
             }
             if (!gui.bookData.loadedOther.isEmpty()) {
-                drawCenteredText(ChatFormatting.BOLD + "Loaded Resource Packs:", x, _y, width);
+                drawCenteredText(ChatFormatting.BOLD + LocaleUtil.localize("buildcraft.guide.loaded_resource_packs"), x,
+                    _y, width);
                 _y += perLineHeight;
                 for (String text : gui.bookData.loadedOther) {
                     drawCenteredText(text, x, _y, width);
@@ -248,14 +258,14 @@ public class GuidePageContents extends GuidePageBase {
         }
         if (mouseButton == 0 && index == 0) {
             IFontRenderer f = getFontRenderer();
-            String text = XmlPageLoader.SHOW_LORE ? "Show Lore [x]" : "Show Lore [ ]";
+            String text = loreLabel();
             int fWidth = f.getStringWidth(text);
             GuiRectangle rect =
                 new GuiRectangle(x + (width - fWidth) / 2.0, y + height - 52, fWidth, f.getFontHeight(text));
             if (rect.contains(mouseX, mouseY)) {
                 XmlPageLoader.SHOW_LORE = !XmlPageLoader.SHOW_LORE;
             }
-            text = XmlPageLoader.SHOW_HINTS ? "Show Hints [x]" : "Show Hints [ ]";
+            text = hintsLabel();
             fWidth = f.getStringWidth(text);
             rect = new GuiRectangle(x + (width - fWidth) / 2.0, y + height - 38, fWidth, f.getFontHeight(text));
             if (rect.contains(mouseX, mouseY)) {

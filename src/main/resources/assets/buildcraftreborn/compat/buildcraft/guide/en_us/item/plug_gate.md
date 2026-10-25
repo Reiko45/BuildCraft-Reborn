@@ -25,8 +25,8 @@ Quartz Expansion- Provides 1 parameter slot to each set (will cut the amount of 
 Diamond Expansion- Provides 3 parameter slots to set (will cut the amount of slots the gate has by half).
 
 <chapter name="Gate Variants"/>
-Using an AND Gate ensures that </bold>all</bold> connected Triggers are active before the connection to the actions is made active.
-Using an OR Gate ensures that </bold>one or more</bold> connected Triggers are active before the connection to the actions is made active.
+Using an AND Gate ensures that <bold>all</bold> connected Triggers are active before the connection to the actions is made active.
+Using an OR Gate ensures that <bold>one or more</bold> connected Triggers are active before the connection to the actions is made active.
 
 <chapter name="Triggers"/>
 The Icons on the left-hand side are known as Triggers. These are dragged into the slots on the left side of the GUI.

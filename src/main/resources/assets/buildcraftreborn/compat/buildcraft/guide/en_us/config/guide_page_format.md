@@ -78,7 +78,7 @@ This is enabled by default in-game, and always disabled in exports.
 ## Hints
 If the "Show Hints [ ]" box is ticked then everything in the &lt;no_hint&gt; tag will be hidden, otherwise everything in the &lt;hint&gt; tag will be hidden.
 
-The hint tag should be used to show extra "hints" that the described thing can be used for, or different ways of using it in combinations with other blocks/items. Essentially this is for "recommended usages" of different things. (As working this out is part of the fun it is not required. As such this is disabled by default, but toggle-able in-game and planned to be toggle-able when exported.
+The hint tag should be used to show extra "hints" that the described thing can be used for, or different ways of using it in combinations with other blocks/items. Essentially this is for "recommended usages" of different things. (As working this out is part of the fun, it is not required.) As such this is disabled by default, but toggle-able in-game and planned to be toggle-able when exported.
 
 ## Detail
 If the "guideBookEnableDetail" client configuration option is set to "true" then everything in the &lt;no_detail&gt; tag will be hidden, otherwise everything in the &lt;detail&gt; tag will be hidden.

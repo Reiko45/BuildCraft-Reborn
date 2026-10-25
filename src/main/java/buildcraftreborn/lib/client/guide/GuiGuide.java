@@ -169,7 +169,7 @@ public class GuiGuide extends Screen {
     }
 
     private GuiGuide(@Nullable GuideBook book) {
-        super(book == null ? Component.literal("Everything") : book.title);
+        super(book == null ? Component.translatable("buildcraft.guide.everything") : book.title);
         this.book = book;
         this.bookData = book != null ? book.data : GuideManager.BOOK_ALL_DATA;
         GuideManager.INSTANCE.ensureLoaded();

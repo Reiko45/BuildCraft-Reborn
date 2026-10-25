@@ -1,0 +1,38 @@
+<lore>
+Quer tirar certos itens e levá-los para outro lugar? É só fornecer energia e vê-los fluir.
+</lore>
+<no_lore>
+O Tubo de Transporte de Madeira e Diamante serve para extrair de um inventário os itens determinados por seu filtro quando recebe energia.
+</no_lore>
+
+<recipes stack="buildcraftreborn:pipe_diamond_wood_item"/>
+
+<chapter name="Mecânica do tubo"/>
+Quando alimentado, ele extrai os itens selecionados no filtro e os transporta para quaisquer outros inventários ou tubos conectados.
+A extração acontece pelo lado sólido do tubo, e os itens são transportados para os lados transparentes.
+Se ele tiver vários lados transparentes, os itens seguem em uma direção aleatória.
+Se os itens extraídos não tiverem para onde ir, eles saem do tubo e caem no chão.
+
+Algumas máquinas podem enviar itens diretamente para um Tubo de Transporte de Madeira e Diamante de forma automática, sem que o tubo precise de energia (nesse caso, o filtro não é respeitado).
+Para impedir que os tubos se conectem, você pode usar Tampas de Tubo ou pintá-los de cores diferentes.
+
+<chapter name="Filtragem"/>
+Ao abrir a interface do Tubo de Transporte de Madeira e Diamante, você pode configurar um filtro.
+Colocar nos espaços os itens desejados permite filtrar o que ele extrai.
+Você pode usar as opções Lista branca, Lista negra ou Rodízio para mudar o funcionamento do filtro:
+Lista branca: apenas os itens selecionados são extraídos.
+Lista negra: qualquer item, exceto os selecionados, é extraído.
+Rodízio: extrai os itens na ordem exata em que estão nos espaços de filtro acima (da esquerda para a direita).
+
+Uma Lista pode ser usada em um espaço de filtro para ampliar as opções de filtragem.
+<link to="buildcraftreborn:item/list"/> 
+
+<chapter name="Alimentação"/>
+Ele pode receber energia de qualquer fonte de MJ, como um motor, um adaptador de energia ou um pulsar de tubo.
+<link to="buildcraftreborn:block/engine_wood"/>
+<link to="buildcraftreborn:item/plug_power_adaptor"/>
+<link to="buildcraftreborn:item/plug_pulsar"/> 
+A cada pulso de energia que recebe, ele extrai itens do inventário adjacente.
+Quanto mais energia um pulso tiver, mais itens são extraídos por pulso.
+
+<usages stack="buildcraftreborn:pipe_diamond_wood_item"/>
