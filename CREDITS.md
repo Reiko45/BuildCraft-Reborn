@@ -64,9 +64,15 @@ Code ported so far:
 - The paintbrush (`core/item/ItemPaintbrush_BC8`), core gate statements (`core/statements`), JSON variable models (`lib/client/model`), statement GUI elements (`lib/gui/statement`) and the assembly and integration recipe registries (`lib/recipe`) are ported from the matching `common/buildcraft/` files (MPL-2.0).
 - The unit tests in `src/test/java` from BuildCraft's `src/test/java` (packet buffer, box, snapshot index and NBT tests) and `sub_projects/expression/src/test/java` (MPL-2.0). The filler pattern GameTests follow 1.12's `ShapePatternsTester`.
 
+## This port
+
+- The logo (`src/main/resources/logo.png`, shown in the mods list and the README) is new for BuildCraft Reborn and was supplied by the project's author. It isn't BuildCraft's art.
+
 ## Optional integrations
 
 - [JEI](https://github.com/mezz/JustEnoughItems) by mezz (MIT), [Jade](https://github.com/Snownee/Jade) by Snownee (CC BY-NC-SA 4.0), [The One Probe](https://github.com/McJtyMods/TheOneProbe) by McJty (MIT) and [CraftTweaker](https://github.com/CraftTweaker/CraftTweaker) by BlameJared (MIT). Their APIs are only compiled against; none of their code is in BuildCraft Reborn's jar.
+
+- [PneumaticCraft: Repressurized](https://github.com/TeamPneumatic/pnc-repressurized) by desht (GPL-3.0) is only downloaded for the optional cross-mod GameTests (`-Pinterop_runtime=true`); none of its code or assets are in this mod.
 
 ## Tooling
 

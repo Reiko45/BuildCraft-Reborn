@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.3
+
+- The mod has a logo, shown in the mods list and on the GitHub page.
+
 ## 1.1.2
 
 Oil and fuel work with other mods.

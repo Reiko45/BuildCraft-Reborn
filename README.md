@@ -1,3 +1,5 @@
+<p align="center"><img src="src/main/resources/logo.png" alt="BuildCraft Reborn logo" width="256"></p>
+
 # BuildCraft Reborn
 
 An unofficial port of BuildCraft 8.0 from Minecraft 1.12.2 to **Minecraft 1.21.1 on NeoForge**. It is not affiliated with SpaceToad or the BuildCraft Team.
