@@ -36,6 +36,7 @@ import buildcraftreborn.energy.BCEnergyBlocks;
 import buildcraftreborn.factory.BCFactoryBlocks;
 import buildcraftreborn.robotics.BCRoboticsBlocks;
 import buildcraftreborn.silicon.BCSiliconBlocks;
+import buildcraftreborn.silicon.BCSiliconPackaging;
 import buildcraftreborn.transport.BCTransportBlocks;
 import buildcraftreborn.factory.BCFactoryItems;
 import buildcraftreborn.factory.block.BlockWaterGel;
@@ -72,6 +73,8 @@ public final class BCLootTables {
             dropSelf(BCSiliconBlocks.ASSEMBLY_TABLE.get());
             dropSelf(BCSiliconBlocks.ADVANCED_CRAFTING_TABLE.get());
             dropSelf(BCSiliconBlocks.INTEGRATION_TABLE.get());
+            dropSelf(BCSiliconPackaging.PACKAGER.get());
+            dropSelf(BCSiliconPackaging.STAMPING_TABLE.get());
             dropSelf(BCFactoryBlocks.MINING_WELL.get());
             dropSelf(BCFactoryBlocks.PUMP.get());
             dropSelf(BCFactoryBlocks.FLOOD_GATE.get());

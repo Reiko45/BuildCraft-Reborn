@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "G": {
+      "tag": "c:gears/gold"
+    },
+    "O": {
+      "tag": "c:obsidians/normal"
+    },
+    "R": {
+      "item": "buildcraftreborn:redstone_red_chipset"
+    },
+    "W": {
+      "tag": "c:player_workstations/crafting_tables"
+    }
+  },
+  "pattern": [
+    "OWO",
+    "ORO",
+    "OGO"
+  ],
+  "result": {
+    "count": 1,
+    "id": "buildcraftreborn:stamping_table"
+  }
+}

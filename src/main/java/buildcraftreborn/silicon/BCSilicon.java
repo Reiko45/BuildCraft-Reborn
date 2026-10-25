@@ -95,6 +95,7 @@ public final class BCSilicon {
         IntegrationRecipe.type = INTEGRATION_RECIPE_TYPE;
 
         BCSiliconBlocks.init();
+        BCSiliconPackaging.init(modBus);
         BCSiliconPlugs.init();
         BCSiliconItems.init();
         BCSiliconStatements.init();

@@ -25,6 +25,8 @@
     "buildcraftreborn:assembly_table",
     "buildcraftreborn:advanced_crafting_table",
     "buildcraftreborn:integration_table",
+    "buildcraftreborn:packager",
+    "buildcraftreborn:stamping_table",
     "buildcraftreborn:filler",
     "buildcraftreborn:builder",
     "buildcraftreborn:architect",

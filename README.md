@@ -6,7 +6,7 @@ An unofficial port of BuildCraft 8.0 from Minecraft 1.12.2 to **Minecraft 1.21.1
 
 ## Status
 
-**Version 1.1.0 adds BuildCraft 7.1's robots** (8.0 never got as far as robots), on top of 1.0.0-rc.1, which ported everything 8.0 had. The foundation every machine is built on is ported, and so are BuildCraft's core, energy, factory, transport, silicon, builders and robotics modules, the guide book, and support for JEI, Jade, The One Probe and CraftTweaker:
+**Version 1.2.0 adds BuildCraft 7.1's crafting by package**, after 1.1.0 added 7.1's robots (8.0 never got as far as either), on top of 1.0.0-rc.1, which ported everything 8.0 had. The foundation every machine is built on is ported, and so are BuildCraft's core, energy, factory, transport, silicon, builders and robotics modules, the guide book, and support for JEI, Jade, The One Probe and CraftTweaker:
 
 - **Engines:** redstone, stirling, combustion and creative, with their GUIs, the power, owner and help ledgers, heat, overheating and the moving piston.
 - **Wrench:** rotates BuildCraft blocks and vanilla blocks (chests, furnaces, pistons, stairs, doors and the rest of 1.12's list).
@@ -60,11 +60,15 @@ An unofficial port of BuildCraft 8.0 from Minecraft 1.12.2 to **Minecraft 1.21.1
   - The **requester** asks delivery robots for items (20 requests, each a whole stack), and the **construction mark** holds a blueprint for builder robots to build.
   - Robots wear helmets and mob heads. A sneaking right click with a wrench turns a robot back into its item, with its board and power.
   - The **zone planner**'s GUI shows a 3D map of the land around it that can be panned and zoomed, zones are painted on it with paintbrushes (16 colour layers), and a map location can copy a zone in or out. Its screen shows a small map of the area.
+- **Crafting by package** (BuildCraft 7.1's, which 8.0 didn't port):
+  - The **recipe packager** packs a crafting recipe's ingredients into a **package**. Each slot of its 3x3 pattern asks for an item or for "anything" (all the "anything" slots get the same item, one no slot names); it takes the ingredients from its nine storage slots and the inventories on its four sides, and turns a piece of paper into a package with each item in its slot. A package with empty slots can go round again to have them filled.
+  - The **stamping table**, a laser table, crafts a package's grid (40 MJ for each item), and crafts any other item on its own as a one-item recipe. What can't be crafted moves on unchanged, and what a recipe leaves behind (empty buckets) goes in its leftover slots.
+  - Packages show their grid in their tooltip. Thrown by hand, a dispenser or a stripes pipe, a package bursts where it lands and drops what it holds.
 - **Tools:** the **list** (two lines of filter items, matching exactly, by type or by material, with a label), the **map location** (marks a spot, an area, a path or a zone), and the **debugger** (adds a machine's internal state to the F3 screen).
 - **RF engine and MJ dynamo:** the RF engine turns NeoForge energy (FE) into MJ and the MJ dynamo turns MJ into FE. Both are off by default, as in 1.12: turn on `enableRfEngine` and `enableMjDynamo` in `config/buildcraftreborn-energy.toml` for their recipes and creative tab entries.
-- **Guide book:** BuildCraft's own guide, with all 107 pages from 1.12's BuildCraft Guide (blocks, items, pipes, triggers, actions and configuration) and 7 new ones for the robots, boards, docking station, tables, requester and construction mark, crafting, smelting and assembly recipes and uses on each item's page, three ways of sorting the contents, search, chapter bookmarks, and lore and hints that can be turned on and off. Pages are markdown files in `assets/<mod>/compat/buildcraft/guide/<language>/`, so resource packs and other mods can add their own (F3 + T reloads them).
+- **Guide book:** BuildCraft's own guide, with all 107 pages from 1.12's BuildCraft Guide (blocks, items, pipes, triggers, actions and configuration) and 10 new ones for the robots, boards, docking station, tables, requester, construction mark, recipe packager, stamping table and package, crafting, smelting and assembly recipes and uses on each item's page, three ways of sorting the contents, search, chapter bookmarks, and lore and hints that can be turned on and off. Pages are markdown files in `assets/<mod>/compat/buildcraft/guide/<language>/`, so resource packs and other mods can add their own (F3 + T reloads them).
 - **Translations:** the 30 languages of 1.12's BuildCraft, for every text that kept its meaning. Text that is new in this port is English only for now.
-- **JEI** (optional): assembly table recipes (including every facade), programming table boards, robot programming in the integration table, distiller, heat exchanger (heating and cooling) and combustion engine fuel and coolant recipes, with their machines as catalysts; the stirling engine for furnace fuels; the auto workbench and advanced crafting table as crafting tables, with recipe transfer into their blueprints; clickable progress arrows; items dragged from JEI into filter and blueprint slots; and gates, lenses, facades, paintbrushes, guide books, robots and boards listed one by one.
+- **JEI** (optional): assembly table recipes (including every facade), programming table boards, robot programming in the integration table, distiller, heat exchanger (heating and cooling) and combustion engine fuel and coolant recipes, with their machines as catalysts; the stirling engine for furnace fuels; the auto workbench and advanced crafting table as crafting tables, with recipe transfer into their blueprints, and the stamping table; clickable progress arrows; items dragged from JEI into filter and blueprint slots; and gates, lenses, facades, paintbrushes, guide books, robots and boards listed one by one.
 - **Jade and The One Probe** (optional): what an auto workbench or advanced crafting table is making and from what, how much power a laser table is waiting for, an engine's output, stored power and heat, and how much MJ other machines hold.
 - **CraftTweaker** (optional): `<recipetype:buildcraftreborn:assembly>` adds and removes assembly recipes; `mods.buildcraftreborn.Refinery` adds heat exchanger and distiller recipes and `mods.buildcraftreborn.CombustionEngine` adds fuels and coolants. See [CraftTweaker](#crafttweaker) below.
 - **Advancements** for the above.
@@ -105,6 +109,7 @@ A **test machine** takes MJ from engines and has a tank and an item slot. It is 
 - **Builder robots and construction marks use 8.0's builder.** 7.1's builder robot placed each block itself with 7.1's builder, which 8.0 replaced; here the mark runs 8.0's builder (it clears and places as a builder in its place would), and builder robots bring it the items it needs and the power from their own batteries. Engines can power a mark too. Blueprints with sub-blueprints, and linking marks to an architect table, are gone with 7.1's builder.
 - **Robots' areas come from 8.0's zone planner** (through map locations); 7.1's own zone planner block is replaced by it. Robots search for work and plan their paths on the server thread, a few milliseconds a tick (7.1 used threads).
 - **Docking stations get power from kinesis pipes.** 8.0's kinesis pipes only powered blocks; they now also power pluggables that ask for it.
+- **Packages:** the tooltip draws the package's grid at full size (7.1 drew it at half size with a special font renderer), a thrown package drops its items on the side of the block it hit (7.1 dropped them inside it), and an empty package passes through the stamping table (7.1 kept it there for good). The stamping table only uses its power when it crafts or passes something on (7.1 used it up even when nothing happened), and 7.1's cost of 400 RF an item is 40 MJ. Pipes can only put items into the packager's storage that top up a stack there or that the pattern can use, and so can players (7.1's GUI took anything). The stamping table doesn't craft as a fake player, so crafting events and statistics don't fire, like the auto workbench.
 - **Robot fixes:** the tool a robot holds points at what it works on again (1.12's rewrite turned it away), the programming table only takes items it can program, and its choices come from the server (so a server's board blacklist is what players see). Board ids are `buildcraftreborn:<board>`, so robots from 7.1 worlds don't carry over.
 - **Silicon fixes found on the way:** pipes can take results out of the integration table (8.0 made its output slot insert-only), and the pulsar can be placed on pipes (8.0's pulsar item placed nothing).
 - **JEI, Jade and The One Probe** show more than 1.12's BuildCraftCompat did: facade, coolant and solid coolant recipes, recipe click areas and ingredient dragging in JEI, and engine and power lines in the probes. 1.12's Hwyla support is Jade's here.
@@ -137,7 +142,7 @@ On Windows use `gradlew.bat` instead of `./gradlew`.
 | `./gradlew runClient` | Start Minecraft with the mod |
 | `./gradlew runServer` | Start a dedicated server (set `eula=true` in `run/eula.txt` first) |
 | `./gradlew runData` | Regenerate models, lang, tags and recipes into `src/generated/resources` |
-| `./gradlew runGameTestServer` | Run every GameTest (129) on a headless server, then exit |
+| `./gradlew runGameTestServer` | Run every GameTest (139) on a headless server, then exit |
 | `./gradlew test` | Run the unit tests (expression language, packet buffer, boxes, snapshot NBT and indexes, and a check that the shipped data never mentions development-only content) |
 | `./gradlew build` | Build the mod jar into `build/libs` |
 
@@ -145,7 +150,7 @@ Commit `src/generated/resources` after running `runData`; the build reads it fro
 
 JEI, Jade, The One Probe and CraftTweaker are compiled against but never required. With `compat_runtime=true` in `gradle.properties` (the default) the dev runs load all four; set it to `false` (or pass `-Pcompat_runtime=false`) to run without them.
 
-`-Pinterop_runtime=true` also loads PneumaticCraft in the dev runs, for the GameTests in `BCInteropTests` that check oil works both ways between the two mods (132 GameTests in all).
+`-Pinterop_runtime=true` also loads PneumaticCraft in the dev runs, for the GameTests in `BCInteropTests` that check oil works both ways between the two mods (142 GameTests in all).
 
 The dev runs can't catch everything: they register development-only content and run in development mode. Before a release, also boot the built jar on a real NeoForge server (from the NeoForge installer, `--installServer`) and check its log for errors.
 
@@ -212,7 +217,8 @@ src/main/java/buildcraftreborn/
   transport/                   was buildcrafttransport: pipe holder, pipe types and flows, wires,
                                blocker and power adapter, stripes, filtered buffer, pipe statements
   silicon/                     was buildcraftsilicon: laser, assembly, advanced crafting and integration
-                               tables, gates, lenses, pulsar, light sensor, timer, facades, chipsets
+                               tables, gates, lenses, pulsar, light sensor, timer, facades, chipsets,
+                               and from 7.1 the recipe packager, stamping table and packages
   builders/                    was buildcraftbuilders: quarry and frame, filler and its patterns,
                                architect table, builder, electronic library, replacer, blueprints,
                                templates, schematics and their rules, the filler planner
@@ -238,6 +244,7 @@ The guide book's engine is in `lib/client/guide/`, and its pages in `assets/buil
 - [x] **Phase 5, builders.** Quarry, filler, architect table, blueprints, builder, library, replacer, volume boxes.
 - [x] **Phase 6, robotics, compat, guide, polish.** Zone planner, list, map location, debugger, RF engine and MJ dynamo, guide book, JEI, Jade, The One Probe, CraftTweaker, translations, advancements.
 - [x] **Phase 7, robots (1.1.0).** BuildCraft 7.1's robots, all 17 boards, docking stations and their gate statements, the programming and charging tables, the requester, and the construction mark on 8.0's builder.
+- [x] **Phase 8, packages (1.2.0).** BuildCraft 7.1's recipe packager, stamping table and packages.
 
 Each phase ends with GameTests for its exit criteria and a dedicated-server boot.
 
@@ -247,7 +254,7 @@ Each phase ends with GameTests for its exit criteria and a dedicated-server boot
 
 ## Upstream
 
-Ported from the official BuildCraft source, branch [`8.0.x-1.12.2`](https://github.com/BuildCraft/BuildCraft/tree/8.0.x-1.12.2) at commit `7c86626` (2026-05-23). The robots come from BuildCraft 7.1 (branch [`7.1.x`](https://github.com/BuildCraft/BuildCraft/tree/7.1.x)), by way of the robotics code the 1.12 branch keeps under `src_old_license/`.
+Ported from the official BuildCraft source, branch [`8.0.x-1.12.2`](https://github.com/BuildCraft/BuildCraft/tree/8.0.x-1.12.2) at commit `7c86626` (2026-05-23). The robots come from BuildCraft 7.1 (branch [`7.1.x`](https://github.com/BuildCraft/BuildCraft/tree/7.1.x)), by way of the robotics code the 1.12 branch keeps under `src_old_license/`, and the packager, stamping table and packages come from 7.1's silicon module.
 
 ## License
 

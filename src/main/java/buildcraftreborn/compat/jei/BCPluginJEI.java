@@ -54,6 +54,7 @@ import buildcraftreborn.robotics.item.ItemRedstoneBoard;
 import buildcraftreborn.robotics.recipe.RobotIntegrationRecipe;
 import buildcraftreborn.robotics.tile.TileProgrammingTable;
 import buildcraftreborn.silicon.BCSiliconBlocks;
+import buildcraftreborn.silicon.BCSiliconPackaging;
 import buildcraftreborn.silicon.BCSiliconItems;
 import buildcraftreborn.silicon.client.gui.GuiAdvancedCraftingTable;
 import buildcraftreborn.silicon.client.gui.GuiAssemblyTable;
@@ -227,6 +228,7 @@ public class BCPluginJEI implements IModPlugin {
         registration.addRecipeCatalyst(BCEnergyBlocks.ENGINE_STONE.get(), RecipeTypes.FUELING);
         registration.addRecipeCatalyst(BCSiliconBlocks.ADVANCED_CRAFTING_TABLE.get(), RecipeTypes.CRAFTING);
         registration.addRecipeCatalyst(BCFactoryBlocks.AUTO_WORKBENCH_ITEMS.get(), RecipeTypes.CRAFTING);
+        registration.addRecipeCatalyst(BCSiliconPackaging.STAMPING_TABLE.get(), RecipeTypes.CRAFTING);
     }
 
     @Override

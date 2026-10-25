@@ -27,6 +27,7 @@ import buildcraftreborn.energy.BCEnergyFluids;
 import buildcraftreborn.factory.BCFactoryItems;
 import buildcraftreborn.lib.fluid.BCFluid;
 import buildcraftreborn.robotics.BCRoboticsItems;
+import buildcraftreborn.silicon.BCSiliconPackaging;
 import buildcraftreborn.silicon.BCSiliconItems;
 import buildcraftreborn.transport.BCTransportItems;
 
@@ -120,6 +121,7 @@ public final class BCItemModels extends ItemModelProvider {
         withExistingParent("robot_station", mcLoc("item/generated")).texture("layer0",
             modLoc("block/robot_station/base"));
         basicItem(BCRoboticsItems.REDSTONE_CRYSTAL.get());
+        basicItem(BCSiliconPackaging.PACKAGE.get());
 
         // 1.12's forgebucket model with the shard's own base and fluid mask; the fluid comes from the stack
         withExistingParent("fragile_fluid_shard", ResourceLocationHelper.neoforge("item/default"))

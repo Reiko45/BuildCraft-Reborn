@@ -1,8 +1,17 @@
 # Changelog
 
-## 1.1.3
+## 1.2.0
 
+BuildCraft 7.1's crafting by package, which 8.0 never ported.
+
+### Phase 8: packages
+
+- The **recipe packager** packs a crafting recipe's ingredients into a package. Its 3x3 pattern sets each slot to an item or to "anything", and it takes the ingredients from its nine storage slots and from the inventories on its four sides, using paper (or a package with empty slots) for each package.
+- The **stamping table**, a laser table, crafts packages as the crafting grid they hold (40 MJ an item), and other items on their own as one-item recipes (a log into planks). What can't be crafted passes through; what recipes leave behind goes in three leftover slots.
+- **Packages** show their grid in their tooltip, and can be thrown by hand, by dispensers and by stripes pipes: they burst open where they land.
+- 7.1's recipes, GUIs, textures and stamping table model; guide pages for all three; the stamping table is a crafting catalyst in JEI.
 - The mod has a logo, shown in the mods list and on the GitHub page.
+- The integration table no longer says "No recipes use this!" (robots are programmed in it).
 
 ## 1.1.2
 

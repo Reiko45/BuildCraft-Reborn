@@ -24,6 +24,7 @@ import buildcraftreborn.energy.BCEnergyBlocks;
 import buildcraftreborn.factory.BCFactoryBlocks;
 import buildcraftreborn.robotics.BCRoboticsBlocks;
 import buildcraftreborn.silicon.BCSiliconBlocks;
+import buildcraftreborn.silicon.BCSiliconPackaging;
 import buildcraftreborn.transport.BCTransportBlocks;
 
 /** Block tags (mineable/pickaxe, needs_iron_tool, ...). */
@@ -46,7 +47,8 @@ public final class BCBlockTags extends BlockTagsProvider {
         // Transport: pipes break quickly by hand, like 1.12 (no tool tag); the filtered buffer is iron
         tag(BlockTags.MINEABLE_WITH_PICKAXE).add(BCTransportBlocks.FILTERED_BUFFER.get());
         tag(BlockTags.MINEABLE_WITH_PICKAXE).add(BCSiliconBlocks.LASER.get(), BCSiliconBlocks.ASSEMBLY_TABLE.get(),
-            BCSiliconBlocks.ADVANCED_CRAFTING_TABLE.get(), BCSiliconBlocks.INTEGRATION_TABLE.get());
+            BCSiliconBlocks.ADVANCED_CRAFTING_TABLE.get(), BCSiliconBlocks.INTEGRATION_TABLE.get(),
+            BCSiliconPackaging.PACKAGER.get(), BCSiliconPackaging.STAMPING_TABLE.get());
         tag(BlockTags.MINEABLE_WITH_PICKAXE).add(BCBuildersBlocks.FILLER.get(), BCBuildersBlocks.BUILDER.get(),
             BCBuildersBlocks.ARCHITECT.get(), BCBuildersBlocks.LIBRARY.get(), BCBuildersBlocks.REPLACER.get(),
             BCBuildersBlocks.FRAME.get(), BCBuildersBlocks.QUARRY.get());

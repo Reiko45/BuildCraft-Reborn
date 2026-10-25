@@ -9,6 +9,7 @@ package buildcraftreborn.silicon.client;
 
 import java.util.Map;
 
+import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.client.resources.model.ModelResourceLocation;
@@ -17,6 +18,7 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.ModelEvent;
+import net.neoforged.neoforge.client.event.RegisterClientTooltipComponentFactoriesEvent;
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 
@@ -26,10 +28,13 @@ import buildcraftreborn.lib.client.model.ModelLazy;
 import buildcraftreborn.lib.client.model.ModelPluggableItem;
 import buildcraftreborn.silicon.BCSiliconBlocks;
 import buildcraftreborn.silicon.BCSiliconItems;
+import buildcraftreborn.silicon.BCSiliconPackaging;
 import buildcraftreborn.silicon.client.gui.GuiAdvancedCraftingTable;
 import buildcraftreborn.silicon.client.gui.GuiAssemblyTable;
 import buildcraftreborn.silicon.client.gui.GuiGate;
 import buildcraftreborn.silicon.client.gui.GuiIntegrationTable;
+import buildcraftreborn.silicon.client.gui.GuiPackager;
+import buildcraftreborn.silicon.client.gui.GuiStampingTable;
 import buildcraftreborn.silicon.client.model.ModelGateItem;
 import buildcraftreborn.silicon.client.model.ModelLensItem;
 import buildcraftreborn.silicon.client.model.key.KeyPlugFacade;
@@ -46,6 +51,7 @@ import buildcraftreborn.silicon.client.render.PlugGateRenderer;
 import buildcraftreborn.silicon.client.render.PlugPulsarRenderer;
 import buildcraftreborn.silicon.client.render.RenderLaser;
 import buildcraftreborn.silicon.plug.PluggableGate;
+import buildcraftreborn.silicon.item.ItemPackage.PackageTooltip;
 import buildcraftreborn.silicon.plug.PluggablePulsar;
 
 /** Client setup for silicon: the table and gate screens, the laser beam, and the pluggable models. Runs after
@@ -67,6 +73,7 @@ public final class BCSiliconClient {
         PipeApiClient.registry.registerRenderer(PluggablePulsar.class, PlugPulsarRenderer.INSTANCE);
 
         modBus.addListener(BCSiliconClient::registerScreens);
+        modBus.addListener(BCSiliconClient::registerTooltips);
         modBus.addListener(BCSiliconClient::registerRenderers);
         modBus.addListener(BCSiliconClient::onClientSetup);
         modBus.addListener(BCSiliconClient::onModifyBakingResult);
@@ -79,6 +86,12 @@ public final class BCSiliconClient {
         event.register(BCSiliconBlocks.ADVANCED_CRAFTING_TABLE_MENU.get(), GuiAdvancedCraftingTable::new);
         event.register(BCSiliconBlocks.INTEGRATION_TABLE_MENU.get(), GuiIntegrationTable::new);
         event.register(BCSiliconBlocks.GATE_MENU.get(), GuiGate::new);
+        event.register(BCSiliconPackaging.PACKAGER_MENU.get(), GuiPackager::new);
+        event.register(BCSiliconPackaging.STAMPING_TABLE_MENU.get(), GuiStampingTable::new);
+    }
+
+    private static void registerTooltips(RegisterClientTooltipComponentFactoriesEvent event) {
+        event.register(PackageTooltip.class, ClientPackageTooltip::new);
     }
 
     private static void registerItemColours(RegisterColorHandlersEvent.Item event) {
@@ -87,6 +100,7 @@ public final class BCSiliconClient {
 
     private static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
         event.registerBlockEntityRenderer(BCSiliconBlocks.LASER_TILE.get(), RenderLaser::new);
+        event.registerEntityRenderer(BCSiliconPackaging.PACKAGE_ENTITY.get(), ThrownItemRenderer::new);
     }
 
     private static void onClientSetup(FMLClientSetupEvent event) {

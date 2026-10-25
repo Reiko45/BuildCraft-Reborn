@@ -34,6 +34,7 @@ import buildcraftreborn.energy.BCEnergyFluids;
 import buildcraftreborn.factory.BCFactoryBlocks;
 import buildcraftreborn.robotics.BCRoboticsBlocks;
 import buildcraftreborn.silicon.BCSiliconBlocks;
+import buildcraftreborn.silicon.BCSiliconPackaging;
 import buildcraftreborn.transport.BCTransportBlocks;
 import buildcraftreborn.factory.block.BlockChute;
 import buildcraftreborn.factory.block.BlockFloodGate;
@@ -156,6 +157,13 @@ public final class BCBlockStates extends BlockStateProvider {
         table(BCSiliconBlocks.ASSEMBLY_TABLE.get(), "assembly");
         table(BCSiliconBlocks.ADVANCED_CRAFTING_TABLE.get(), "advanced_crafting");
         table(BCSiliconBlocks.INTEGRATION_TABLE.get(), "integration");
+        // 7.1's packager, and its stamping table (stamping.json is 7.1's model of it, with 7.1's texture sheet)
+        String p = "block/packager/";
+        ModelFile packager = models().cubeBottomTop("packager", modLoc(p + "side"), modLoc(p + "bottom"),
+            modLoc(p + "top"));
+        simpleBlock(BCSiliconPackaging.PACKAGER.get(), packager);
+        simpleBlockItem(BCSiliconPackaging.PACKAGER.get(), packager);
+        table(BCSiliconPackaging.STAMPING_TABLE.get(), "stamping");
     }
 
     private void table(Block block, String name) {

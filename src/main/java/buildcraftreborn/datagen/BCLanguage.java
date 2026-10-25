@@ -32,6 +32,7 @@ import buildcraftreborn.robotics.BCRoboticsItems;
 import buildcraftreborn.silicon.BCSilicon;
 import buildcraftreborn.silicon.BCSiliconBlocks;
 import buildcraftreborn.silicon.BCSiliconItems;
+import buildcraftreborn.silicon.BCSiliconPackaging;
 import buildcraftreborn.transport.BCTransport;
 import buildcraftreborn.transport.BCTransportBlocks;
 import buildcraftreborn.transport.BCTransportItems;
@@ -133,7 +134,12 @@ public final class BCLanguage extends LanguageProvider {
         add(BCSiliconBlocks.ASSEMBLY_TABLE.get(), "Assembly Table");
         add(BCSiliconBlocks.ADVANCED_CRAFTING_TABLE.get(), "Advanced Crafting Table");
         add(BCSiliconBlocks.INTEGRATION_TABLE.get(), "Integration Table");
-        add(BCSiliconBlocks.INTEGRATION_TABLE.get().getDescriptionId() + ".tip", "No recipes use this!");
+        // (1.12's tip, "No recipes use this!", isn't true any more: robots are programmed here)
+        // 7.1's crafting by package
+        add(BCSiliconPackaging.PACKAGER.get(), "Recipe Packager");
+        add(BCSiliconPackaging.STAMPING_TABLE.get(), "Stamping Table");
+        add(BCSiliconPackaging.PACKAGE.get(), "Package");
+        add(BCSiliconPackaging.PACKAGE_ENTITY.get(), "Package");
         String[][] chipsets = { { "red", "Redstone Chipset" }, { "iron", "Iron Chipset" }, { "gold", "Golden Chipset" },
             { "quartz", "Quartz Chipset" }, { "diamond", "Diamond Chipset" } };
         for (String[] chipset : chipsets) {

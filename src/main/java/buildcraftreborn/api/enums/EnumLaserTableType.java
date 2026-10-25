@@ -16,7 +16,8 @@ public enum EnumLaserTableType implements StringRepresentable {
     ADVANCED_CRAFTING_TABLE,
     INTEGRATION_TABLE,
     CHARGING_TABLE,
-    PROGRAMMING_TABLE;
+    PROGRAMMING_TABLE,
+    STAMPING_TABLE;
 
     private final String serializedName = name().toLowerCase(Locale.ROOT);
 

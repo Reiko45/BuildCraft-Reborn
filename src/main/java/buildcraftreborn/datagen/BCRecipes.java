@@ -56,6 +56,7 @@ import buildcraftreborn.robotics.BCRoboticsBlocks;
 import buildcraftreborn.robotics.BCRoboticsItems;
 import buildcraftreborn.silicon.BCSiliconBlocks;
 import buildcraftreborn.silicon.BCSiliconItems;
+import buildcraftreborn.silicon.BCSiliconPackaging;
 import buildcraftreborn.silicon.gate.EnumGateLogic;
 import buildcraftreborn.silicon.gate.EnumGateMaterial;
 import buildcraftreborn.silicon.gate.EnumGateModifier;
@@ -189,6 +190,24 @@ public final class BCRecipes extends RecipeProvider {
         silicon(output);
         builders(output);
         robotics(output);
+        packaging(output);
+    }
+
+    /** 7.1's recipes for the recipe packager and the stamping table (BuildCraftSilicon). */
+    private static void packaging(RecipeOutput output) {
+        Item redChipset = chipset(EnumRedstoneChipset.RED);
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, BCSiliconPackaging.PACKAGER.get())
+            .pattern(" I ").pattern("ICI").pattern(" P ")
+            .define('I', Tags.Items.INGOTS_IRON).define('C', Tags.Items.PLAYER_WORKSTATIONS_CRAFTING_TABLES)
+            .define('P', Items.PISTON)
+            .unlockedBy("has_piston", has(Items.PISTON))
+            .save(output, BuildCraftReborn.id("packager"));
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, BCSiliconPackaging.STAMPING_TABLE.get())
+            .pattern("OWO").pattern("ORO").pattern("OGO")
+            .define('O', Tags.Items.OBSIDIANS_NORMAL).define('W', Tags.Items.PLAYER_WORKSTATIONS_CRAFTING_TABLES)
+            .define('R', redChipset).define('G', BCCoreTags.GEARS_GOLD)
+            .unlockedBy("has_chipset", has(redChipset))
+            .save(output, BuildCraftReborn.id("stamping_table"));
     }
 
     /** Robotics: 7.1's recipes (BuildCraftRobotics and BuildCraftSilicon). 1.12 had none, not even for the zone

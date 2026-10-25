@@ -796,5 +796,26 @@
     "tag_type": "block",
     "tag_subtype": "robotics",
     "stack": "buildcraftreborn:construction_marker"
+  },
+  "block/packager": {
+    "type": "item_stack",
+    "book": "buildcraftreborn:main",
+    "tag_type": "block",
+    "tag_subtype": "automation",
+    "stack": "buildcraftreborn:packager"
+  },
+  "block/stamping_table": {
+    "type": "item_stack",
+    "book": "buildcraftreborn:main",
+    "tag_type": "block",
+    "tag_subtype": "automation",
+    "stack": "buildcraftreborn:stamping_table"
+  },
+  "item/package": {
+    "type": "item_stack",
+    "book": "buildcraftreborn:main",
+    "tag_type": "item",
+    "tag_subtype": "automation",
+    "stack": "buildcraftreborn:package"
   }
 }
