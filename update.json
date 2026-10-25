@@ -1,9 +1,11 @@
 {
   "homepage": "https://github.com/Reiko45/BuildCraft-Reborn/releases",
   "promos": {
-    "1.21.1-latest": "1.3.0"
+    "1.21.1-latest": "2.0.0",
+    "1.21.1-recommended": "2.0.0"
   },
   "1.21.1": {
+    "2.0.0": "First release out of beta. The guide book in all 31 languages (translated by AI, not yet checked by native speakers), a real Path Mark page, and translation fixes.",
     "1.3.0": "Robot goggles: wear them to see robots through walls, glowing red, yellow or green by their battery. They also show laser beams the config hides.",
     "1.2.3": "Every language translates every line (the missing ones by AI, not yet checked by native speakers). Serbian in Cyrillic and Latin. Coloured item names follow each language. Fixes in the old translations.",
     "1.2.2": "Other mods' diesel, gasoline, kerosene, biodiesel, ethanol and LPG burn in the combustion engine, each with its own power and burn time.",
