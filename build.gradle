@@ -139,16 +139,24 @@ dependencies {
     compileOnly "mezz.jei:jei-${minecraft_version}-common-api:${jei_version}"
     compileOnly "mezz.jei:jei-${minecraft_version}-neoforge-api:${jei_version}"
     compileOnly "maven.modrinth:jade:${jade_version}"
-    compileOnly "mcjty.theoneprobe:theoneprobe:${top_version}"
+    compileOnly "maven.modrinth:emi:${emi_version}"
+    // (The One Probe's pom asks for an old JEI, which would load with EMI-only runs)
+    compileOnly("mcjty.theoneprobe:theoneprobe:${top_version}") { exclude group: "mezz.jei" }
     compileOnly "com.blamejared.crafttweaker:CraftTweaker-neoforge-${minecraft_version}:${crafttweaker_version}"
     // Another mod's oil, for the cross-mod tests in BCInteropTests: -Pinterop_runtime=true (off by default)
     if (project.findProperty("interop_runtime") == "true") {
         localRuntime "maven.modrinth:pneumaticcraft-repressurized:${pnc_version}"
     }
     if (project.findProperty("compat_runtime") == "true") {
-        localRuntime "mezz.jei:jei-${minecraft_version}-neoforge:${jei_version}"
+        def viewer = project.findProperty("recipe_viewer") ?: "jei"
+        if (viewer == "jei" || viewer == "both") {
+            localRuntime "mezz.jei:jei-${minecraft_version}-neoforge:${jei_version}"
+        }
+        if (viewer == "emi" || viewer == "both") {
+            localRuntime "maven.modrinth:emi:${emi_version}"
+        }
         localRuntime "maven.modrinth:jade:${jade_version}"
-        localRuntime "mcjty.theoneprobe:theoneprobe:${top_version}"
+        localRuntime("mcjty.theoneprobe:theoneprobe:${top_version}") { exclude group: "mezz.jei" }
         localRuntime "com.blamejared.crafttweaker:CraftTweaker-neoforge-${minecraft_version}:${crafttweaker_version}"
     }
 

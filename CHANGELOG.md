@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.2.1
+
+EMI support.
+
+- **EMI** (optional) shows everything JEI does: assembly table recipes (including every facade), programming table boards, robot programming in the integration table, distiller, heat exchanger and combustion engine fuel and coolant recipes, with their machines as workstations; the stirling engine for furnace fuels; the auto workbench, advanced crafting table and stamping table as crafting tables. EMI's fill button puts a crafting recipe into the auto workbench's and advanced crafting table's blueprints and moves an assembly recipe's ingredients into the assembly table, items can be dragged from EMI into filter, blueprint and pattern slots, ledgers are kept clear of EMI's item list, and gates, lenses, facades, paintbrushes, guide books, robots and boards are listed one by one. With JEI installed as well, EMI uses BuildCraft's own EMI support rather than its JEI plugin.
+- JEI and EMI can put a crafting recipe into the recipe packager's pattern. Filling a blueprint or pattern from a recipe uses the items the player has where a slot takes several (oak planks rather than whichever planks JEI was showing).
+- BuildCraft's common tags (`c:gears` and its five gears, `c:oil`, `c:crude_oil`, `c:fuel`, `c:light_fuel`) have names, which JEI and EMI show for tag ingredients.
+- Fixes items dragged from JEI into the recipe packager's pattern: the slot showed the item but wasn't switched on, so the packager left it out.
+- For development: `recipe_viewer` in `gradle.properties` (or `-Precipe_viewer=emi` or `both`) picks the recipe viewer the dev runs load, and a new GameTest checks what recipe viewers send to the packager's pattern.
+
 ## 1.2.0
 
 BuildCraft 7.1's crafting by package, which 8.0 never ported.

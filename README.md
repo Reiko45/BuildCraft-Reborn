@@ -6,7 +6,7 @@ An unofficial port of BuildCraft 8.0 from Minecraft 1.12.2 to **Minecraft 1.21.1
 
 ## Status
 
-**Version 1.2.0 adds BuildCraft 7.1's crafting by package**, after 1.1.0 added 7.1's robots (8.0 never got as far as either), on top of 1.0.0-rc.1, which ported everything 8.0 had. The foundation every machine is built on is ported, and so are BuildCraft's core, energy, factory, transport, silicon, builders and robotics modules, the guide book, and support for JEI, Jade, The One Probe and CraftTweaker:
+**Version 1.2.0 adds BuildCraft 7.1's crafting by package** (and 1.2.1 adds EMI support), after 1.1.0 added 7.1's robots (8.0 never got as far as either), on top of 1.0.0-rc.1, which ported everything 8.0 had. The foundation every machine is built on is ported, and so are BuildCraft's core, energy, factory, transport, silicon, builders and robotics modules, the guide book, and support for JEI, EMI, Jade, The One Probe and CraftTweaker:
 
 - **Engines:** redstone, stirling, combustion and creative, with their GUIs, the power, owner and help ledgers, heat, overheating and the moving piston.
 - **Wrench:** rotates BuildCraft blocks and vanilla blocks (chests, furnaces, pistons, stairs, doors and the rest of 1.12's list).
@@ -68,7 +68,8 @@ An unofficial port of BuildCraft 8.0 from Minecraft 1.12.2 to **Minecraft 1.21.1
 - **RF engine and MJ dynamo:** the RF engine turns NeoForge energy (FE) into MJ and the MJ dynamo turns MJ into FE. Both are off by default, as in 1.12: turn on `enableRfEngine` and `enableMjDynamo` in `config/buildcraftreborn-energy.toml` for their recipes and creative tab entries.
 - **Guide book:** BuildCraft's own guide, with all 107 pages from 1.12's BuildCraft Guide (blocks, items, pipes, triggers, actions and configuration) and 10 new ones for the robots, boards, docking station, tables, requester, construction mark, recipe packager, stamping table and package, crafting, smelting and assembly recipes and uses on each item's page, three ways of sorting the contents, search, chapter bookmarks, and lore and hints that can be turned on and off. Pages are markdown files in `assets/<mod>/compat/buildcraft/guide/<language>/`, so resource packs and other mods can add their own (F3 + T reloads them).
 - **Translations:** the 30 languages of 1.12's BuildCraft, for every text that kept its meaning. Text that is new in this port is English only for now.
-- **JEI** (optional): assembly table recipes (including every facade), programming table boards, robot programming in the integration table, distiller, heat exchanger (heating and cooling) and combustion engine fuel and coolant recipes, with their machines as catalysts; the stirling engine for furnace fuels; the auto workbench and advanced crafting table as crafting tables, with recipe transfer into their blueprints, and the stamping table; clickable progress arrows; items dragged from JEI into filter and blueprint slots; and gates, lenses, facades, paintbrushes, guide books, robots and boards listed one by one.
+- **JEI** (optional): assembly table recipes (including every facade), programming table boards, robot programming in the integration table, distiller, heat exchanger (heating and cooling) and combustion engine fuel and coolant recipes, with their machines as catalysts; the stirling engine for furnace fuels; the auto workbench, advanced crafting table and stamping table as crafting tables, with recipe transfer into the blueprints and into the recipe packager's pattern; clickable progress arrows; items dragged from JEI into filter, blueprint and pattern slots; and gates, lenses, facades, paintbrushes, guide books, robots and boards listed one by one.
+- **EMI** (optional): the same recipes and workstations as JEI, EMI's fill button for the blueprints, the packager's pattern and the assembly table, dragging into filter, blueprint and pattern slots, and the same items listed one by one. EMI has no click areas, so the progress arrows aren't clickable there. With JEI installed too, EMI uses this support rather than the JEI plugin.
 - **Jade and The One Probe** (optional): what an auto workbench or advanced crafting table is making and from what, how much power a laser table is waiting for, an engine's output, stored power and heat, and how much MJ other machines hold.
 - **CraftTweaker** (optional): `<recipetype:buildcraftreborn:assembly>` adds and removes assembly recipes; `mods.buildcraftreborn.Refinery` adds heat exchanger and distiller recipes and `mods.buildcraftreborn.CombustionEngine` adds fuels and coolants. See [CraftTweaker](#crafttweaker) below.
 - **Advancements** for the above.
@@ -112,7 +113,7 @@ A **test machine** takes MJ from engines and has a tank and an item slot. It is 
 - **Packages:** the tooltip draws the package's grid at full size (7.1 drew it at half size with a special font renderer), a thrown package drops its items on the side of the block it hit (7.1 dropped them inside it), and an empty package passes through the stamping table (7.1 kept it there for good). The stamping table only uses its power when it crafts or passes something on (7.1 used it up even when nothing happened), and 7.1's cost of 400 RF an item is 40 MJ. Pipes can only put items into the packager's storage that top up a stack there or that the pattern can use, and so can players (7.1's GUI took anything). The stamping table doesn't craft as a fake player, so crafting events and statistics don't fire, like the auto workbench.
 - **Robot fixes:** the tool a robot holds points at what it works on again (1.12's rewrite turned it away), the programming table only takes items it can program, and its choices come from the server (so a server's board blacklist is what players see). Board ids are `buildcraftreborn:<board>`, so robots from 7.1 worlds don't carry over.
 - **Silicon fixes found on the way:** pipes can take results out of the integration table (8.0 made its output slot insert-only), and the pulsar can be placed on pipes (8.0's pulsar item placed nothing).
-- **JEI, Jade and The One Probe** show more than 1.12's BuildCraftCompat did: facade, coolant and solid coolant recipes, recipe click areas and ingredient dragging in JEI, and engine and power lines in the probes. 1.12's Hwyla support is Jade's here.
+- **JEI, Jade and The One Probe** show more than 1.12's BuildCraftCompat did: facade, coolant and solid coolant recipes, recipe click areas and ingredient dragging in JEI, and engine and power lines in the probes. 1.12's Hwyla support is Jade's here, and EMI support is new (EMI didn't exist for 1.12).
 
 ### Not ported
 
@@ -124,7 +125,7 @@ A **test machine** takes MJ from engines and has a tank and an item slot. It is 
 
 ## Download
 
-Get the jar from the [releases page](https://github.com/Reiko45/BuildCraft-Reborn/releases) and put it in your `mods` folder. It needs Minecraft 1.21.1 and NeoForge 21.1.264 or newer; JEI, Jade, The One Probe and CraftTweaker are optional. The mods list tells you when a new version is out. Please report problems on the [issue tracker](https://github.com/Reiko45/BuildCraft-Reborn/issues), not to the BuildCraft Team.
+Get the jar from the [releases page](https://github.com/Reiko45/BuildCraft-Reborn/releases) and put it in your `mods` folder. It needs Minecraft 1.21.1 and NeoForge 21.1.264 or newer; JEI, EMI, Jade, The One Probe and CraftTweaker are optional. The mods list tells you when a new version is out. Please report problems on the [issue tracker](https://github.com/Reiko45/BuildCraft-Reborn/issues), not to the BuildCraft Team.
 
 ## Requirements
 
@@ -142,15 +143,15 @@ On Windows use `gradlew.bat` instead of `./gradlew`.
 | `./gradlew runClient` | Start Minecraft with the mod |
 | `./gradlew runServer` | Start a dedicated server (set `eula=true` in `run/eula.txt` first) |
 | `./gradlew runData` | Regenerate models, lang, tags and recipes into `src/generated/resources` |
-| `./gradlew runGameTestServer` | Run every GameTest (139) on a headless server, then exit |
+| `./gradlew runGameTestServer` | Run every GameTest (140) on a headless server, then exit |
 | `./gradlew test` | Run the unit tests (expression language, packet buffer, boxes, snapshot NBT and indexes, and a check that the shipped data never mentions development-only content) |
 | `./gradlew build` | Build the mod jar into `build/libs` |
 
 Commit `src/generated/resources` after running `runData`; the build reads it from there.
 
-JEI, Jade, The One Probe and CraftTweaker are compiled against but never required. With `compat_runtime=true` in `gradle.properties` (the default) the dev runs load all four; set it to `false` (or pass `-Pcompat_runtime=false`) to run without them.
+JEI, EMI, Jade, The One Probe and CraftTweaker are compiled against but never required. With `compat_runtime=true` in `gradle.properties` (the default) the dev runs load them; set it to `false` (or pass `-Pcompat_runtime=false`) to run without them. `recipe_viewer` picks the recipe viewer those runs load: `jei` (the default), `emi`, or `both` (for example `./gradlew runClient -Precipe_viewer=emi`).
 
-`-Pinterop_runtime=true` also loads PneumaticCraft in the dev runs, for the GameTests in `BCInteropTests` that check oil works both ways between the two mods (142 GameTests in all).
+`-Pinterop_runtime=true` also loads PneumaticCraft in the dev runs, for the GameTests in `BCInteropTests` that check oil works both ways between the two mods (143 GameTests in all).
 
 The dev runs can't catch everything: they register development-only content and run in development mode. Before a release, also boot the built jar on a real NeoForge server (from the NeoForge installer, `--installServer`) and check its log for errors.
 
@@ -225,7 +226,7 @@ src/main/java/buildcraftreborn/
   robotics/                    was buildcraftrobotics: the zone planner and its map (8.0), and from
                                7.1 robots, their AIs and boards, docking stations, the requester and
                                the programming and charging tables
-  compat/                      was BuildCraftCompat: JEI, Jade, The One Probe and CraftTweaker
+  compat/                      was BuildCraftCompat: JEI, EMI, Jade, The One Probe and CraftTweaker
                                plugins (MMPL), loaded only when those mods are
   datagen/                     data generators for every JSON file
   test/                        development-only test machine and GameTests
@@ -245,6 +246,7 @@ The guide book's engine is in `lib/client/guide/`, and its pages in `assets/buil
 - [x] **Phase 6, robotics, compat, guide, polish.** Zone planner, list, map location, debugger, RF engine and MJ dynamo, guide book, JEI, Jade, The One Probe, CraftTweaker, translations, advancements.
 - [x] **Phase 7, robots (1.1.0).** BuildCraft 7.1's robots, all 17 boards, docking stations and their gate statements, the programming and charging tables, the requester, and the construction mark on 8.0's builder.
 - [x] **Phase 8, packages (1.2.0).** BuildCraft 7.1's recipe packager, stamping table and packages.
+- [x] **EMI support (1.2.1).** Everything the JEI plugin shows and does, for EMI.
 
 Each phase ends with GameTests for its exit criteria and a dedicated-server boot.
 

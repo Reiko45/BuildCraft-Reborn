@@ -83,6 +83,15 @@ public class ContainerPackager extends ContainerBCTile<TilePackager> {
         super.clicked(slotId, dragType, clickType, player);
     }
 
+    /** A recipe viewer putting an item in a pattern slot sets the slot to that item, as clicking with it does (and
+     * emptying one switches it off). */
+    @Override
+    protected void onPhantomSlotSet(SlotPhantom slot, ItemStack stack) {
+        if (slot instanceof SlotPattern pattern) {
+            tile.setPatternSlot(pattern.handlerIndex, !stack.isEmpty());
+        }
+    }
+
     public static class SlotPattern extends SlotPhantom {
         public SlotPattern(IItemHandlerAdv handler, int index, int x, int y) {
             super(handler, index, x, y, false);

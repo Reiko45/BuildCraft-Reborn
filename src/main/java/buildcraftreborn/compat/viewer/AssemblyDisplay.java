@@ -5,7 +5,7 @@
  * This Source Code Form is subject to the terms of the Mozilla Public License, v. 2.0. If a copy of the MPL was not
  * distributed with this file, You can obtain one at https://mozilla.org/MPL/2.0/.
  */
-package buildcraftreborn.compat.jei;
+package buildcraftreborn.compat.viewer;
 
 import java.util.List;
 
@@ -21,7 +21,7 @@ import buildcraftreborn.silicon.plug.FacadeBlockStateInfo;
 import buildcraftreborn.silicon.plug.FacadeStateManager;
 import buildcraftreborn.silicon.recipe.FacadeAssemblyRecipe;
 
-/** One output of an assembly recipe, as JEI shows it: what goes in, what comes out and the power it takes. An
+/** One output of an assembly recipe, as JEI and EMI show it: what goes in, what comes out and the power it takes. An
  * assembly recipe can have several outputs (each with its own inputs), so it can make several of these. */
 public record AssemblyDisplay(ResourceLocation id, List<IngredientStack> inputs, ItemStack output, long microJoules) {
     /** Adds a display for each output {@link AssemblyRecipe#getOutputPreviews()} lists. */

@@ -13,14 +13,11 @@ import org.jetbrains.annotations.Nullable;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.ItemStack;
-
-import net.neoforged.neoforge.fluids.FluidStack;
 
 import buildcraftreborn.BuildCraftReborn;
+import buildcraftreborn.compat.viewer.CoolantDisplay;
 import buildcraftreborn.energy.BCEnergyBlocks;
 
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
@@ -33,13 +30,10 @@ import mezz.jei.api.recipe.category.AbstractRecipeCategory;
 
 /** Combustion engine coolants (new in BuildCraft Reborn's JEI support): each coolant fluid and how much it cools the
  * engine per mB, and each item that melts into a coolant in the engine (like ice into water). */
-public class CategoryCombustionCoolant extends AbstractRecipeCategory<CategoryCombustionCoolant.CoolantDisplay> {
+public class CategoryCombustionCoolant extends AbstractRecipeCategory<CoolantDisplay> {
     public static final RecipeType<CoolantDisplay> TYPE =
         RecipeType.create(BuildCraftReborn.MODID, "combustion_coolant", CoolantDisplay.class);
     private static final DecimalFormat FORMAT = new DecimalFormat("0.####");
-
-    /** @param solid The item that melts into {@code fluid}, or null for a fluid coolant. */
-    public record CoolantDisplay(@Nullable ItemStack solid, FluidStack fluid, float degreesPerMb) {}
 
     private final IDrawable slot, arrow;
 
@@ -82,10 +76,6 @@ public class CategoryCombustionCoolant extends AbstractRecipeCategory<CategoryCo
     @Override
     @Nullable
     public ResourceLocation getRegistryName(CoolantDisplay recipe) {
-        if (recipe.solid() != null) {
-            ResourceLocation item = BuiltInRegistries.ITEM.getKey(recipe.solid().getItem());
-            return ResourceLocation.fromNamespaceAndPath(item.getNamespace(), "solid_coolant/" + item.getPath());
-        }
-        return BCPluginJEI.fluidRecipeId("combustion_coolant", recipe.fluid());
+        return recipe.id();
     }
 }

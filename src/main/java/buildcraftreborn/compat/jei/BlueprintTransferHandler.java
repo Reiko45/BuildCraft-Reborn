@@ -32,8 +32,9 @@ import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.transfer.IRecipeTransferError;
 import mezz.jei.api.recipe.transfer.IRecipeTransferHandler;
 
-/** Moves a crafting recipe into a 3x3 phantom blueprint (the auto workbench's and the advanced crafting table's): the
- * items shown in JEI's grid become the blueprint. Nothing is taken from the player. */
+/** Moves a crafting recipe into a 3x3 phantom grid (the auto workbench's and the advanced crafting table's blueprint,
+ * or the recipe packager's pattern). For each slot this picks an item the player has, if they have one of those that
+ * fit, or else the one JEI is showing. Nothing is taken from the player. */
 public class BlueprintTransferHandler<C extends ContainerBC_Neptune>
     implements IRecipeTransferHandler<C, RecipeHolder<CraftingRecipe>> {
 
@@ -70,12 +71,17 @@ public class BlueprintTransferHandler<C extends ContainerBC_Neptune>
             List<IRecipeSlotView> inputs = recipeSlots.getSlotViews(RecipeIngredientRole.INPUT);
             List<ItemStack> stacks = new ArrayList<>();
             for (int slot = 0; slot < 9; slot++) {
-                ItemStack stack = slot < inputs.size() ? inputs.get(slot).getDisplayedItemStack()
-                    .orElse(ItemStack.EMPTY) : ItemStack.EMPTY;
+                ItemStack stack = slot < inputs.size() ? pick(inputs.get(slot), player) : ItemStack.EMPTY;
                 stacks.add(stack.copyWithCount(stack.isEmpty() ? 0 : 1));
             }
             container.sendSetPhantomSlots(blueprint.apply(container), stacks);
         }
         return null;
+    }
+
+    /** An item for the slot that the player has, if they have one of those that fit, or else the one JEI shows. */
+    private static ItemStack pick(IRecipeSlotView view, Player player) {
+        return view.getItemStacks().filter(stack -> !stack.isEmpty() && player.getInventory().contains(stack))
+            .findFirst().orElseGet(() -> view.getDisplayedItemStack().orElse(ItemStack.EMPTY));
     }
 }

@@ -19,6 +19,7 @@ import net.neoforged.neoforge.fluids.FluidStack;
 import buildcraftreborn.BuildCraftReborn;
 import buildcraftreborn.api.mj.MjAPI;
 import buildcraftreborn.api.recipes.IRefineryRecipeManager.IDistillationRecipe;
+import buildcraftreborn.compat.viewer.RecipeDisplays;
 import buildcraftreborn.factory.BCFactoryBlocks;
 
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
@@ -80,6 +81,6 @@ public class CategoryDistiller extends AbstractRecipeCategory<IDistillationRecip
     @Override
     @Nullable
     public ResourceLocation getRegistryName(IDistillationRecipe recipe) {
-        return BCPluginJEI.fluidRecipeId("distillation", recipe.in());
+        return RecipeDisplays.fluidRecipeId("distillation", recipe.in());
     }
 }

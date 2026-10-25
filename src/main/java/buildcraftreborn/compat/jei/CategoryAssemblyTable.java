@@ -21,6 +21,7 @@ import net.minecraft.world.item.ItemStack;
 import buildcraftreborn.BuildCraftReborn;
 import buildcraftreborn.api.mj.MjAPI;
 import buildcraftreborn.api.recipes.IngredientStack;
+import buildcraftreborn.compat.viewer.AssemblyDisplay;
 import buildcraftreborn.silicon.BCSiliconBlocks;
 
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;

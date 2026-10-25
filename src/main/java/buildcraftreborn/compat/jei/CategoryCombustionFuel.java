@@ -21,6 +21,7 @@ import net.minecraft.resources.ResourceLocation;
 import buildcraftreborn.BuildCraftReborn;
 import buildcraftreborn.api.fuels.IFuel;
 import buildcraftreborn.api.fuels.IFuelManager.IDirtyFuel;
+import buildcraftreborn.compat.viewer.RecipeDisplays;
 import buildcraftreborn.energy.BCEnergyBlocks;
 import buildcraftreborn.lib.misc.LocaleUtil;
 
@@ -89,6 +90,6 @@ public class CategoryCombustionFuel extends AbstractRecipeCategory<IFuel> {
     @Override
     @Nullable
     public ResourceLocation getRegistryName(IFuel recipe) {
-        return BCPluginJEI.fluidRecipeId("combustion_fuel", recipe.getFluid());
+        return RecipeDisplays.fluidRecipeId("combustion_fuel", recipe.getFluid());
     }
 }

@@ -15,6 +15,7 @@ import net.minecraft.resources.ResourceLocation;
 
 import buildcraftreborn.BuildCraftReborn;
 import buildcraftreborn.api.recipes.IRefineryRecipeManager.IHeatExchangerRecipe;
+import buildcraftreborn.compat.viewer.RecipeDisplays;
 import buildcraftreborn.factory.BCFactoryBlocks;
 
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
@@ -95,6 +96,6 @@ public class CategoryHeatExchange extends AbstractRecipeCategory<IHeatExchangerR
     @Override
     @Nullable
     public ResourceLocation getRegistryName(IHeatExchangerRecipe recipe) {
-        return BCPluginJEI.fluidRecipeId(heating ? "heatable" : "coolable", recipe.in());
+        return RecipeDisplays.fluidRecipeId(heating ? "heatable" : "coolable", recipe.in());
     }
 }

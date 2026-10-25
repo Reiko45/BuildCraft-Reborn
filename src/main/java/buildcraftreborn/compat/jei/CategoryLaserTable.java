@@ -7,19 +7,17 @@
  */
 package buildcraftreborn.compat.jei;
 
-import java.util.List;
-
 import org.jetbrains.annotations.Nullable;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 
 import buildcraftreborn.BuildCraftReborn;
 import buildcraftreborn.api.mj.MjAPI;
+import buildcraftreborn.compat.viewer.LaserTableDisplay;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawableAnimated;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
@@ -30,7 +28,7 @@ import mezz.jei.api.recipe.category.AbstractRecipeCategory;
 
 /** A laser table that turns a few items into one, with power: the programming table (a blank board and the board
  * picked) and the integration table (a robot and the board put in it). */
-public class CategoryLaserTable extends AbstractRecipeCategory<CategoryLaserTable.LaserTableDisplay> {
+public class CategoryLaserTable extends AbstractRecipeCategory<LaserTableDisplay> {
     public static final RecipeType<LaserTableDisplay> PROGRAMMING =
         RecipeType.create(BuildCraftReborn.MODID, "programming", LaserTableDisplay.class);
     public static final RecipeType<LaserTableDisplay> INTEGRATION =
@@ -44,10 +42,6 @@ public class CategoryLaserTable extends AbstractRecipeCategory<CategoryLaserTabl
             TOP + 20);
         arrow = helper.createAnimatedRecipeArrow(100);
     }
-
-    /** What goes in (each slot can show several items), what comes out, and the power it takes. */
-    public record LaserTableDisplay(ResourceLocation id, List<List<ItemStack>> inputs, ItemStack output,
-        long microJoules) {}
 
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, LaserTableDisplay recipe, IFocusGroup focuses) {

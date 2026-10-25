@@ -227,6 +227,7 @@ public abstract class ContainerBC_Neptune extends AbstractContainerMenu {
         if (idx >= 0 && idx < slots.size() && slots.get(idx) instanceof SlotPhantom ph) {
             if (ph.itemHandler instanceof IItemHandlerModifiable handler && ph.itemHandler.canSet(ph.handlerIndex, stack)) {
                 handler.setStackInSlot(ph.handlerIndex, stack);
+                onPhantomSlotSet(ph, stack);
                 return;
             }
         }
@@ -234,6 +235,9 @@ public abstract class ContainerBC_Neptune extends AbstractContainerMenu {
         BuildCraftReborn.LOGGER.warn("[lib.container] Received an illegal phantom slot setting request! "
             + "(Client = {}, slot_index = {}, stack = {})", player.getName().getString(), idx, stack);
     }
+
+    /** Called on the server after a client (a recipe viewer, usually) has set a phantom slot. */
+    protected void onPhantomSlotSet(SlotPhantom slot, ItemStack stack) {}
 
     /** Asks the server to set a phantom slot (client side). */
     public void sendSetPhantomSlot(SlotPhantom slot, ItemStack to) {

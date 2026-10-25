@@ -7,10 +7,13 @@
  */
 package buildcraftreborn.test;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 
 import com.mojang.authlib.GameProfile;
+
+import io.netty.buffer.Unpooled;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -28,6 +31,7 @@ import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraft.world.level.block.entity.DispenserBlockEntity;
 
 import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.fml.LogicalSide;
 import net.neoforged.neoforge.common.util.FakePlayer;
 import net.neoforged.neoforge.common.util.FakePlayerFactory;
 import net.neoforged.neoforge.gametest.GameTestHolder;
@@ -35,6 +39,8 @@ import net.neoforged.neoforge.gametest.PrefixGameTestTemplate;
 import net.neoforged.neoforge.items.IItemHandler;
 
 import buildcraftreborn.BuildCraftReborn;
+import buildcraftreborn.lib.gui.ContainerBC_Neptune;
+import buildcraftreborn.lib.net.PacketBufferBC;
 import buildcraftreborn.silicon.BCSiliconPackaging;
 import buildcraftreborn.silicon.container.ContainerPackager;
 import buildcraftreborn.silicon.entity.EntityPackage;
@@ -205,6 +211,51 @@ public final class BCPackagingTests {
             "An empty hand didn't set it to anything");
         menu.clicked(slotId, 0, ClickType.PICKUP, player);
         helper.assertTrue(!packager.isPatternSlotSet(4), "An empty hand didn't switch anything off");
+        helper.succeed();
+    }
+
+    /** What JEI's and EMI's recipe transfer and item dragging send: the pattern slots they fill are set to those
+     * items, and the ones a recipe leaves empty are switched off. */
+    @GameTest(template = "empty")
+    public static void packagerPatternFromRecipeViewers(GameTestHelper helper) throws IOException {
+        TilePackager packager = packager(helper);
+        packager.setPatternSlot(8, true);
+        FakePlayer player = FakePlayerFactory.get(helper.getLevel(),
+            new GameProfile(UUID.nameUUIDFromBytes("bc_packager".getBytes()), "bc_packager"));
+        ContainerPackager menu = new ContainerPackager(1, player, packager);
+        int[] slotIds = new int[9];
+        for (Slot slot : menu.slots) {
+            if (slot instanceof ContainerPackager.SlotPattern pattern) {
+                slotIds[pattern.handlerIndex] = slot.index;
+            }
+        }
+
+        // A crafting table's recipe: planks in the top left 2x2
+        PacketBufferBC buffer = new PacketBufferBC(Unpooled.buffer(), helper.getLevel().registryAccess());
+        buffer.writeByte(9);
+        for (int i = 0; i < 9; i++) {
+            buffer.writeVarInt(slotIds[i]);
+            boolean planks = i == 0 || i == 1 || i == 3 || i == 4;
+            ItemStack.OPTIONAL_STREAM_CODEC.encode(buffer, planks ? new ItemStack(Items.OAK_PLANKS) : ItemStack.EMPTY);
+        }
+        menu.readMessage(ContainerBC_Neptune.NET_SET_PHANTOM_MULTI, buffer, LogicalSide.SERVER, null);
+        buffer.release();
+        for (int i = 0; i < 9; i++) {
+            boolean planks = i == 0 || i == 1 || i == 3 || i == 4;
+            helper.assertTrue(packager.isPatternSlotSet(i) == planks, "Pattern slot " + i + " is "
+                + (planks ? "off" : "on") + " after a recipe transfer");
+            helper.assertTrue(packager.invPattern.getStackInSlot(i).is(Items.OAK_PLANKS) == planks,
+                "Pattern slot " + i + " has " + packager.invPattern.getStackInSlot(i));
+        }
+
+        // Dragging an item onto one slot
+        buffer = new PacketBufferBC(Unpooled.buffer(), helper.getLevel().registryAccess());
+        buffer.writeVarInt(slotIds[7]);
+        ItemStack.OPTIONAL_STREAM_CODEC.encode(buffer, new ItemStack(Items.STONE));
+        menu.readMessage(ContainerBC_Neptune.NET_SET_PHANTOM, buffer, LogicalSide.SERVER, null);
+        buffer.release();
+        helper.assertTrue(packager.isPatternSlotSet(7) && packager.invPattern.getStackInSlot(7).is(Items.STONE),
+            "Dragging stone onto slot 7 didn't set it");
         helper.succeed();
     }
 

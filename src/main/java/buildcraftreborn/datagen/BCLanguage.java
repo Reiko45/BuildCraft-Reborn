@@ -11,6 +11,7 @@ import java.util.Locale;
 
 import net.minecraft.data.PackOutput;
 
+import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.data.LanguageProvider;
 
 import buildcraftreborn.builders.BCBuildersBlocks;
@@ -20,8 +21,10 @@ import buildcraftreborn.api.enums.EnumDecoratedBlock;
 import buildcraftreborn.core.BCCore;
 import buildcraftreborn.core.BCCoreBlocks;
 import buildcraftreborn.core.BCCoreItems;
+import buildcraftreborn.core.BCCoreTags;
 import buildcraftreborn.energy.BCEnergyBlocks;
 import buildcraftreborn.energy.BCEnergyFluids;
+import buildcraftreborn.energy.BCEnergyTags;
 import buildcraftreborn.factory.BCFactoryBlocks;
 import buildcraftreborn.factory.BCFactoryItems;
 import buildcraftreborn.api.enums.EnumRedstoneChipset;
@@ -443,6 +446,18 @@ public final class BCLanguage extends LanguageProvider {
         add("jei.buildcraftreborn.burn_power", "at %s");
         add("jei.buildcraftreborn.burn_total", "total %s");
         add("jei.buildcraftreborn.cooling", "Cools by %s \u00b0C/mB");
+
+        // Names for the common tags BuildCraft adds, which JEI and EMI show for tag ingredients
+        add(Tags.getTagTranslationKey(BCCoreTags.GEARS), "Gears");
+        add(Tags.getTagTranslationKey(BCCoreTags.GEARS_WOOD), "Wood Gears");
+        add(Tags.getTagTranslationKey(BCCoreTags.GEARS_STONE), "Stone Gears");
+        add(Tags.getTagTranslationKey(BCCoreTags.GEARS_IRON), "Iron Gears");
+        add(Tags.getTagTranslationKey(BCCoreTags.GEARS_GOLD), "Gold Gears");
+        add(Tags.getTagTranslationKey(BCCoreTags.GEARS_DIAMOND), "Diamond Gears");
+        add(Tags.getTagTranslationKey(BCEnergyTags.OIL), "Oil");
+        add(Tags.getTagTranslationKey(BCEnergyTags.CRUDE_OIL), "Crude Oil");
+        add(Tags.getTagTranslationKey(BCEnergyTags.FUEL), "Fuel");
+        add(Tags.getTagTranslationKey(BCEnergyTags.LIGHT_FUEL), "Light Fuel");
         // Jade and The One Probe
         add("buildcraftreborn.probe.of", "%s / %s");
         add("buildcraftreborn.probe.making", "Making:");

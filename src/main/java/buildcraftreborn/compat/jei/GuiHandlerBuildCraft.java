@@ -7,14 +7,12 @@
  */
 package buildcraftreborn.compat.jei;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraft.client.renderer.Rect2i;
 
+import buildcraftreborn.compat.viewer.ScreenAreas;
 import buildcraftreborn.lib.gui.GuiBC8;
-import buildcraftreborn.lib.gui.IGuiElement;
-import buildcraftreborn.lib.gui.pos.IGuiArea;
 
 import mezz.jei.api.gui.handlers.IGuiContainerHandler;
 
@@ -23,20 +21,6 @@ import mezz.jei.api.gui.handlers.IGuiContainerHandler;
 public class GuiHandlerBuildCraft implements IGuiContainerHandler<GuiBC8<?>> {
     @Override
     public List<Rect2i> getGuiExtraAreas(GuiBC8<?> gui) {
-        IGuiArea root = gui.mainGui.rootElement;
-        List<Rect2i> list = new ArrayList<>();
-        for (IGuiElement element : gui.mainGui.shownElements) {
-            // Ledger style elements are all top level, and outside (or partly outside) the main area
-            if (element.getX() >= root.getX() && element.getEndX() <= root.getEndX()
-                && element.getY() >= root.getY() && element.getEndY() <= root.getEndY()) {
-                continue;
-            }
-            int x = (int) Math.floor(element.getX());
-            int y = (int) Math.floor(element.getY());
-            int endX = (int) Math.ceil(element.getEndX());
-            int endY = (int) Math.ceil(element.getEndY());
-            list.add(new Rect2i(x, y, endX - x, endY - y));
-        }
-        return list;
+        return ScreenAreas.ledgerAreas(gui);
     }
 }
