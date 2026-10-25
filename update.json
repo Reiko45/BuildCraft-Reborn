@@ -1,9 +1,10 @@
 {
   "homepage": "https://github.com/Reiko45/BuildCraft-Reborn/releases",
   "promos": {
-    "1.21.1-latest": "1.2.2"
+    "1.21.1-latest": "1.2.3"
   },
   "1.21.1": {
+    "1.2.3": "Every language translates every line (the missing ones by AI, not yet checked by native speakers). Serbian in Cyrillic and Latin. Coloured item names follow each language. Fixes in the old translations.",
     "1.2.2": "Other mods' diesel, gasoline, kerosene, biodiesel, ethanol and LPG burn in the combustion engine, each with its own power and burn time.",
     "1.2.1": "EMI support: every BuildCraft recipe in EMI, recipe filling and item dragging. JEI and EMI can fill the recipe packager's pattern, and dragging into it from JEI works now.",
     "1.2.0": "BuildCraft 7.1's crafting by package: the recipe packager, the stamping table and packages. A logo in the mods list.",
