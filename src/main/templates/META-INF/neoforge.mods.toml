@@ -1,13 +1,16 @@
 modLoader="javafml"
 loaderVersion="${loader_version_range}"
 license="${mod_license}"
+issueTrackerURL="${mod_url}/issues"
 
 [[mods]]
 modId="${mod_id}"
 version="${mod_version}"
 displayName="${mod_name}"
 authors="${mod_authors}"
-credits="BuildCraft was created by SpaceToad and the BuildCraft Team. This port is unofficial and not affiliated with them. Code under MPL-2.0, original art under the MMPL."
+credits="BuildCraft was created by SpaceToad and the BuildCraft Team. This port is unofficial and not affiliated with them. Code under MPL-2.0 (BuildCraft 7.1's robot code under the MMPL), BuildCraft's art and translations under the MMPL, API under MIT."
+displayURL="${mod_url}"
+updateJSONURL="${mod_update_json}"
 description='''${mod_description}'''
 
 [[dependencies.${mod_id}]]

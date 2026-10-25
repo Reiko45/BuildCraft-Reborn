@@ -115,7 +115,13 @@ A **test machine** takes MJ from engines and has a tank and an item slot. It is 
 - From Phase 1: JSON-defined GUIs, the advanced debugger, and the neighbour and chunk caches.
 - The plastic sheet item (only registered in 1.12's development builds).
 
+## Download
+
+Get the jar from the [releases page](https://github.com/Reiko45/BuildCraft-Reborn/releases) and put it in your `mods` folder. It needs Minecraft 1.21.1 and NeoForge 21.1.264 or newer; JEI, Jade, The One Probe and CraftTweaker are optional. The mods list tells you when a new version is out. Please report problems on the [issue tracker](https://github.com/Reiko45/BuildCraft-Reborn/issues), not to the BuildCraft Team.
+
 ## Requirements
+
+To build the mod yourself:
 
 - JDK 21, 64-bit. NeoForge recommends the [Microsoft Build of OpenJDK](https://learn.microsoft.com/java/openjdk/download).
 - IntelliJ IDEA (Community is fine) or Eclipse. Open the folder as a Gradle project; the first import downloads and decompiles Minecraft, which can take 10 minutes or more.
@@ -140,6 +146,13 @@ JEI, Jade, The One Probe and CraftTweaker are compiled against but never require
 `-Pinterop_runtime=true` also loads PneumaticCraft in the dev runs, for the GameTests in `BCInteropTests` that check oil works both ways between the two mods (132 GameTests in all).
 
 The dev runs can't catch everything: they register development-only content and run in development mode. Before a release, also boot the built jar on a real NeoForge server (from the NeoForge installer, `--installServer`) and check its log for errors.
+
+## Releasing
+
+1. Set `mod_version` in `gradle.properties` and add the version to `CHANGELOG.md`.
+2. Add it to `update.json` (NeoForge's update checker reads this file from the `main` branch): a line of changes under `1.21.1`, and as `1.21.1-latest` in `promos`. Use `1.21.1-recommended` too once a version is meant for everyone rather than for testing.
+3. Run the GameTests (with `-Pinterop_runtime=true` as well), `./gradlew build`, and boot the jar on a real NeoForge server.
+4. Push, then make a GitHub release tagged `v<version>` with the jar from `build/libs` attached.
 
 ## CraftTweaker
 
