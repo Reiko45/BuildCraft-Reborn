@@ -226,6 +226,10 @@ The guide book's engine is in `lib/client/guide/`, and its pages in `assets/buil
 
 Each phase ends with GameTests for its exit criteria and a dedicated-server boot.
 
+### Future plans
+
+- [ ] **Other mods' refined fuels in the combustion engine:** diesel, gasoline, biodiesel, ethanol and kerosene (`c:diesel`, `c:gasoline`, `c:biodiesel`, `c:ethanol` and `c:kerosene`, made by PneumaticCraft, Modern Industrialization, Oritech and Immersive Engineering). BuildCraft has no equivalent of these, so each needs its own power and burn time, balanced against BuildCraft's fuels. Oil and light fuel from other mods already work (1.1.2).
+
 ## Upstream
 
 Ported from the official BuildCraft source, branch [`8.0.x-1.12.2`](https://github.com/BuildCraft/BuildCraft/tree/8.0.x-1.12.2) at commit `7c86626` (2026-05-23). The robots come from BuildCraft 7.1 (branch [`7.1.x`](https://github.com/BuildCraft/BuildCraft/tree/7.1.x)), by way of the robotics code the 1.12 branch keeps under `src_old_license/`.
