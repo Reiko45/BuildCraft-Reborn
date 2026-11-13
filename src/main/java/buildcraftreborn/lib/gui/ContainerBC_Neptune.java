@@ -33,6 +33,7 @@ import net.neoforged.neoforge.network.handling.IPayloadContext;
 import buildcraftreborn.BuildCraftReborn;
 import buildcraftreborn.lib.gui.slot.IPhantomSlot;
 import buildcraftreborn.lib.gui.slot.SlotPhantom;
+import buildcraftreborn.lib.misc.MessageUtil;
 import buildcraftreborn.lib.misc.data.IdAllocator;
 import buildcraftreborn.lib.net.ContainerPayload;
 import buildcraftreborn.lib.net.IPayloadWriter;
@@ -188,7 +189,7 @@ public abstract class ContainerBC_Neptune extends AbstractContainerMenu {
         if (player.level().isClientSide) {
             PacketDistributor.sendToServer(message);
         } else if (player instanceof ServerPlayer serverPlayer) {
-            PacketDistributor.sendToPlayer(serverPlayer, message);
+            MessageUtil.sendToPlayer(serverPlayer, message);
         }
     }
 

@@ -24,7 +24,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.saveddata.SavedData;
 import net.minecraft.world.phys.AABB;
 
-import net.neoforged.neoforge.network.PacketDistributor;
+import buildcraftreborn.lib.misc.MessageUtil;
+
 
 /** The volume boxes of one level, saved with it and sent to its players whenever they change. */
 public class WorldSavedDataVolumeBoxes extends SavedData {
@@ -95,7 +96,7 @@ public class WorldSavedDataVolumeBoxes extends SavedData {
     public void setDirty() {
         super.setDirty();
         if (level != null) {
-            PacketDistributor.sendToPlayersInDimension(level, VolumeBoxesPayload.of(volumeBoxes, level.registryAccess()));
+            MessageUtil.sendToPlayersInDimension(level, VolumeBoxesPayload.of(volumeBoxes, level.registryAccess()));
         }
     }
 

@@ -168,7 +168,7 @@ Commit `src/generated/resources` after running `runData`; the build reads it fro
 
 JEI, EMI, Jade, The One Probe and CraftTweaker are compiled against but never required. With `compat_runtime=true` in `gradle.properties` (the default) the dev runs load them; set it to `false` (or pass `-Pcompat_runtime=false`) to run without them. `recipe_viewer` picks the recipe viewer those runs load: `jei` (the default), `emi`, or `both` (for example `./gradlew runClient -Precipe_viewer=emi`).
 
-`-Pinterop_runtime=true` also loads PneumaticCraft in the dev runs, for the GameTests in `BCInteropTests` that check oil works both ways between the two mods and PneumaticCraft's refined fuels burn in the combustion engine (153 GameTests in all).
+`-Pinterop_runtime=true` also loads PneumaticCraft in the dev runs, for the GameTests in `BCInteropTests` that check oil works both ways between the two mods and PneumaticCraft's refined fuels burn in the combustion engine (154 GameTests in all).
 
 The dev runs can't catch everything: they register development-only content and run in development mode. Before a release, also boot the built jar on a real NeoForge server (from the NeoForge installer, `--installServer`) and check its log for errors.
 

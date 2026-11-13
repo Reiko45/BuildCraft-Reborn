@@ -31,13 +31,21 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
 
+import net.neoforged.neoforge.common.util.FakePlayer;
 import net.neoforged.neoforge.network.PacketDistributor;
 import net.neoforged.neoforge.server.ServerLifecycleHooks;
 
 import buildcraftreborn.BuildCraftReborn;
 
 /** Network helpers ported from 1.12's {@code MessageUtil}. Sending goes through NeoForge's {@link PacketDistributor}
- * rather than a {@code SimpleNetworkWrapper}. */
+ * rather than a {@code SimpleNetworkWrapper}.
+ * <p>
+ * Everything the server sends to clients goes through {@link #sendToPlayer}, which skips a player whose connection
+ * doesn't have BuildCraft's channels: fake players other mods put in a level (with a connection that never negotiated
+ * channels) and any client without the channel. NeoForge throws for those ("Payload ... may not be sent to the
+ * client!"), which crashed the server when such a player joined a level, as BuildCraft sends volume boxes and markers
+ * to every player that joins one. NeoForge's own {@link FakePlayer}s have no network channel at all, so they're
+ * skipped before asking. */
 public final class MessageUtil {
     private MessageUtil() {}
 
@@ -50,17 +58,39 @@ public final class MessageUtil {
         }
     }
 
+    /** Sends to one player, if its connection can take the payload (see the class comment).
+     * @return Whether it was sent. */
+    public static boolean sendToPlayer(ServerPlayer player, CustomPacketPayload payload) {
+        if (player instanceof FakePlayer || player.connection == null
+            || player.connection.getConnection().channel() == null || !player.connection.hasChannel(payload)) {
+            return false;
+        }
+        PacketDistributor.sendToPlayer(player, payload);
+        return true;
+    }
+
     /** Sends to every player that has the chunk containing {@code pos} loaded. Server side only. */
     public static void sendToAllWatching(Level level, BlockPos pos, CustomPacketPayload payload) {
         if (level instanceof ServerLevel serverLevel) {
-            PacketDistributor.sendToPlayersTrackingChunk(serverLevel, new ChunkPos(pos), payload);
+            for (ServerPlayer player : serverLevel.getChunkSource().chunkMap.getPlayers(new ChunkPos(pos), false)) {
+                sendToPlayer(player, payload);
+            }
+        }
+    }
+
+    /** Sends to every player in the level's dimension, as {@link PacketDistributor#sendToPlayersInDimension} does. */
+    public static void sendToPlayersInDimension(ServerLevel level, CustomPacketPayload payload) {
+        for (ServerPlayer player : level.getServer().getPlayerList().getPlayers()) {
+            if (player.level().dimension() == level.dimension()) {
+                sendToPlayer(player, payload);
+            }
         }
     }
 
     public static void sendToPlayers(Collection<? extends Player> players, CustomPacketPayload payload) {
         for (Player player : players) {
             if (player instanceof ServerPlayer serverPlayer) {
-                PacketDistributor.sendToPlayer(serverPlayer, payload);
+                sendToPlayer(serverPlayer, payload);
             }
         }
     }

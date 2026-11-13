@@ -363,7 +363,7 @@ public abstract class TileBC_Neptune extends BlockEntity implements IPayloadRece
                 // Only the message ID was written: nothing changed
                 return;
             }
-            PacketDistributor.sendToPlayer(serverPlayer, message);
+            MessageUtil.sendToPlayer(serverPlayer, message);
         }
     }
 
@@ -377,7 +377,7 @@ public abstract class TileBC_Neptune extends BlockEntity implements IPayloadRece
 
     public final void sendNetworkUpdate(int id, Player target) {
         if (hasLevel() && target instanceof ServerPlayer serverPlayer) {
-            PacketDistributor.sendToPlayer(serverPlayer, createNetworkUpdate(id));
+            MessageUtil.sendToPlayer(serverPlayer, createNetworkUpdate(id));
         }
     }
 
@@ -410,7 +410,7 @@ public abstract class TileBC_Neptune extends BlockEntity implements IPayloadRece
 
     public final void createAndSendMessage(int id, ServerPlayer player, IPayloadWriter writer) {
         if (hasLevel()) {
-            PacketDistributor.sendToPlayer(player, createMessage(id, writer));
+            MessageUtil.sendToPlayer(player, createMessage(id, writer));
         }
     }
 

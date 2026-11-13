@@ -29,14 +29,12 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.saveddata.SavedData;
 
-import net.neoforged.neoforge.network.PacketDistributor;
-
-
 import buildcraftreborn.BuildCraftReborn;
 import buildcraftreborn.api.transport.EnumWirePart;
 import buildcraftreborn.api.transport.IWireEmitter;
 import buildcraftreborn.api.transport.pipe.IPipeHolder;
 import buildcraftreborn.api.transport.pluggable.PipePluggable;
+import buildcraftreborn.lib.misc.MessageUtil;
 
 
 /** Every wire system in a level, and whether each is powered. Saved with the level; ticked on the server. */
@@ -160,7 +158,7 @@ public class WorldSavedDataWireSystems extends SavedData {
                     .filter(wireSystem -> wireSystem.isPlayerWatching(player) && (structureChanged || changedPlayers.contains(player)))
                     .collect(Collectors.toMap(ws -> ws.networkId, Function.identity()));
             if(!changedWires.isEmpty()) {
-                PacketDistributor.sendToPlayer(player, WireSystemsPayload.of(changedWires));
+                MessageUtil.sendToPlayer(player, WireSystemsPayload.of(changedWires));
             }
             Map<Integer, Boolean> hashesPowered = this.wireSystems.entrySet().stream()
                     .filter(systemPower ->
@@ -170,7 +168,7 @@ public class WorldSavedDataWireSystems extends SavedData {
                     .map(systemPowered -> Pair.of(systemPowered.getKey().networkId, systemPowered.getValue()))
                     .collect(Collectors.toMap(Pair::getLeft, Pair::getRight));
             if(!hashesPowered.isEmpty()) {
-                PacketDistributor.sendToPlayer(player, new WireSystemsPoweredPayload(hashesPowered));
+                MessageUtil.sendToPlayer(player, new WireSystemsPoweredPayload(hashesPowered));
             }
         });
         if(structureChanged || !changedSystems.isEmpty()) {

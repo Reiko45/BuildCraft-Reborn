@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.1.1
+
+- **Fixed a server crash when another mod's fake player joins a level.** BuildCraft sends volume boxes and markers to every player that joins a level, and NeoForge refuses to send them to a player whose connection never set up BuildCraft's channels (some mods' fake players have such a connection): "Payload buildcraftreborn:volume_boxes may not be sent to the client!". Everything BuildCraft sends to players now checks the player's connection has the channel first (`player.connection.hasChannel(payload)`) and skips the player otherwise. Found while porting Galacticraft.
+- A GameTest puts a player without BuildCraft's channels in a level with markers (148 GameTests, 154 with PneumaticCraft).
+
 ## 2.1.0
 
 Other mods' power and wrenches.

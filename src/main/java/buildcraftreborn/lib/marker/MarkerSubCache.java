@@ -26,9 +26,8 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.Level;
 
-import net.neoforged.neoforge.network.PacketDistributor;
-
 import buildcraftreborn.BuildCraftReborn;
+import buildcraftreborn.lib.misc.MessageUtil;
 import buildcraftreborn.lib.net.MarkerPayload;
 import buildcraftreborn.lib.tile.TileMarker;
 
@@ -54,7 +53,7 @@ public abstract class MarkerSubCache<C extends MarkerConnection<C>> {
 
     private void send(MarkerPayload message) {
         if (isServer && level instanceof ServerLevel server) {
-            PacketDistributor.sendToPlayersInDimension(server, message);
+            MessageUtil.sendToPlayersInDimension(server, message);
         }
     }
 
@@ -62,12 +61,12 @@ public abstract class MarkerSubCache<C extends MarkerConnection<C>> {
         if (isServer) {// Sanity Check
             // Send ALL loaded markers
             if (!tileCache.isEmpty()) {
-                PacketDistributor.sendToPlayer(player,
+                MessageUtil.sendToPlayer(player,
                     new MarkerPayload(true, false, cacheId, new ArrayList<>(tileCache.keySet())));
             }
             // Send ALL connections.
             for (C connection : connectionToPos.keySet()) {
-                PacketDistributor.sendToPlayer(player,
+                MessageUtil.sendToPlayer(player,
                     new MarkerPayload(true, true, cacheId, new ArrayList<>(connection.getMarkerPositions())));
             }
         }

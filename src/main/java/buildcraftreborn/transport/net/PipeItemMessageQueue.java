@@ -17,7 +17,8 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
 
-import net.neoforged.neoforge.network.PacketDistributor;
+import buildcraftreborn.lib.misc.MessageUtil;
+
 
 /** Collects the travelling item updates of a tick, so each player gets one {@link MultiPipeItemPayload} per tick. */
 public final class PipeItemMessageQueue {
@@ -28,7 +29,7 @@ public final class PipeItemMessageQueue {
     /** Called at the end of every server tick. */
     public static void serverTick() {
         for (Entry<ServerPlayer, MultiPipeItemPayload> entry : cachedPlayerPackets.entrySet()) {
-            PacketDistributor.sendToPlayer(entry.getKey(), entry.getValue());
+            MessageUtil.sendToPlayer(entry.getKey(), entry.getValue());
         }
         cachedPlayerPackets.clear();
     }

@@ -13,7 +13,8 @@ import net.minecraft.server.level.ServerPlayer;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
 import net.neoforged.neoforge.event.tick.LevelTickEvent;
-import net.neoforged.neoforge.network.PacketDistributor;
+
+import buildcraftreborn.lib.misc.MessageUtil;
 
 /** 1.12's {@code BCCoreEventDist}: ticks the volume boxes being edited, and sends a level's boxes to players joining
  * it. */
@@ -35,7 +36,7 @@ public final class VolumeBoxEvents {
         if (event.getEntity() instanceof ServerPlayer player && event.getLevel() instanceof ServerLevel level) {
             WorldSavedDataVolumeBoxes data = WorldSavedDataVolumeBoxes.get(level);
             // 1.12 delayed this so it also worked in single player; payloads are queued until the client is ready
-            PacketDistributor.sendToPlayer(player, VolumeBoxesPayload.of(data.volumeBoxes, level.registryAccess()));
+            MessageUtil.sendToPlayer(player, VolumeBoxesPayload.of(data.volumeBoxes, level.registryAccess()));
             data.volumeBoxes.stream()
                 .filter(volumeBox -> volumeBox.isPausedEditingBy(player))
                 .forEach(VolumeBox::resumeEditing);

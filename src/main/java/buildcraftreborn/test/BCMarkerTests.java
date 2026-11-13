@@ -12,20 +12,31 @@ import java.util.UUID;
 
 import com.mojang.authlib.GameProfile;
 
+import io.netty.channel.embedded.EmbeddedChannel;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.gametest.framework.GameTest;
+import net.minecraft.gametest.framework.GameTestAssertException;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.NbtUtils;
 import net.minecraft.nbt.Tag;
+import net.minecraft.network.Connection;
+import net.minecraft.network.protocol.PacketFlow;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.server.network.CommonListenerCookie;
+import net.minecraft.server.network.ServerGamePacketListenerImpl;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 
+import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.common.util.FakePlayer;
 import net.neoforged.neoforge.common.util.FakePlayerFactory;
 import net.neoforged.neoforge.gametest.GameTestHolder;
@@ -42,9 +53,11 @@ import buildcraftreborn.core.marker.PathSubCache;
 import buildcraftreborn.core.marker.VolumeCache;
 import buildcraftreborn.core.marker.VolumeSavedData;
 import buildcraftreborn.core.marker.VolumeSubCache;
+import buildcraftreborn.core.marker.volume.VolumeBoxesPayload;
 import buildcraftreborn.core.tile.TileMarkerPath;
 import buildcraftreborn.core.tile.TileMarkerVolume;
 import buildcraftreborn.lib.block.BlockBCBase_Neptune;
+import buildcraftreborn.lib.misc.MessageUtil;
 
 /** Phase 2 tests for volume and path markers, the marker connector and decorations. Markers are connected in pairs
  * (not with a right click, which would also find the markers of other tests running in the same world). */
@@ -183,6 +196,42 @@ public final class BCMarkerTests {
             .getLightEmission() == 10, "Blueprint decoration should glow");
         helper.assertTrue(BCCoreBlocks.DECORATED.get(EnumDecoratedBlock.DESTROY).get().defaultBlockState()
             .getLightEmission() == 0, "Destroy decoration shouldn't glow");
+        helper.succeed();
+    }
+
+    /** A player whose connection never set up BuildCraft's channels joins a level that has markers and volume boxes,
+     * as another mod's fake player can: BuildCraft skips it (MessageUtil.sendToPlayer) instead of sending what NeoForge
+     * refuses with an exception, which crashed the server. NeoForge's own fake players have no channel to ask, and are
+     * skipped too. The player here has an in-memory connection without NeoForge's channel negotiation, like
+     * GameTestHelper.makeMockServerPlayerInLevel's, but only joins the level (logging in would also run other mods'
+     * login code, which has the same problem). */
+    @GameTest(template = "empty")
+    public static void playersWithoutChannelsAreSkipped(GameTestHelper helper) {
+        placeMarker(helper, new BlockPos(1, 1, 1), BCCoreBlocks.MARKER_VOLUME.get());
+        VolumeBoxesPayload payload = VolumeBoxesPayload.of(List.of(), helper.getLevel().registryAccess());
+        MinecraftServer server = helper.getLevel().getServer();
+        CommonListenerCookie cookie = CommonListenerCookie.createInitial(new GameProfile(UUID.nameUUIDFromBytes(
+            "bc_no_channel_player".getBytes()), "bc_no_channel_player"), false);
+        ServerPlayer player = new ServerPlayer(server, helper.getLevel(), cookie.gameProfile(),
+            cookie.clientInformation());
+        Connection connection = new Connection(PacketFlow.SERVERBOUND);
+        new EmbeddedChannel(connection);
+        new ServerGamePacketListenerImpl(server, connection, player, cookie);
+        player.moveTo(helper.absoluteVec(new Vec3(3, 1, 3)));
+        try {
+            helper.getLevel().addNewPlayer(player);
+        } catch (UnsupportedOperationException e) {
+            throw new GameTestAssertException("A player without BuildCraft's channels joining threw: " + e.getMessage());
+        }
+        try {
+            helper.assertFalse(player.connection.hasChannel(VolumeBoxesPayload.TYPE), "The player has the channel");
+            helper.assertFalse(MessageUtil.sendToPlayer(player, payload), "Sent to a player without the channel");
+            FakePlayer fake = FakePlayerFactory.get(helper.getLevel(), new GameProfile(UUID.nameUUIDFromBytes(
+                "bc_no_channel".getBytes()), "bc_no_channel"));
+            helper.assertFalse(MessageUtil.sendToPlayer(fake, payload), "Sent to a NeoForge fake player");
+        } finally {
+            helper.getLevel().removePlayerImmediately(player, Entity.RemovalReason.DISCARDED);
+        }
         helper.succeed();
     }
 }
